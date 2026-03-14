@@ -1,0 +1,466 @@
+---
+title: "Hogares y pobreza"
+subtitle: "Pobreza, grupos de hogar e ingresos — EPH-INDEC"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 2
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r setup}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(plotly)
+library(scales)
+library(readxl)
+
+GRUPOS_ORDEN <- c(
+  "Hogares de trabajadores formales",
+  "Hogares de trabajadores informales",
+  "Hogares mixtos",
+  "Hogares sin ocupados"
+)
+
+PALETA <- c(
+  "Hogares de trabajadores formales"   = "#2166ac",
+  "Hogares de trabajadores informales" = "#d6604d",
+  "Hogares mixtos"                     = "#74add1",
+  "Hogares sin ocupados"               = "#878787"
+)
+
+# ---- Detectar fuente de datos ----
+usar_rds <- file.exists("data/hogares_indicadores.rds")
+
+if (usar_rds) {
+  indicadores    <- readRDS("data/hogares_indicadores.rds")
+  complementario <- readRDS("data/hogares_complementario.rds")
+  base_label     <- unique(indicadores$base_deflactor)[1]
+  ultimo_periodo <- tail(sort(unique(indicadores$periodo)), 1)
+
+  pobreza_long <- indicadores |>
+    filter(grupo_hogar %in% GRUPOS_ORDEN) |>
+    mutate(grupo_hogar = factor(grupo_hogar, levels = GRUPOS_ORDEN)) |>
+    select(periodo, grupo_hogar, tasa = tasa_pobreza_pond)
+
+  indigencia_long <- indicadores |>
+    filter(grupo_hogar %in% GRUPOS_ORDEN) |>
+    mutate(grupo_hogar = factor(grupo_hogar, levels = GRUPOS_ORDEN)) |>
+    select(periodo, grupo_hogar, tasa = tasa_indigencia_pond)
+
+  ipcf_long <- indicadores |>
+    filter(grupo_hogar %in% GRUPOS_ORDEN) |>
+    mutate(grupo_hogar = factor(grupo_hogar, levels = GRUPOS_ORDEN)) |>
+    select(periodo, grupo_hogar, valor = media_IPCF_pond)
+
+  itf_long <- indicadores |>
+    filter(grupo_hogar %in% GRUPOS_ORDEN) |>
+    mutate(grupo_hogar = factor(grupo_hogar, levels = GRUPOS_ORDEN)) |>
+    select(periodo, grupo_hogar, valor = media_ITF_pond)
+
+  pobreza_ultimo <- indicadores |>
+    filter(periodo == ultimo_periodo, grupo_hogar %in% GRUPOS_ORDEN) |>
+    mutate(grupo_hogar = factor(grupo_hogar, levels = GRUPOS_ORDEN)) |>
+    select(grupo_hogar, pobreza = tasa_pobreza_pond,
+           indigencia = tasa_indigencia_pond)
+
+  pol_social <- complementario$politica_social |>
+    filter(grupo_hogar %in% GRUPOS_ORDEN) |>
+    mutate(grupo_hogar = factor(grupo_hogar, levels = GRUPOS_ORDEN))
+
+  comp_ing <- complementario$composicion_ing |>
+    filter(grupo_hogar %in% GRUPOS_ORDEN) |>
+    mutate(grupo_hogar = factor(grupo_hogar, levels = GRUPOS_ORDEN))
+
+  peso <- indicadores |>
+    filter(grupo_hogar %in% GRUPOS_ORDEN) |>
+    group_by(periodo) |>
+    mutate(peso = hogares_expandidos / sum(hogares_expandidos) * 100) |>
+    ungroup() |>
+    mutate(grupo_hogar = factor(grupo_hogar, levels = GRUPOS_ORDEN)) |>
+    select(periodo, grupo_hogar, peso)
+
+  horas_long <- if (!is.null(complementario$ocupacion_horas)) {
+    complementario$ocupacion_horas |>
+      filter(grupo_hogar %in% GRUPOS_ORDEN, !is.na(horas_promedio)) |>
+      mutate(grupo_hogar = factor(grupo_hogar, levels = GRUPOS_ORDEN)) |>
+      select(periodo, grupo_hogar, horas = horas_promedio)
+  } else { tibble(periodo=character(), grupo_hogar=factor(levels=GRUPOS_ORDEN), horas=numeric()) }
+
+} else {
+  # Leer desde Excel pre-calculados
+  excel_res  <- Sys.glob(c("data/resumen*.xlsx",  "resumen*.xlsx"))[1]
+  excel_comp <- Sys.glob(c("data/analisis_complementario*.xlsx",
+                           "analisis_complementario*.xlsx"))[1]
+  base_label <- "precios constantes"
+
+  # Pobreza (wide → long)
+  raw_pob    <- read_excel(excel_comp, sheet = "tasa_pobreza",
+                            col_names = FALSE, skip = 1)
+  periodos_p <- na.omit(as.character(unlist(raw_pob[1, 2:ncol(raw_pob)])))
+  pobreza_long <- bind_rows(lapply(seq_along(GRUPOS_ORDEN), function(i) {
+    tibble(periodo     = periodos_p,
+           grupo_hogar = GRUPOS_ORDEN[i],
+           tasa = suppressWarnings(as.numeric(
+             unlist(raw_pob[i + 1, 2:(length(periodos_p) + 1)]))))
+  })) |> mutate(grupo_hogar = factor(grupo_hogar, levels = GRUPOS_ORDEN))
+
+  ultimo_periodo <- tail(sort(periodos_p), 1)
+  indigencia_long <- tibble(periodo=character(), grupo_hogar=factor(levels=GRUPOS_ORDEN), tasa=numeric())
+
+  # IPCF e ITF (una hoja por trimestre en excel_res)
+  hojas_trim <- excel_sheets(excel_res)
+  hojas_trim <- sort(hojas_trim[grepl("^\\d{4}T\\d$", hojas_trim)])
+  ingresos <- bind_rows(lapply(hojas_trim, function(h) {
+    raw <- suppressMessages(
+      read_excel(excel_res, sheet = h, col_names = FALSE, skip = 1))
+    tibble(periodo = h,
+           grupo_hogar = GRUPOS_ORDEN,
+           ipcf = suppressWarnings(as.numeric(raw[[6]][1:4])),
+           itf  = suppressWarnings(as.numeric(raw[[5]][1:4])))
+  }))
+  ipcf_long <- ingresos |>
+    select(periodo, grupo_hogar, valor = ipcf) |>
+    mutate(grupo_hogar = factor(grupo_hogar, levels = GRUPOS_ORDEN))
+  itf_long <- ingresos |>
+    select(periodo, grupo_hogar, valor = itf) |>
+    mutate(grupo_hogar = factor(grupo_hogar, levels = GRUPOS_ORDEN))
+
+  pobreza_ultimo <- pobreza_long |>
+    filter(periodo == ultimo_periodo) |>
+    rename(pobreza = tasa) |>
+    mutate(indigencia = NA_real_)
+
+  # Política social
+  raw_ps     <- read_excel(excel_comp, sheet = "politica_social",
+                            col_names = FALSE, skip = 2)
+  periodos_s <- na.omit(as.character(unlist(raw_ps[1, 2:ncol(raw_ps)])))
+  pol_social <- bind_rows(lapply(seq_along(GRUPOS_ORDEN), function(i) {
+    tibble(periodo = periodos_s,
+           grupo_hogar = GRUPOS_ORDEN[i],
+           pct_con_social = suppressWarnings(as.numeric(
+             unlist(raw_ps[i + 1, 2:(length(periodos_s) + 1)]))))
+  })) |> mutate(grupo_hogar = factor(grupo_hogar, levels = GRUPOS_ORDEN))
+
+  # Composición ingresos (% laboral y % público, vista ponderada)
+  raw_ci <- read_excel(excel_comp, sheet = "composicion_ingresos",
+                        col_names = FALSE)
+  bloques <- which(apply(raw_ci, 1, function(r) any(grepl("^\\d{4}T\\d$", r))))
+  comp_ing <- bind_rows(lapply(bloques, function(b) {
+    trim <- as.character(raw_ci[[1]][b])
+    if (is.na(trim) || !grepl("^\\d{4}T\\d$", trim)) {
+      trim <- as.character(unlist(raw_ci[b, ]))[!is.na(unlist(raw_ci[b,]))][1]
+    }
+    tibble(
+      periodo     = trim,
+      grupo_hogar = GRUPOS_ORDEN,
+      share_lab   = suppressWarnings(as.numeric(unlist(raw_ci[(b+2):(b+5), 3]))),
+      share_nolab = suppressWarnings(as.numeric(unlist(raw_ci[(b+2):(b+5), 4]))),
+      share_pub   = suppressWarnings(as.numeric(unlist(raw_ci[(b+2):(b+5), 5])))
+    )
+  })) |> mutate(grupo_hogar = factor(grupo_hogar, levels = GRUPOS_ORDEN))
+
+  # Peso hogares
+  raw_w  <- read_excel(excel_comp, sheet = "peso_hogares",
+                        col_names = FALSE, skip = 1)
+  periodos_w <- na.omit(as.character(unlist(raw_w[1, 2:ncol(raw_w)])))
+  peso <- bind_rows(lapply(seq_along(GRUPOS_ORDEN), function(i) {
+    tibble(periodo = periodos_w,
+           grupo_hogar = GRUPOS_ORDEN[i],
+           peso = suppressWarnings(as.numeric(
+             unlist(raw_w[i + 1, 2:(length(periodos_w) + 1)]))))
+  })) |> mutate(grupo_hogar = factor(grupo_hogar, levels = GRUPOS_ORDEN))
+
+  # Horas semanales (Cuadro 2b)
+  raw_hs <- read_excel(excel_comp, sheet = "ocupacion_horas",
+                        col_names = FALSE, skip = 10)
+  periodos_h <- na.omit(as.character(unlist(raw_hs[1, 2:ncol(raw_hs)])))
+  horas_long <- bind_rows(lapply(1:4, function(i) {
+    tibble(periodo = periodos_h,
+           grupo_hogar = GRUPOS_ORDEN[i],
+           horas = suppressWarnings(as.numeric(
+             unlist(raw_hs[i + 1, 2:(length(periodos_h) + 1)]))))
+  })) |>
+    filter(!is.na(horas)) |>
+    mutate(grupo_hogar = factor(grupo_hogar, levels = GRUPOS_ORDEN))
+}
+```
+
+::: {.callout-note}
+Ingresos expresados en **`r base_label`** (IPC Nacional). Las tasas de pobreza e indigencia se calculan con las líneas de cada período (canasta a precios corrientes).
+:::
+
+---
+
+## Tasas de pobreza e indigencia
+
+### Por tipo de hogar — serie trimestral
+
+```{r fig-pobreza}
+plot_ly(pobreza_long,
+  x = ~periodo, y = ~tasa, color = ~grupo_hogar,
+  colors = PALETA, type = "scatter", mode = "lines+markers",
+  hovertemplate = "<b>%{fullData.name}</b><br>%{x}: %{y:.1f}%<extra></extra>"
+) |> layout(
+  xaxis  = list(title = "", tickangle = -45),
+  yaxis  = list(title = "Tasa de pobreza (%)", ticksuffix = "%", range = c(0, 80)),
+  legend = list(orientation = "h", y = -0.3),
+  hovermode = "x unified"
+)
+```
+
+### Tasa de indigencia por tipo de hogar
+
+```{r fig-indigencia}
+if (nrow(indigencia_long) > 0) {
+  plot_ly(indigencia_long,
+    x = ~periodo, y = ~tasa, color = ~grupo_hogar,
+    colors = PALETA, type = "scatter", mode = "lines+markers",
+    hovertemplate = "<b>%{fullData.name}</b><br>%{x}: %{y:.1f}%<extra></extra>"
+  ) |> layout(
+    xaxis  = list(title = "", tickangle = -45),
+    yaxis  = list(title = "Tasa de indigencia (%)", ticksuffix = "%", range = c(0, 40)),
+    legend = list(orientation = "h", y = -0.3),
+    hovermode = "x unified"
+  )
+} else {
+  cat("Disponible al correr calcular_hogares.R")
+}
+```
+
+### Último período: `r ultimo_periodo`
+
+```{r fig-ultimo}
+df_ult <- pobreza_ultimo |>
+  pivot_longer(c(pobreza, indigencia), names_to = "indicador", values_to = "tasa") |>
+  filter(!is.na(tasa)) |>
+  mutate(indicador = recode(indicador, pobreza = "Pobreza", indigencia = "Indigencia"))
+
+# Preparamos las etiquetas acortadas con saltos de línea y factorizamos
+df_ult <- df_ult |>
+  mutate(
+    grupo_hogar_wrap = stringr::str_replace_all(stringr::str_wrap(grupo_hogar, width = 20), "\n", "<br>"),
+    grupo_hogar_wrap = factor(grupo_hogar_wrap, levels = stringr::str_replace_all(stringr::str_wrap(levels(pobreza_ultimo$grupo_hogar), width = 20), "\n", "<br>"))
+  ) |>
+  arrange(grupo_hogar_wrap)
+
+plot_ly() |>
+  {function(fig) {
+    df_pob <- df_ult |> filter(indicador == "Pobreza")
+    df_ind <- df_ult |> filter(indicador == "Indigencia")
+    colores_arr <- PALETA[as.character(df_pob$grupo_hogar)]
+    
+    fig <- fig |> add_bars(
+      data = df_pob, x = ~grupo_hogar_wrap, y = ~tasa,
+      name = "Pobreza",
+      marker = list(color = colores_arr),
+      showlegend = FALSE,
+      text = ~paste0(round(tasa,1), "%"), textposition = "outside",
+      hovertemplate = ~paste0("<b>", grupo_hogar, "</b><br>Pobreza: %{y:.1f}%<extra></extra>")
+    )
+    
+    fig <- fig |> add_bars(
+      data = df_ind, x = ~grupo_hogar_wrap, y = ~tasa,
+      name = "Indigencia",
+      marker = list(
+        color = "white",
+        line = list(color = colores_arr, width = 1.5),
+        pattern = list(shape = "x", fgcolor = colores_arr, bgcolor = "white", size = 5, solidity = 0.4)
+      ),
+      showlegend = FALSE,
+      text = ~paste0(round(tasa,1), "%"), textposition = "outside",
+      hovertemplate = ~paste0("<b>", grupo_hogar, "</b><br>Indigencia: %{y:.1f}%<extra></extra>")
+    )
+
+    # Añadir trazas vacías en un eje secundario para evitar desplazar las barras principales
+    fig <- fig |> add_bars(x = "Leyenda", y = 0, name = "Pobreza", xaxis = "x2",
+                           showlegend = TRUE, hoverinfo = "none",
+                           marker = list(color = "grey"))
+    fig <- fig |> add_bars(x = "Leyenda", y = 0, name = "Indigencia", xaxis = "x2",
+                           showlegend = TRUE, hoverinfo = "none",
+                           marker = list(color = "white", 
+                                         line = list(color = "grey", width = 1.5),
+                                         pattern = list(shape = "x", fgcolor = "grey", bgcolor = "white", size=5)))
+    fig
+  }}() |>
+layout(
+  barmode = "group",
+  bargap = 0.15,
+  xaxis   = list(title = ""),
+  xaxis2  = list(overlaying = "x", showticklabels = FALSE, showgrid = FALSE, zeroline = FALSE),
+  yaxis   = list(title = "(%)", ticksuffix = "%", range = c(0, 100)),
+  legend  = list(orientation = "h", y = -0.35, font = list(size = 11)),
+  showlegend = TRUE
+)
+```
+
+---
+
+## Ingresos de los hogares
+
+### Ingreso per cápita familiar (IPCF) — `r base_label`
+
+```{r fig-ipcf}
+plot_ly(ipcf_long,
+  x = ~periodo, y = ~valor, color = ~grupo_hogar,
+  colors = PALETA, type = "scatter", mode = "lines+markers",
+  hovertemplate = "<b>%{fullData.name}</b><br>%{x}: $%{y:,.0f}<extra></extra>"
+) |> layout(
+  xaxis  = list(title = "", tickangle = -45),
+  yaxis  = list(title = "IPCF promedio ($)", tickprefix = "$", tickformat = ",.0f"),
+  legend = list(orientation = "h", y = -0.3),
+  hovermode = "x unified"
+)
+```
+
+### Ingreso total familiar (ITF) — `r base_label`
+
+```{r fig-itf}
+plot_ly(itf_long,
+  x = ~periodo, y = ~valor, color = ~grupo_hogar,
+  colors = PALETA, type = "scatter", mode = "lines+markers",
+  hovertemplate = "<b>%{fullData.name}</b><br>%{x}: $%{y:,.0f}<extra></extra>"
+) |> layout(
+  xaxis  = list(title = "", tickangle = -45),
+  yaxis  = list(title = "ITF promedio ($)", tickprefix = "$", tickformat = ",.0f"),
+  legend = list(orientation = "h", y = -0.3),
+  hovermode = "x unified"
+)
+```
+
+---
+
+## Política social
+
+### Hogares con al menos una fuente de política social (%)
+
+```{r fig-social}
+plot_ly(pol_social,
+  x = ~periodo, y = ~pct_con_social, color = ~grupo_hogar,
+  colors = PALETA, type = "scatter", mode = "lines+markers",
+  hovertemplate = "<b>%{fullData.name}</b><br>%{x}: %{y:.1f}%<extra></extra>"
+) |> layout(
+  xaxis  = list(title = "", tickangle = -45),
+  yaxis  = list(title = "Hogares con política social (%)",
+                ticksuffix = "%", range = c(0, 100)),
+  legend = list(orientation = "h", y = -0.3),
+  hovermode = "x unified"
+)
+```
+
+---
+
+## Composición de ingresos
+
+El ingreso de los hogares proviene de dos fuentes: **laboral** (salarios, ganancias de la ocupación) y **no laboral** (jubilaciones, pensiones, transferencias, rentas).
+
+### % del ingreso del hogar que es laboral
+
+```{r fig-comp-laboral}
+if (nrow(comp_ing) > 0 && "share_lab" %in% names(comp_ing)) {
+  comp_plot <- comp_ing |> filter(!is.na(share_lab))
+  plot_ly(comp_plot,
+    x = ~periodo, y = ~share_lab, color = ~grupo_hogar,
+    colors = PALETA, type = "scatter", mode = "lines+markers",
+    hovertemplate = "<b>%{fullData.name}</b><br>%{x}: %{y:.1f}% laboral<extra></extra>"
+  ) |> layout(
+    xaxis  = list(title = "", tickangle = -45),
+    yaxis  = list(title = "Ingreso laboral (% del ingreso total del hogar)",
+                  ticksuffix = "%", range = c(0, 100)),
+    legend = list(orientation = "h", y = -0.3),
+    hovermode = "x unified"
+  )
+}
+```
+
+*Los hogares sin ocupados tienen ingreso laboral prácticamente nulo (cercano a 0%). Sus ingresos provienen de jubilaciones, pensiones y transferencias sociales.*
+
+### Cuadro 5 — Hogares sin ocupados: composición del ingreso no laboral por fuente (defl. a ene 2026)
+
+```{r fig-comp-nolab}
+if (usar_rds && !is.null(complementario$ing_no_lab_sin_ocup) && nrow(complementario$ing_no_lab_sin_ocup) > 0) {
+  # Tabla automatizada proveniente de EPH/RDS (v2 – cache invalidado):
+  tab5_data <- complementario$ing_no_lab_sin_ocup |> select(-`Composición %`)
+  knitr::kable(
+    tab5_data,
+    digits = 1, format.args = list(big.mark = ".", decimal.mark = ","),
+    align = c("l", rep("r", ncol(tab5_data)-1))
+  )
+} else {
+  # Lectura alternativa desde Excel suministrado manualmente
+  if (file.exists(excel_comp) && "ing_no_lab_sin_ocup" %in% readxl::excel_sheets(excel_comp)) {
+    tab5 <- readxl::read_excel(excel_comp, sheet = "ing_no_lab_sin_ocup", skip = 2) |>
+            filter(!is.na(Categoría))
+    knitr::kable(tab5, digits = 1, align = c("l", rep("r", ncol(tab5)-1)))
+  } else {
+    cat("Datos de composición no laboral no disponibles.")
+  }
+}
+```
+
+---
+
+## Horas semanales de trabajo
+
+
+
+### Cuadro 2b — Horas semanales promedio de los ocupados, por tipo de hogar
+
+```{r tab-horas}
+if (exists("horas_long") && nrow(horas_long) > 0) {
+  tab2b <- horas_long |> 
+    tidyr::pivot_wider(names_from = periodo, values_from = horas) |> 
+    dplyr::rename(Categoría = grupo_hogar)
+  knitr::kable(tab2b, digits = 1, align = c("l", rep("r", ncol(tab2b)-1)))
+}
+```
+
+---
+
+## Distribución de hogares por tipo
+
+```{r fig-peso}
+plot_ly(peso,
+  x = ~periodo, y = ~peso, color = ~grupo_hogar,
+  colors = PALETA, type = "bar",
+  hovertemplate = "<b>%{fullData.name}</b><br>%{x}: %{y:.1f}%<extra></extra>"
+) |> layout(
+  barmode = "stack",
+  xaxis  = list(title = "", tickangle = -45),
+  yaxis  = list(title = "% del total de hogares", ticksuffix = "%", range = c(0, 100)),
+  legend = list(orientation = "h", y = -0.3)
+)
+```
+
+### Cuadro 7 — Peso de cada tipo de hogar en el total (%)
+
+```{r tab-peso}
+if (exists("peso") && nrow(peso) > 0) {
+  tab7 <- peso |> 
+    tidyr::pivot_wider(names_from = periodo, values_from = peso) |> 
+    dplyr::rename(Categoría = grupo_hogar)
+  knitr::kable(tab7, digits = 1, align = c("l", rep("r", ncol(tab7)-1)))
+}
+```
+
+---
+
+## Nota metodológica
+
+**Clasificación de hogares** — variable `EMPLEO`, disponible desde 4T2023:
+
+- **Formales**: al menos un miembro con ingreso laboral formal (`EMPLEO = 1`), ninguno informal
+- **Informales**: al menos un miembro con ingreso laboral informal (`EMPLEO = 2`), ninguno formal
+- **Mixtos**: miembros con ambos tipos de empleo
+- **Sin ocupados**: ningún miembro con ingreso laboral positivo
+
+**Líneas de pobreza e indigencia**: canasta CBA/CBT del INDEC para adulto equivalente (GBA), descargada automáticamente. Valores regionales estimados por ratios de Paridades de Poder de Compra del Consumidor (Metodología N° 22).
+
+**Deflactación**: ingresos expresados en `r base_label` usando el IPC de Cobertura Nacional. Las tasas de pobreza e indigencia se calculan siempre con las líneas a precios corrientes de cada período.
+
+**Ponderador:** `PONDIH`. **Fuente:** EPH-INDEC. Elaboración propia.

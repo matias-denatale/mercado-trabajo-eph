@@ -1,0 +1,56 @@
+---
+title: "Metodología"
+---
+
+## Fuente de datos
+
+Los indicadores se calculan a partir de los microdatos de la **Encuesta Permanente de Hogares (EPH)** del INDEC, descargados automáticamente mediante el paquete [`eph`](https://github.com/ropensci/eph) de R (función `get_microdata()`).
+
+La EPH releva trimestralmente 31 aglomerados urbanos, los cuales concentran aproximadamente el 62% de la población total del país.
+
+## Definiciones
+
+### Tasa de empleo
+
+$$\text{Tasa de empleo} = \frac{\text{Ocupados}}{\text{PET}} \times 100$$
+
+Donde la Población en Edad de Trabajar (PET) comprende a todas las personas de **10 años y más** (ESTADO ≠ 4 en el diseño de registro).
+
+### Tasa de desempleo
+
+$$\text{Tasa de desempleo} = \frac{\text{Desocupados}}{\text{PEA}} \times 100$$
+
+Donde la Población Económicamente Activa (PEA) es la suma de ocupados (ESTADO = 1) y desocupados (ESTADO = 2).
+
+### Tasa de informalidad laboral
+
+$$\text{Tasa de informalidad} = \frac{\text{Ocupados informales}}{\text{Total ocupados con información válida}} \times 100$$
+
+Se utiliza la variable **EMPLEO** del diseño de registro post-4T2023 (valores: 1 = Formal, 2 = Informal). El ponderador empleado es PONDERA. La variable EMPLEO fue incorporada en el **cuarto trimestre de 2023**, junto con SECTOR, como parte de la revisión metodológica del diseño de registro de la EPH.
+
+::: {.callout-warning}
+**Ruptura de serie:** la tasa de informalidad calculada aquí no es comparable con indicadores elaborados mediante la variable `PP07H` (descuento jubilatorio), que sólo captura informalidad asalariada. La variable `EMPLEO` cubre también a los trabajadores independientes. Por esta razón la serie de informalidad inicia en el 4T2023.
+:::
+
+## Ponderadores
+
+Se utiliza **PONDERA** para el cálculo de tasas de actividad, empleo y desempleo, siguiendo las recomendaciones del Anexo I del diseño de registros de la EPH.
+
+## Cobertura temporal
+
+| Indicador | Período disponible |
+|---|---|
+| Tasa de empleo | 2T2016 — 3T2025 |
+| Tasa de desempleo | 2T2016 — 3T2025 |
+| Tasa de informalidad | 4T2023 — 3T2025 |
+
+## Notas adicionales
+
+- El aglomerado Viedma-Carmen de Patagones presentó cobertura insuficiente en el 3T2025 (ver nota metodológica del informe INDEC correspondiente).
+- Los microdatos son las bases preliminares publicadas por INDEC. Los valores pueden diferir marginalmente de las bases definitivas.
+
+## Reproducibilidad
+
+El sitio se actualiza automáticamente mediante **GitHub Actions** cada vez que se sube un nuevo conjunto de datos. El renderizado se realiza con [Quarto](https://quarto.org) y el entorno de paquetes está gestionado con [`renv`](https://rstudio.github.io/renv/).
+
+Todo el código fuente está disponible en el repositorio de GitHub.

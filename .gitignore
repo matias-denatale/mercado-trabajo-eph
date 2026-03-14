@@ -1,0 +1,43 @@
+# R
+.Rproj.user/
+.Rhistory
+.RData
+.RDataTmp
+.Ruserdata
+*.Rproj
+
+# renv
+renv/library/
+renv/python/
+renv/staging/
+
+# Quarto output
+docs/
+_site/
+.quarto/
+/.quarto/
+**/*.quarto_ipynb
+site_libs/
+
+# Datos EPH — no versionar
+data/cache/
+data/hogares_long.rds
+Bases transiciones/
+*_cache.rds
+
+# Datos procesados — sí versionar
+!data/indicadores.rds
+!data/hogares_indicadores.rds
+!data/hogares_complementario.rds
+!data/ipc_trimestral.rds
+!data/transiciones_consolidado.xlsx
+!data/paneles/matrices_anual.rds
+!data/paneles/matrices_bloque.rds
+!data/paneles/tasas_cond_anual.rds
+!data/paneles/tasas_cond_bloque.rds
+!data/paneles/tasas_norm_anual.rds
+!data/paneles/balance_anual.rds
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

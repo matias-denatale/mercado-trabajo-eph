@@ -1,0 +1,85 @@
+name: Render and Deploy
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Lunes 6 AM UTC — captura publicaciones nuevas de EPH e IPC
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "4.4"
+          use-public-rspm: true
+
+      - name: Install Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: "1.5"
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
+
+      # Cache de paquetes renv — se invalida cuando cambia renv.lock
+      - name: Cache renv packages
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.RENV_PATHS_ROOT }}
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
+
+      - name: Restore renv environment
+        shell: Rscript {0}
+        run: |
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          renv::restore()
+
+      # Cache de microdatos EPH — se refresca cada lunes (= nueva semana ISO)
+      - name: Get current week
+        id: date
+        run: echo "week=$(date +%V-%Y)" >> $GITHUB_OUTPUT
+
+      - name: Cache EPH microdata
+        uses: actions/cache@v4
+        with:
+          path: data/cache
+          key: eph-cache-${{ runner.os }}-${{ steps.date.outputs.week }}
+          restore-keys: |
+            eph-cache-${{ runner.os }}-
+
+      # Pipeline 1: indicadores de mercado laboral (empleo, desempleo, informalidad)
+      - name: Calculate labor market indicators
+        shell: Rscript {0}
+        run: source("R/calcular_indicadores.R")
+
+      # Pipeline 2: hogares — descarga CBA/CBT e IPC, calcula pobreza y grupos
+      - name: Calculate household poverty indicators
+        shell: Rscript {0}
+        run: source("R/calcular_hogares.R")
+
+      # Render — paneles usa freeze:auto, no recalcula sin bases locales
+      - name: Render Quarto site
+        run: quarto render
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: gh-pages
+          force_orphan: true

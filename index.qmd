@@ -1,0 +1,191 @@
+---
+title: "Mercado de Trabajo Argentino"
+subtitle: "Indicadores trimestrales basados en la EPH-INDEC"
+date: today
+---
+
+```{r setup}
+#| include: false
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(scales)
+
+indicadores <- readRDS("data/indicadores.rds")
+
+# Paleta minimalista
+col_empleo    <- "#2166ac"
+col_desempleo <- "#d73027"
+col_informal  <- "#e08214"
+col_actividad <- "#1b7837"
+
+ultimo <- indicadores |> slice_tail(n = 1)
+
+# Tema unificado para ggplot
+tema_limpio <- theme_minimal(base_size = 13, base_family = "Inter") +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(color = "#718096", size = 11),
+    axis.title.y = element_text(size = 11, color = "#4a5568"),
+    legend.position = "bottom"
+  )
+```
+
+## Panorama actual
+
+::: {.callout-note}
+Último dato disponible: **`r ultimo$periodo_label`**. Los indicadores se calculan sobre el total de 31 aglomerados urbanos relevados por la EPH.
+:::
+
+::: {.indicadores-resumen}
+
+::: {.indicador-card}
+<div class="valor">`r ultimo$tasa_actividad`%</div>
+<div class="etiqueta">Tasa de actividad</div>
+:::
+
+::: {.indicador-card}
+<div class="valor">`r ultimo$tasa_empleo`%</div>
+<div class="etiqueta">Tasa de empleo</div>
+:::
+
+::: {.indicador-card}
+<div class="valor">`r ultimo$tasa_desempleo`%</div>
+<div class="etiqueta">Tasa de desempleo</div>
+:::
+
+::: {.indicador-card}
+<div class="valor">`r if(!is.null(ultimo$tasa_informalidad) && !is.na(ultimo$tasa_informalidad)) paste0(ultimo$tasa_informalidad, "%") else "—"`</div>
+<div class="etiqueta">Informalidad laboral</div>
+:::
+
+:::
+
+---
+
+## Tasa de empleo
+
+Proporción de ocupados sobre la Población en Edad de Trabajar (PET, 10 años y más).
+
+```{r graf-empleo}
+#| echo: false
+p_empleo <- indicadores |>
+  filter(!is.na(tasa_empleo)) |>
+  ggplot(aes(x = fecha_aprox, y = tasa_empleo, group = 1,
+             text = paste0(periodo_label, ": ", tasa_empleo, "%"))) +
+  geom_line(color = col_empleo, linewidth = 0.9) +
+  geom_point(color = col_empleo, size = 1.8) +
+  scale_y_continuous(limits = c(35, 55),
+                     labels = function(x) paste0(x, "%")) +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y",
+               expand = expansion(mult = 0.02)) +
+  labs(x = NULL, y = "Tasa de empleo (%)") +
+  tema_limpio
+
+ggplotly(p_empleo, tooltip = "text") |>
+  layout(hovermode = "x unified")
+```
+
+---
+
+## Tasa de desempleo
+
+Proporción de desocupados sobre la Población Económicamente Activa (PEA).
+
+```{r graf-desempleo}
+#| echo: false
+p_desempleo <- indicadores |>
+  filter(!is.na(tasa_desempleo)) |>
+  ggplot(aes(x = fecha_aprox, y = tasa_desempleo, group = 1,
+             text = paste0(periodo_label, ": ", tasa_desempleo, "%"))) +
+  geom_line(color = col_desempleo, linewidth = 0.9) +
+  geom_point(color = col_desempleo, size = 1.8) +
+  scale_y_continuous(labels = function(x) paste0(x, "%")) +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y",
+               expand = expansion(mult = 0.02)) +
+  labs(x = NULL, y = "Tasa de desempleo (%)") +
+  tema_limpio
+
+ggplotly(p_desempleo, tooltip = "text") |>
+  layout(hovermode = "x unified")
+```
+
+---
+
+## Tasa de informalidad laboral
+
+Proporción de ocupados con empleo informal sobre el total de ocupados con información válida. Variable `EMPLEO` del diseño de registro. **Serie disponible desde el 4° trimestre de 2023**, cuando INDEC incorporó la medición directa de informalidad laboral.
+
+```{r graf-informalidad}
+#| echo: false
+datos_inf <- indicadores |> filter(!is.na(tasa_informalidad))
+
+if (nrow(datos_inf) > 0) {
+  p_inf <- datos_inf |>
+    ggplot(aes(x = fecha_aprox, y = tasa_informalidad, group = 1,
+               text = paste0(periodo_label, ": ", tasa_informalidad, "%"))) +
+    geom_line(color = col_informal, linewidth = 0.9) +
+    geom_point(color = col_informal, size = 2) +
+    scale_y_continuous(limits = c(30, 60),
+                       labels = function(x) paste0(x, "%")) +
+    scale_x_date(date_breaks = "3 months", date_labels = "%mT%Y",
+                 expand = expansion(mult = 0.04)) +
+    labs(x = NULL, y = "Tasa de informalidad (%)") +
+    tema_limpio
+
+  ggplotly(p_inf, tooltip = "text") |>
+    layout(hovermode = "x unified")
+} else {
+  cat("Sin datos de informalidad disponibles aún.")
+}
+```
+
+---
+
+## Presión sobre el mercado de trabajo
+
+Composición de la presión sobre el mercado de trabajo (Total = Desocupados + Ocupados demandantes + Ocupados no demandantes disponibles). Expresado como % de la Población Económicamente Activa.
+
+```{r graf-presion}
+#| echo: false
+datos_presion <- indicadores |> filter(!is.na(tasa_presion_mercado))
+
+if (nrow(datos_presion) > 0) {
+  df_presion_long <- datos_presion |>
+    select(fecha_aprox, periodo_label, 
+           `Desocupados abiertos` = tasa_desoc_abiertos,
+           `Ocupados demandantes` = tasa_ocup_demandantes,
+           `Ocup. no demand. disponibles` = tasa_ocup_nodem_disp,
+           `Presión Total` = tasa_presion_mercado) |>
+    tidyr::pivot_longer(cols = c(`Desocupados abiertos`, `Ocupados demandantes`, `Ocup. no demand. disponibles`, `Presión Total`),
+                        names_to = "Categoria", values_to = "tasa") |>
+    mutate(Categoria = factor(Categoria, levels = c(
+      "Presión Total", "Ocupados demandantes", "Ocup. no demand. disponibles", "Desocupados abiertos"
+    )))
+
+  p_pres <- ggplot(df_presion_long, aes(x = fecha_aprox, y = tasa, color = Categoria, group = Categoria,
+                                        text = paste0(periodo_label, "<br>", Categoria, ": ", tasa, "%"))) +
+    geom_line(aes(linewidth = ifelse(Categoria == "Presión Total", 1.2, 0.8))) +
+    geom_point(size = 1.5) +
+    scale_linewidth_identity() +
+    scale_y_continuous(labels = function(x) paste0(x, "%")) +
+    scale_x_date(date_breaks = "1 year", date_labels = "%Y", expand = expansion(mult = 0.02)) +
+    scale_color_manual(values = c("Presión Total" = "#1a1a2e", 
+                                  "Ocupados demandantes" = "#e08214", 
+                                  "Ocup. no demand. disponibles" = "#8073ac", 
+                                  "Desocupados abiertos" = col_desempleo)) +
+    labs(x = NULL, y = "(% de la PEA)", color = "") +
+    tema_limpio
+
+  ggplotly(p_pres, tooltip = "text") |>
+    layout(hovermode = "x unified", legend = list(orientation = "h", y = -0.2))
+} else {
+  cat("Sin datos de presión de mercado de trabajo disponibles aún.")
+}
+```
+
+---
+
+*Elaboración propia en base a EPH-INDEC. Actualizado trimestralmente vía GitHub Actions.*

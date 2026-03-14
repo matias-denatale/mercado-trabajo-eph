@@ -1,0 +1,52 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Mercado de Trabajo — EPH"
+  description: "Indicadores del mercado laboral argentino basados en la Encuesta Permanente de Hogares (INDEC)"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Inicio
+      - href: paneles.qmd
+        text: Paneles
+      - href: hogares.qmd
+        text: Hogares
+      - href: metodologia.qmd
+        text: Metodología
+    right:
+      - text: "Matías De Natale"
+        href: https://www.linkedin.com/in/matías-de-natale-336745181
+      - icon: linkedin
+        href: https://www.linkedin.com/in/matías-de-natale-336745181
+        aria-label: LinkedIn
+      - icon: envelope
+        href: mailto:matias_denatale@hotmail.com
+        aria-label: Email
+      - icon: github
+        href: https://github.com/
+        aria-label: GitHub
+  page-footer:
+    left: "Elaboración propia en base a EPH-INDEC."
+    right: "Actualizado trimestralmente vía GitHub Actions."
+
+format:
+  html:
+    theme: flatly
+    css: styles.css
+    toc: true
+    toc-depth: 2
+    code-fold: true
+    code-summary: "Ver código"
+    fig-width: 9
+    fig-height: 5.5
+    fig-dpi: 150
+    lang: es
+    smooth-scroll: true
+
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto

@@ -1,0 +1,137 @@
+---
+title: "Transiciones ocupacionales"
+subtitle: "Matrices de transición y flujos interanuales — EPH en panel"
+date: today
+---
+
+```{r setup}
+#| include: false
+library(dplyr)
+library(tidyr)
+library(reactable)
+library(purrr)
+
+# Verificar si los datos pre-calculados están disponibles
+datos_disponibles <- file.exists("data/paneles/matrices_bloque.rds")
+```
+
+::: {.callout-note}
+Esta sección utiliza bases de panel locales construidas a partir de archivos
+longitudinales de la EPH. Para actualizar los resultados, ejecutá
+`source("R/calcular_paneles.R")` en la consola de R y luego volvé a renderizar.
+:::
+
+---
+
+## Marco conceptual
+
+Las matrices de transición permiten analizar la **movilidad ocupacional** entre períodos:
+qué proporción de quienes estaban en cada categoría en $t_1$ se encuentran en cada
+categoría en $t_2$. Se trabaja con población de **18 a 64 años** y ocho categorías
+que combinan posición en el empleo, formalidad y tamaño del establecimiento.
+
+El análisis interanual agrega dos métricas de flujo:
+
+- **Tasa de entrada (TE):** proporción del stock total que ingresa a una categoría.
+- **Tasa de salida (TS):** proporción del stock total que egresa de una categoría.
+- **Balance:** TE − TS. Positivo indica ganancia de participación; negativo, pérdida.
+
+---
+
+## Categorías ocupacionales
+
+| Código | Categoría |
+|--------|-----------|
+| 1 | Patrones +5 empleados |
+| 2 | TCP calificados |
+| 3 | Asalariados formales |
+| 4 | Microempresarios |
+| 5 | TCP semi o no calificados |
+| 6 | Asalariados informales |
+| 7 | Desocupados |
+| 8 | Inactivos |
+
+La variable `g_ocup` combina `CAT_OCUP`, `CAT_INAC` y `ESTADO`. El código 8 mezcla
+desocupados e inactivos en el diseño original; se corrige usando `estado_t1`/`estado_t2`.
+
+---
+
+## Tasas condicionales por bloque histórico
+
+Proporción de personas que, estando en cada categoría inicial, se encuentran en cada
+categoría final. Filas suman 100%.
+
+```{r tasas-cond}
+#| echo: false
+if (datos_disponibles) {
+  tasas_cond_bloque <- readRDS("data/paneles/tasas_cond_bloque.rds")
+  nombres_bloques   <- names(tasas_cond_bloque)
+} else {
+  cat("Datos no disponibles. Ejecutá source('R/calcular_paneles.R') primero.")
+}
+```
+
+```{r tabs-bloques}
+#| echo: false
+#| results: asis
+for (nm in nombres_bloques) {
+  tc <- as.data.frame(round(tasas_cond_bloque[[nm]] * 100, 1))
+  tc <- tibble::rownames_to_column(tc, "Categoría inicial")
+  cat(glue::glue("\n\n### {nm}\n\n"))
+  print(
+    reactable(
+      tc,
+      striped   = TRUE,
+      highlight = TRUE,
+      compact   = TRUE,
+      defaultPageSize = 8,
+      columns = list(
+        `Categoría inicial` = colDef(minWidth = 180, sticky = "left")
+      )
+    )
+  )
+}
+```
+
+---
+
+## Balance interanual
+
+Variación de la participación en el stock total (TE − TS) por año y categoría.
+Valores positivos indican que la categoría ganó peso relativo en ese período.
+
+```{r balance}
+#| echo: false
+if (file.exists("data/paneles/balance_anual.rds")) {
+  balance_df <- readRDS("data/paneles/balance_anual.rds")
+
+  reactable(
+    balance_df,
+    striped         = TRUE,
+    highlight       = TRUE,
+    defaultPageSize = 8,
+    columns         = c(
+      list(categoria = colDef(name = "Categoría", minWidth = 180, sticky = "left")),
+      setNames(
+        lapply(names(balance_df)[-1], function(x) colDef(name = x, minWidth = 90)),
+        names(balance_df)[-1]
+      )
+    )
+  )
+}
+```
+
+---
+
+## Nota metodológica
+
+Los paneles se construyen apareando observaciones entre trimestres consecutivos mediante
+`CODUSU` + `NRO_HOGAR` + `COMPONENTE`, con horizonte temporal anual (t1 y t2 separados
+por cuatro trimestres). La ponderación utilizada es `PONDERA_t1`.
+
+Los períodos plurianuales acumulan todos los paneles disponibles dentro del bloque,
+lo que amplía el tamaño efectivo de la muestra y estabiliza las estimaciones en celdas
+de baja frecuencia (especialmente para patrones y TCP calificados).
+
+El Excel con todas las matrices (absolutas, condicionales y balance) se genera en
+`data/paneles/transiciones_completo.xlsx` al ejecutar `calcular_paneles.R`.
