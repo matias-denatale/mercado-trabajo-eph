@@ -33,7 +33,7 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev libgdal-dev libpng-dev libproj-dev pandoc
+          sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev libgdal-dev libpng-dev libproj-dev libudunits2-dev pandoc
 
       - name: Restore renv environment
         shell: Rscript {0}
