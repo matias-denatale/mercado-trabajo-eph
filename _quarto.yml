@@ -1,11 +1,11 @@
 project:
   type: website
-  output-dir: docs
+  output-dir: _site
 
 website:
   title: "Mercado de Trabajo — EPH"
   description: "Indicadores del mercado laboral argentino basados en la Encuesta Permanente de Hogares (INDEC)"
-  site-url: https://matias-denatale.github.io/mercado-trabajo-eph
+  site-url: "https://matias-denatale.github.io/mercado-trabajo-eph/"
   navbar:
     left:
       - href: index.qmd
