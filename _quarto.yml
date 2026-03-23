@@ -8,6 +8,7 @@ website:
   title: "Mercado de Trabajo — EPH"
   description: "Indicadores del mercado laboral argentino basados en la Encuesta Permanente de Hogares (INDEC)"
   site-url: "https://matias-denatale.github.io/mercado-trabajo-eph/"
+  favicon: "favicon.ico"
   navbar:
     left:
       - href: index.qmd
@@ -18,17 +19,17 @@ website:
         text: Hogares
       - href: metodologia.qmd
         text: Metodología
+      - href: sobre-mi.qmd
+        text: Sobre mí
     right:
-      - text: "Matías De Natale"
-        href: https://www.linkedin.com/in/matías-de-natale-336745181
       - icon: linkedin
         href: https://www.linkedin.com/in/matías-de-natale-336745181
         aria-label: LinkedIn
       - icon: envelope
-        href: mailto:matias_denatale@hotmail.com
+        href: mailto:denatale.mati@gmail.com
         aria-label: Email
       - icon: github
-        href: https://github.com/
+        href: https://github.com/matias-denatale/mercado-trabajo-eph
         aria-label: GitHub
   page-footer:
     left: "Elaboración propia en base a EPH-INDEC."
@@ -36,8 +37,7 @@ website:
 
 format:
   html:
-    theme: flatly
-    css: styles.css
+    theme: [solar, styles.css]
     toc: true
     toc-depth: 2
     code-fold: true
