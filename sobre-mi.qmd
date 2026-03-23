@@ -6,8 +6,7 @@ toc: false
 ::: {.profile-section}
 
 ::: {.profile-photo}
-<!-- Reemplazá el div de abajo por: <img src="foto.jpg" alt="Matías De Natale"> cuando tengas la foto lista -->
-<div class="photo-placeholder">👤</div>
+<img src="Foto-CV.png" alt="Matías De Natale">
 :::
 
 ::: {.profile-bio}
@@ -48,9 +47,9 @@ para audiencias tanto académicas como de política pública.
 
 <div class="contact-grid">
 
-<a class="contact-card" href="mailto:denatale.mati@gmail.com">
+<a class="contact-card" href="mailto:matias_denatale@hotmail.com">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-  denatale.mati@gmail.com
+  matias_denatale@hotmail.com
 </a>
 
 <a class="contact-card" href="https://www.linkedin.com/in/matías-de-natale-336745181" target="_blank" rel="noopener">
