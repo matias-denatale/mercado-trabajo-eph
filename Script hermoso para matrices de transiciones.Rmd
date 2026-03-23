@@ -1,0 +1,366 @@
+---
+title: "Matrices de Transiciones Ocupacionales"
+author: "Matías De Natale"
+date: "2025-11-18"
+output: html_document
+---
+---
+
+## Introducción
+
+En este documento construyo matrices de transición ocupacional a partir de las bases de panel de la EPH para distintos períodos:
+
+- 2003–2007  
+- 2008–2011  
+- 2011–2015  
+- 2016–2019  
+- 2022–2024  
+
+En todos los casos:
+
+- se considera población de **18 a 64 años**,  
+- se trabaja con la variable **g_ocup** (8 categorías),  
+- se corrige el código 8 (mezcla de desocupados e inactivos) utilizando la variable de **estado de actividad**.
+
+---
+
+## 1. Configuración inicial
+
+Cargo paquetes y defino opciones generales de los chunks.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+
+library(dplyr)
+library(readxl)
+library(tidyr)
+library(purrr)
+```
+
+2. Rutas a las carpetas de paneles
+
+Trabajo con dos carpetas separadas:
+
+Paneles 2003-2015
+
+Paneles 2016-2024
+
+```{r}
+ruta_2003_2015 <- "Bases transiciones/Paneles 2003-2015"
+ruta_2016_2024 <- "Bases transiciones/Paneles 2016-2024"
+```
+
+3. Definición de categorías ocupacionales
+
+Uso una codificación en ocho categorías:
+
+1. Patrones +5
+2. TCP calificados
+3. Asalariados formales
+4. Microempresarios
+5. TCP semi o no calificados
+6. Asalariados informales
+7. Desocupados
+8. Inactivos
+
+```{r}
+labels_g_ocup <- c(
+"Patrones +5",                 # 1
+"TCP calificados",             # 2
+"Asalariados formales",        # 3
+"Microempresarios",            # 4
+"TCP semi o no calificados",   # 5
+"Asalariados informales",      # 6
+"Desocupados",                 # 7
+"Inactivos"                    # 8
+)
+```
+
+4. Funciones auxiliares
+
+4.1. Lectura y limpieza de cada archivo de panel
+
+La siguiente función:
+lee un archivo de panel,
+separa desocupados (7) de inactivos (8) usando estado_t1 y estado_t2,
+filtra población de 18 a 64 años,
+aplica etiquetas de g_ocup,
+calcula conteos ponderados de las transiciones.
+
+```{r}
+leer_transiciones_archivo <- function(archivo) {
+base <- read_xlsx(archivo)
+
+base %>%
+transmute(
+g_ocup_t1  = g_ocup_t1,
+g_ocup_t2  = g_ocup_t2,
+estado_t1  = estado_t1,
+estado_t2  = estado_t2,
+pondera_t1 = PONDERA_t1,
+edad       = edad
+) %>%
+# separar desocupados (7) de inactivos (8) cuando g_ocup==8
+mutate(
+g_ocup_t1 = case_when(
+g_ocup_t1 == 8 & estado_t1 == 2 ~ 7L,  # desocupados
+TRUE                             ~ g_ocup_t1
+),
+g_ocup_t2 = case_when(
+g_ocup_t2 == 8 & estado_t2 == 2 ~ 7L,
+TRUE                             ~ g_ocup_t2
+)
+) %>%
+# filtro 18-64 para todas las categorías
+filter(
+edad >= 18, edad <= 64,
+!is.na(g_ocup_t1),
+!is.na(g_ocup_t2)
+) %>%
+# aplicar etiquetas
+mutate(
+g_ocup_t1 = factor(g_ocup_t1, levels = 1:8, labels = labels_g_ocup),
+g_ocup_t2 = factor(g_ocup_t2, levels = 1:8, labels = labels_g_ocup)
+) %>%
+# resumen ponderado
+count(g_ocup_t1, g_ocup_t2, wt = pondera_t1, name = "n_pond")
+}
+```
+
+5. Identificación de archivos por período
+
+En esta sección construyo los vectores de archivos para cada bloque temporal.
+Uso el año inicial del nombre del archivo (Panel_Per_YYYY_...) como referencia.
+
+```{r archivos-por-periodo}
+# Paneles 2003-2015
+df_2003_2015 <- tibble(
+  file = list.files("Bases transiciones/Paneles 2003-2015/", full.names = TRUE)
+) %>%
+  mutate(
+    nombre = basename(file),
+    anio1  = as.integer(substr(nombre, 11, 14))
+  )
+
+files_2003_2007 <- df_2003_2015 %>%
+  filter(anio1 >= 2003, anio1 <= 2007) %>%
+  pull(file)
+
+files_2008_2011 <- df_2003_2015 %>%
+  filter(anio1 >= 2008, anio1 <= 2011) %>%
+  pull(file)
+
+files_2011_2015 <- df_2003_2015 %>%
+  filter(anio1 >= 2011, anio1 <= 2015) %>%
+  pull(file)
+
+# Paneles 2016-2024
+df_2016_2024 <- tibble(
+  file = list.files("Bases transiciones/Paneles 2016-2024/", full.names = TRUE)
+) %>%
+  mutate(
+    nombre = basename(file),
+    anio1  = as.integer(substr(nombre, 11, 14))
+  )
+
+files_2016_2019 <- df_2016_2024 %>%
+  filter(anio1 >= 2016, anio1 <= 2019) %>%
+  pull(file)
+
+files_2022_2024 <- df_2016_2024 %>%
+  filter(anio1 >= 2022, anio1 <= 2024) %>%
+  pull(file)
+
+list(
+  "2003-2007" = length(files_2003_2007),
+  "2008-2011" = length(files_2008_2011),
+  "2011-2015" = length(files_2011_2015),
+  "2016-2019" = length(files_2016_2019),
+  "2022-2024" = length(files_2022_2024)
+)
+```
+
+El último list() solo sirve para chequear cuántos archivos hay en cada bloque.
+
+## 5.3 Función para construir una matriz de transición
+
+```{r funcion-matriz}
+hacer_matriz <- function(df) {
+  # asegurar tipos limpios
+  df2 <- df %>%
+    dplyr::mutate(
+      g_ocup_t1 = as.character(g_ocup_t1),
+      g_ocup_t2 = as.character(g_ocup_t2),
+      n_pond    = as.numeric(n_pond)
+    )
+
+  # matriz de contingencia ponderada
+  m <- xtabs(n_pond ~ g_ocup_t1 + g_ocup_t2, data = df2)
+
+  # asegurar que tenga las 8 categorías en el orden correcto
+  todas <- labels_g_ocup
+  m_full <- matrix(
+    0,
+    nrow = length(todas),
+    ncol = length(todas),
+    dimnames = list(todas, todas)
+  )
+
+  # copiar los valores que sí existen
+  m_full[rownames(m), colnames(m)] <- m
+
+  m_full
+}
+
+```
+
+6. Construcción de matrices de transición por período
+
+En esta sección construyo, para cada período:
+
+la tabla de transiciones (trans_XXXX_YYYY),
+la matriz de transición (matriz_XXXX_YYYY).
+
+```{r construir-matrices}
+# 2003-2007
+
+trans_2003_2007 <- map_dfr(files_2003_2007, leer_transiciones_archivo)
+matriz_2003_2007 <- hacer_matriz(trans_2003_2007)
+
+# 2008-2011
+
+trans_2008_2011 <- map_dfr(files_2008_2011, leer_transiciones_archivo)
+matriz_2008_2011 <- hacer_matriz(trans_2008_2011)
+
+# 2011-2015
+
+trans_2011_2015 <- map_dfr(files_2011_2015, leer_transiciones_archivo)
+matriz_2011_2015 <- hacer_matriz(trans_2011_2015)
+
+# 2016-2019
+
+trans_2016_2019 <- map_dfr(files_2016_2019, leer_transiciones_archivo)
+matriz_2016_2019 <- hacer_matriz(trans_2016_2019)
+
+# 2022-2024
+
+trans_2022_2024 <- map_dfr(files_2022_2024, leer_transiciones_archivo)
+matriz_2022_2024 <- hacer_matriz(trans_2022_2024)
+```
+
+7. Resultados: matrices de transición
+
+A continuación se listan las matrices de transición para cada período.
+Cada una muestra en filas la categoría ocupacional inicial y en columnas la categoría final.
+
+```{r}
+matriz_2003_2007
+matriz_2008_2011
+matriz_2011_2015
+matriz_2016_2019
+matriz_2022_2024
+```
+
+8. Código para crear el Excel
+```{r exportar-matrices, echo=TRUE, message=FALSE, warning=FALSE}
+library(openxlsx)
+
+# Crear workbook
+wb <- createWorkbook()
+
+# Lista de matrices y nombres de hoja
+listas_matrices <- list(
+  "2003-2007" = matriz_2003_2007,
+  "2008-2011" = matriz_2008_2011,
+  "2011-2015" = matriz_2011_2015,
+  "2016-2019" = matriz_2016_2019,
+  "2022-2024" = matriz_2022_2024
+)
+
+# Agregar cada matriz como hoja
+for (nombre in names(listas_matrices)) {
+  addWorksheet(wb, nombre)
+  writeData(wb, sheet = nombre, x = listas_matrices[[nombre]], rowNames = TRUE)
+}
+
+# Guardar archivo
+saveWorkbook(
+  wb,
+  file = "matrices_transicion_2003_2024.xlsx",
+  overwrite = TRUE
+)
+```
+
+
+9. Sankey para 2003–2007
+
+Como ejemplo, abajo dejo el código para generar un diagrama aluvial (Sankey estático) para el período 2003–2007 en versión académica.
+Para que no se ejecute automáticamente al compilar, dejo el chunk con eval = FALSE.
+
+```{r, eval = FALSE}
+library(ggplot2)
+library(ggalluvial)
+library(scales)
+
+trans_2003_2007_prop <- trans_2003_2007 %>%
+group_by(g_ocup_t1) %>%
+mutate(
+total_origen = sum(n_pond),
+prop         = n_pond / total_origen
+) %>%
+ungroup()
+
+ggplot(
+trans_2003_2007_prop,
+aes(
+axis1 = g_ocup_t1,
+axis2 = g_ocup_t2,
+y     = prop
+)
+) +
+geom_alluvium(
+aes(fill = g_ocup_t1),
+alpha    = 0.85,
+width    = 0.12,
+knot.pos = 0.4,
+colour   = "grey80",
+size     = 0.15
+) +
+geom_stratum(
+width   = 0.25,
+fill    = "white",
+colour  = "grey40",
+size    = 0.3
+) +
+geom_text(
+stat   = "stratum",
+aes(label = after_stat(stratum)),
+size   = 3.1,
+vjust  = -0.1
+) +
+scale_x_discrete(
+limits = c("Situación inicial", "Situación final"),
+expand = c(0.12, 0.05)
+) +
+scale_y_continuous(labels = percent_format(accuracy = 1)) +
+scale_fill_brewer(palette = "Set2") +
+labs(
+title    = "Transiciones ocupacionales 2003–2007 (18–64 años)",
+subtitle = "Proporción dentro de cada categoría ocupacional inicial",
+x        = NULL,
+y        = NULL,
+fill     = NULL
+) +
+theme_minimal(base_size = 11) +
+theme(
+panel.grid      = element_blank(),
+axis.text.y     = element_blank(),
+axis.ticks.y    = element_blank(),
+axis.text.x     = element_text(size = 10),
+plot.title      = element_text(face = "bold", size = 13),
+plot.subtitle   = element_text(size = 10, colour = "grey40"),
+legend.position = "bottom",
+legend.box      = "horizontal",
+legend.margin   = margin(t = 2, b = 2)
+)
+```{r, eval = FALSE}

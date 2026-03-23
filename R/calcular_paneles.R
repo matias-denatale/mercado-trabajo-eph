@@ -54,6 +54,60 @@ hacer_matriz_desde_df <- function(df) {
   m_full
 }
 
+# Construye g_ocup (1–8) desde microdatos crudos EPH.
+# Variables requeridas: CAT_OCUP, PP07H, PP04D_COD, PP04C, ESTADO.
+#
+# Categorías:
+#   1 Patrones +5                 CAT_OCUP==1 & PP04C ∈ 6–12
+#   2 TCP calificados             CAT_OCUP==2 & dígito CNO ∈ {1,2}
+#   3 Asalariados formales        CAT_OCUP==3 & PP07H==1
+#   4 Microempresarios            CAT_OCUP==1 & PP04C ∈ 1–5
+#   5 TCP semi o no calificados   CAT_OCUP==2 & dígito CNO ∈ {3,4}
+#   6 Asalariados informales      CAT_OCUP==3 & PP07H==2
+#   7 Desocupados                 ESTADO==2
+#   8 Inactivos                   ESTADO==3
+#   NA todo lo demás (se filtra aguas abajo)
+construir_g_ocup <- function(ind) {
+  stopifnot(is.data.frame(ind))
+  needed <- c("CAT_OCUP", "PP07H", "PP04D_COD", "PP04C", "ESTADO")
+  missing_vars <- setdiff(needed, names(ind))
+  if (length(missing_vars) > 0)
+    stop("Faltan variables en ind: ", paste(missing_vars, collapse = ", "))
+
+  ind |>
+    mutate(
+      CAT_OCUP  = suppressWarnings(as.integer(.data[["CAT_OCUP"]])),
+      PP07H     = suppressWarnings(as.integer(.data[["PP07H"]])),
+      PP04C     = suppressWarnings(as.integer(.data[["PP04C"]])),
+      ESTADO    = suppressWarnings(as.integer(.data[["ESTADO"]])),
+      PP04D_COD = as.character(.data[["PP04D_COD"]]),
+      # Dígito 5 del código CNO: calificación del puesto
+      .cno5 = suppressWarnings(
+        as.integer(
+          str_sub(str_pad(.data[["PP04D_COD"]], 5, side = "left", pad = "0"), 5, 5)
+        )
+      ),
+      g_ocup = case_when(
+        # Estado de actividad tiene prioridad sobre categoría ocupacional
+        ESTADO == 2L                          ~ 7L,  # Desocupados
+        ESTADO == 3L                          ~ 8L,  # Inactivos
+        # Ocupados (ESTADO == 1)
+        CAT_OCUP == 3L & PP07H == 1L          ~ 3L,  # Asalariados formales
+        CAT_OCUP == 3L & PP07H == 2L          ~ 6L,  # Asalariados informales
+        CAT_OCUP == 2L & .cno5 %in% c(1L,2L) ~ 2L,  # TCP calificados
+        CAT_OCUP == 2L & .cno5 %in% c(3L,4L) ~ 5L,  # TCP semi o no calificados
+        CAT_OCUP == 1L & PP04C %in% 1:5      ~ 4L,  # Microempresarios
+        CAT_OCUP == 1L & PP04C %in% 6:12     ~ 1L,  # Patrones +5
+        TRUE                                  ~ NA_integer_
+        # Casos que quedan en NA y se filtran aguas abajo:
+        #   CAT_OCUP==1 & PP04C==99  (patrón Ns/Nr de tamaño)
+        #   CAT_OCUP==4              (familiar sin remuneración)
+        #   ocupados sin PP07H ni PP04D_COD válido
+      )
+    ) |>
+    select(-.cno5)
+}
+
 leer_hoja_panel <- function(nombre_hoja) {
   raw <- read_excel(EXCEL_CONSOLIDADO, sheet = nombre_hoja,
                     col_names = FALSE, col_types = "text")
@@ -173,34 +227,37 @@ if (!file.exists(cache_nuevo)) {
   datos <- obtener_par_trimestres(ultimo_anio, anio_nuevo)
 
   if (!is.null(datos)) {
+    # prep(): aplica construir_g_ocup() sobre microdatos crudos y retiene
+    # las columnas de identificación de panel + g_ocup + estado + edad + pondera.
     prep <- function(ind, sfx) {
-      ind %>%
+      ind |>
+        construir_g_ocup() |>
         transmute(
           CODUSU, NRO_HOGAR, COMPONENTE,
-          !!paste0("g_ocup_", sfx) := suppressWarnings(as.integer(CAT_OCUP)),
-          !!paste0("estado_", sfx) := suppressWarnings(as.integer(ESTADO)),
+          !!paste0("g_ocup_",  sfx) := g_ocup,
+          !!paste0("estado_",  sfx) := suppressWarnings(as.integer(ESTADO)),
           edad    = suppressWarnings(as.integer(CH06)),
           pondera = suppressWarnings(as.numeric(PONDERA))
         )
     }
 
-    panel_df <- prep(datos$i1, "t1") %>%
-      inner_join(prep(datos$i2, "t2") %>%
-                   select(CODUSU, NRO_HOGAR, COMPONENTE, g_ocup_t2, estado_t2),
-                 by = c("CODUSU", "NRO_HOGAR", "COMPONENTE")) %>%
-      mutate(
-        g_ocup_t1 = case_when(estado_t1 == 2 ~ 7L, estado_t1 == 3 ~ 8L,
-                              g_ocup_t1 == 8 & estado_t1 == 2 ~ 7L, TRUE ~ g_ocup_t1),
-        g_ocup_t2 = case_when(estado_t2 == 2 ~ 7L, estado_t2 == 3 ~ 8L,
-                              g_ocup_t2 == 8 & estado_t2 == 2 ~ 7L, TRUE ~ g_ocup_t2)
-      ) %>%
-      filter(edad >= 18, edad <= 64,
-             !is.na(g_ocup_t1), !is.na(g_ocup_t2),
-             g_ocup_t1 %in% 1:8, g_ocup_t2 %in% 1:8) %>%
+    panel_df <- prep(datos$i1, "t1") |>
+      inner_join(
+        prep(datos$i2, "t2") |>
+          select(CODUSU, NRO_HOGAR, COMPONENTE, g_ocup_t2, estado_t2),
+        by = c("CODUSU", "NRO_HOGAR", "COMPONENTE")
+      ) |>
+      # construir_g_ocup() ya asignó 7 (desocupados) y 8 (inactivos) vía ESTADO,
+      # por lo que no se necesita corrección adicional aquí.
+      filter(
+        edad >= 18, edad <= 64,
+        !is.na(g_ocup_t1), !is.na(g_ocup_t2),
+        g_ocup_t1 %in% 1:8, g_ocup_t2 %in% 1:8
+      ) |>
       mutate(
         g_ocup_t1 = factor(g_ocup_t1, levels = 1:8, labels = LABELS),
         g_ocup_t2 = factor(g_ocup_t2, levels = 1:8, labels = LABELS)
-      ) %>%
+      ) |>
       count(g_ocup_t1, g_ocup_t2, wt = pondera, name = "n_pond")
 
     mat <- hacer_matriz_desde_df(panel_df)

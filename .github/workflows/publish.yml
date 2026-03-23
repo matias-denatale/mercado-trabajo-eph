@@ -64,7 +64,16 @@ jobs:
         shell: Rscript {0}
         run: source("R/calcular_hogares.R")
 
-      # Render — paneles usa freeze:auto, no recalcula sin bases locales
+      # Pipeline 3: paneles de transición ocupacional
+      # Se ejecuta solo en el schedule semanal o en disparos manuales.
+      # El script verifica internamente si ya existe cache para el período nuevo:
+      # si data/paneles/cache_panel_YYYY-YYYY.rds no existe, descarga EPH y calcula;
+      # si ya existe, lo carga sin re-descargar nada.
+      - name: Calculate occupational transition panels
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        shell: Rscript {0}
+        run: source("R/calcular_paneles.R")
+
       - name: Render Quarto site
         run: quarto render
 

@@ -1,0 +1,208 @@
+---
+title: "Transiciones ocupacionales - Paneles Anuales"
+author: "Matías De Natale"
+date: "2025-12-01"
+output: html_document
+---
+
+En este documento construyo matrices de transición ocupacional **interanuales**, es decir:
+
+- 2004–2005  
+- 2005–2006  
+- 2006–2007 
+- [...]
+- 2022–2023  
+- 2023–2024  
+
+Esto permite analizar **tasa de entrada (TE)** y **tasa de salida (TS)** con dos criterios:
+
+1. **Condicionales** (probabilidad de transición desde cada estado inicial).  
+2. **Normalizadas por el total poblacional**, lo cual permite vincular flujos con los cambios de stocks y obtener el **Balance** (TE − TS).  
+
+Además se calculan las **composiciones de transición** (hacia qué destino se mueve cada grupo).
+
+---
+
+# 1. Paquetes y setup
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+
+library(dplyr)
+library(readxl)
+library(tidyr)
+library(purrr)
+library(openxlsx)
+library(stringr)
+```
+
+2. Categorías ocupacionales
+
+```{r categorias}
+labels_g_ocup <- c(
+"Patrones +5",
+"TCP calificados",
+"Asalariados formales",
+"Microempresarios",
+"TCP semi o no calificados",
+"Asalariados informales",
+"Desocupados",
+"Inactivos"
+)
+```
+
+3. Función de lectura y limpieza
+
+```{r funcion_lectura}
+leer_panel <- function(archivo) {
+
+base <- read_xlsx(archivo)
+
+base %>%
+transmute(
+g_ocup_t1,
+g_ocup_t2,
+estado_t1,
+estado_t2,
+pondera = PONDERA_t1,
+edad
+) %>%
+mutate(
+g_ocup_t1 = case_when(
+g_ocup_t1 == 8 & estado_t1 == 2 ~ 7L,
+TRUE ~ g_ocup_t1
+),
+g_ocup_t2 = case_when(
+g_ocup_t2 == 8 & estado_t2 == 2 ~ 7L,
+TRUE ~ g_ocup_t2
+)
+) %>%
+filter(
+edad >= 18, edad <= 64,
+!is.na(g_ocup_t1),
+!is.na(g_ocup_t2)
+) %>%
+mutate(
+g_ocup_t1 = factor(g_ocup_t1, levels = 1:8, labels = labels_g_ocup),
+g_ocup_t2 = factor(g_ocup_t2, levels = 1:8, labels = labels_g_ocup)
+) %>%
+count(g_ocup_t1, g_ocup_t2, wt = pondera, name = "n_pond")
+}
+```
+
+4. Función para matriz 8×8
+
+```{r funcion_matriz}
+hacer_matriz <- function(df){
+m <- xtabs(n_pond ~ g_ocup_t1 + g_ocup_t2, data = df)
+
+todas <- labels_g_ocup
+full <- matrix(0, nrow=8, ncol=8,
+dimnames=list(todas, todas))
+
+full[rownames(m), colnames(m)] <- m
+full
+}
+```
+
+5. Densidades, tasas condicionales y balance
+
+```{r funciones_tasas}  
+densidades <- function(mat){
+  ini <- rowSums(mat)
+  fin <- colSums(mat)
+  list(ini = ini/sum(ini), fin = fin/sum(fin))
+}
+
+tasas_cond <- function(mat){
+  prop.table(mat, margin = 1)
+}
+
+tasas_total <- function(mat){
+  prop.table(mat)  # divide por N total
+}
+
+balance <- function(mat){
+  d <- densidades(mat)
+  d$fin - d$ini
+}
+```
+
+5. Cargar archivos por año
+
+```{r cargar_archivos}
+# Rutas a las dos carpetas
+ruta_2003_2015 <- "Bases transiciones/Paneles 2003-2015"
+ruta_2016_2024 <- "Bases transiciones/Paneles 2016-2024"
+
+# Armo un solo data frame con todos los paneles
+df_paneles <- bind_rows(
+  tibble(file = list.files(ruta_2003_2015, full.names = TRUE)),
+  tibble(file = list.files(ruta_2016_2024, full.names = TRUE))
+) %>%
+  mutate(
+    nombre = basename(file),
+    # año inicial (lo que está después de "Panel_Per_")
+    anio1  = as.integer(str_extract(nombre, "(?<=Panel_Per_)\\d{4}")),
+    # año final (lo que sigue después del primer año y el guión bajo)
+    anio2  = as.integer(str_extract(nombre, "(?<=Panel_Per_\\d{4}_)\\d{4}"))
+  )
+
+# Vector de años iniciales que queremos (2003–2023)
+anios_inicio <- df_paneles %>%
+  filter(!is.na(anio1)) %>%
+  pull(anio1) %>%
+  unique() %>%
+  sort()
+
+anios_inicio
+```
+
+6. Armar matrices por año
+
+```{r construir_matrices_todos}
+# Para cada año inicial, agrupo todos los t1, t2, t3, t4 que existan
+lista_matrices <- map(anios_inicio, function(a){
+  archivos_anio <- df_paneles %>%
+    filter(anio1 == a) %>%
+    pull(file)
+
+  transiciones <- map_dfr(archivos_anio, leer_panel)
+  hacer_matriz(transiciones)
+})
+
+names(lista_matrices) <- paste0(anios_inicio, "-", anios_inicio + 1)
+
+# Chequeo rápido: nombres y una matriz
+names(lista_matrices)
+lista_matrices[["2004-2005"]]
+```
+
+8. Exportar a Excel
+
+```{r exportación}
+wb <- createWorkbook()
+
+for(nm in names(lista_matrices)) {
+
+  mat <- lista_matrices[[nm]]
+
+  # Matriz absoluta
+  addWorksheet(wb, nm)
+  writeData(wb, nm, mat, rowNames = TRUE)
+
+  # Tasas condicionales
+  addWorksheet(wb, paste0(nm, "_cond"))
+  writeData(wb, paste0(nm, "_cond"), tasas_cond(mat), rowNames = TRUE)
+
+  # Tasas totales (normalizadas por N total)
+  addWorksheet(wb, paste0(nm, "_tot"))
+  writeData(wb, paste0(nm, "_tot"), tasas_total(mat), rowNames = TRUE)
+
+  # Balance (densidad final - densidad inicial)
+  addWorksheet(wb, paste0(nm, "_balance"))
+  writeData(wb, paste0(nm, "_balance"), balance(mat))
+}
+
+saveWorkbook(wb, "transiciones_paneles_anuales_2003_2024.xlsx", overwrite = TRUE)
+```
