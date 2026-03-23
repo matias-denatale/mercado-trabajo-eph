@@ -37,7 +37,7 @@ website:
 
 format:
   html:
-    theme: [solar, styles.css]
+    theme: [lux, styles.css]
     toc: true
     toc-depth: 2
     code-fold: true
