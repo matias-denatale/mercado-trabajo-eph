@@ -96,10 +96,16 @@ hist_data <- setNames(
   )
 )
 
-# --- Último período anual disponible ---
-last_key    <- tail(names(tasas_cond_anual), 1)
-latest_data <- mat_to_nested(tasas_cond_anual[[last_key]])
-last_label  <- gsub("-", "\u2013", last_key)   # guion largo
+# --- Último período disponible (trimestral si existe, anual si no) ---
+if (file.exists("data/paneles/ultimo_panel.rds")) {
+  up          <- readRDS("data/paneles/ultimo_panel.rds")
+  latest_data <- mat_to_nested(up$panel$cond)
+  last_label  <- up$label                        # ej: "2024–2025 T2"
+} else {
+  last_key    <- tail(names(tasas_cond_anual), 1)
+  latest_data <- mat_to_nested(tasas_cond_anual[[last_key]])
+  last_label  <- gsub("-", "\u2013", last_key)
+}
 
 hist_js   <- toJSON(hist_data,   auto_unbox = TRUE)
 latest_js <- toJSON(latest_data, auto_unbox = TRUE)

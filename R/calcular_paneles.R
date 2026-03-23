@@ -196,83 +196,123 @@ paneles_hist <- map(hojas_paneles, function(h) {
 names(paneles_hist) <- hojas_paneles
 
 # -----------------------------------------------------------------------------
-# 2. PANEL MÁS RECIENTE DESDE EPH (automatico)
+# 2. PANEL MÁS RECIENTE DESDE EPH (actualización trimestral)
+#
+# En cada ejecución el script:
+#   1. Busca el trimestre más alto ya cacheado para el año nuevo.
+#   2. Intenta descargar trimestres MÁS RECIENTES (Q4→Q3→Q2→Q1).
+#   3. Si encuentra uno, calcula el panel y actualiza la caché.
+#   4. Guarda data/paneles/ultimo_panel.rds con el panel + su etiqueta
+#      ("2024–2025 T3", etc.) para que el widget lo consuma dinámicamente.
+#
+# Cache por trimestre: cache_panel_YYYY-YYYY_T{1-4}.rds
 # -----------------------------------------------------------------------------
 
 ultimo_anio  <- as.integer(str_extract(tail(hojas_paneles, 1), "\\d{4}$"))
-anio_nuevo   <- ultimo_anio + 1
+anio_nuevo   <- ultimo_anio + 1L
 nombre_nuevo <- sprintf("%d-%d", ultimo_anio, anio_nuevo)
-cache_nuevo  <- sprintf("data/paneles/cache_panel_%s.rds", nombre_nuevo)
 
-panel_nuevo <- NULL
-
-if (!file.exists(cache_nuevo)) {
-  cat(sprintf("\nIntentando panel %s desde EPH...\n", nombre_nuevo))
-
-  obtener_par_trimestres <- function(yr1, yr2, trimestres = c(2, 3, 1)) {
-    for (per in trimestres) {
-      cat(sprintf("  %dT%d / %dT%d... ", yr1, per, yr2, per))
-      i1 <- tryCatch(
-        get_microdata(year = yr1, period = per, type = "individual", vars = "all"),
-        error = function(e) NULL)
-      i2 <- tryCatch(
-        get_microdata(year = yr2, period = per, type = "individual", vars = "all"),
-        error = function(e) NULL)
-      if (!is.null(i1) && !is.null(i2)) { cat("OK\n"); return(list(i1=i1, i2=i2)) }
-      cat("no disponible\n")
-    }
-    NULL
-  }
-
-  datos <- obtener_par_trimestres(ultimo_anio, anio_nuevo)
-
-  if (!is.null(datos)) {
-    # prep(): aplica construir_g_ocup() sobre microdatos crudos y retiene
-    # las columnas de identificación de panel + g_ocup + estado + edad + pondera.
-    prep <- function(ind, sfx) {
-      ind |>
-        construir_g_ocup() |>
-        transmute(
-          CODUSU, NRO_HOGAR, COMPONENTE,
-          !!paste0("g_ocup_",  sfx) := g_ocup,
-          !!paste0("estado_",  sfx) := suppressWarnings(as.integer(ESTADO)),
-          edad    = suppressWarnings(as.integer(CH06)),
-          pondera = suppressWarnings(as.numeric(PONDERA))
-        )
-    }
-
-    panel_df <- prep(datos$i1, "t1") |>
-      inner_join(
-        prep(datos$i2, "t2") |>
-          select(CODUSU, NRO_HOGAR, COMPONENTE, g_ocup_t2, estado_t2),
-        by = c("CODUSU", "NRO_HOGAR", "COMPONENTE")
-      ) |>
-      # construir_g_ocup() ya asignó 7 (desocupados) y 8 (inactivos) vía ESTADO,
-      # por lo que no se necesita corrección adicional aquí.
-      filter(
-        edad >= 18, edad <= 64,
-        !is.na(g_ocup_t1), !is.na(g_ocup_t2),
-        g_ocup_t1 %in% 1:8, g_ocup_t2 %in% 1:8
-      ) |>
-      mutate(
-        g_ocup_t1 = factor(g_ocup_t1, levels = 1:8, labels = LABELS),
-        g_ocup_t2 = factor(g_ocup_t2, levels = 1:8, labels = LABELS)
-      ) |>
-      count(g_ocup_t1, g_ocup_t2, wt = pondera, name = "n_pond")
-
-    mat <- hacer_matriz_desde_df(panel_df)
-    panel_nuevo <- list(abs=mat, cond=tasas_cond(mat),
-                        norm=tasas_norm(mat), balance=balance(mat))
-    saveRDS(panel_nuevo, cache_nuevo)
-    cat(sprintf("  Panel %s calculado y guardado.\n", nombre_nuevo))
-  } else {
-    cat(sprintf("  Panel %s no disponible aún en EPH — se usa solo el histórico.\n",
-                nombre_nuevo))
-  }
-} else {
-  panel_nuevo <- readRDS(cache_nuevo)
-  cat(sprintf("Panel %s cargado desde caché.\n", nombre_nuevo))
+# Migración de caché legacy (sin número de trimestre → T2 por convención)
+legacy <- sprintf("data/paneles/cache_panel_%s.rds", nombre_nuevo)
+if (file.exists(legacy) &&
+    !any(file.exists(sprintf("data/paneles/cache_panel_%s_T%d.rds", nombre_nuevo, 1:4)))) {
+  file.rename(legacy, sprintf("data/paneles/cache_panel_%s_T2.rds", nombre_nuevo))
+  cat("Cache legacy renombrado a formato trimestral (_T2).\n")
 }
+
+# Construye un panel desde dos data frames EPH crudos
+construir_panel <- function(i1, i2) {
+  prep <- function(ind, sfx) {
+    ind |>
+      construir_g_ocup() |>
+      transmute(
+        CODUSU, NRO_HOGAR, COMPONENTE,
+        !!paste0("g_ocup_", sfx) := g_ocup,
+        !!paste0("estado_", sfx) := suppressWarnings(as.integer(ESTADO)),
+        edad    = suppressWarnings(as.integer(CH06)),
+        pondera = suppressWarnings(as.numeric(PONDERA))
+      )
+  }
+  panel_df <- prep(i1, "t1") |>
+    inner_join(
+      prep(i2, "t2") |> select(CODUSU, NRO_HOGAR, COMPONENTE, g_ocup_t2, estado_t2),
+      by = c("CODUSU", "NRO_HOGAR", "COMPONENTE")
+    ) |>
+    filter(edad >= 18, edad <= 64,
+           !is.na(g_ocup_t1), !is.na(g_ocup_t2),
+           g_ocup_t1 %in% 1:8, g_ocup_t2 %in% 1:8) |>
+    mutate(
+      g_ocup_t1 = factor(g_ocup_t1, levels = 1:8, labels = LABELS),
+      g_ocup_t2 = factor(g_ocup_t2, levels = 1:8, labels = LABELS)
+    ) |>
+    count(g_ocup_t1, g_ocup_t2, wt = pondera, name = "n_pond")
+  mat <- hacer_matriz_desde_df(panel_df)
+  list(abs=mat, cond=tasas_cond(mat), norm=tasas_norm(mat), balance=balance(mat))
+}
+
+# Descarga el primer par de trimestres disponible para yr1/yr2.
+# Prueba en el orden indicado; devuelve list(i1, i2, trimestre) o NULL.
+obtener_par_trimestres <- function(yr1, yr2, trimestres = c(4L, 3L, 2L, 1L)) {
+  for (per in trimestres) {
+    cat(sprintf("  %dT%d / %dT%d... ", yr1, per, yr2, per))
+    i1 <- tryCatch(get_microdata(year=yr1, period=per, type="individual", vars="all"),
+                   error = function(e) NULL)
+    i2 <- tryCatch(get_microdata(year=yr2, period=per, type="individual", vars="all"),
+                   error = function(e) NULL)
+    if (!is.null(i1) && !is.null(i2)) { cat("OK\n"); return(list(i1=i1, i2=i2, trimestre=per)) }
+    cat("no disponible\n")
+  }
+  NULL
+}
+
+panel_nuevo        <- NULL   # se incorpora a la serie anual si se calculó
+ultimo_panel       <- NULL   # panel más reciente (cualquier trimestre)
+ultimo_panel_label <- NULL
+
+cat(sprintf("\nBuscando panel más reciente para %s...\n", nombre_nuevo))
+
+# Trimestre más alto ya cacheado (0 si ninguno)
+caches_ok <- Filter(file.exists,
+  sprintf("data/paneles/cache_panel_%s_T%d.rds", nombre_nuevo, 4:1))
+trim_cache <- if (length(caches_ok)) {
+  as.integer(str_match(caches_ok[[1]], "_T(\\d)\\.rds")[, 2])
+} else { 0L }
+
+# Solo probar trimestres SUPERIORES al que ya tenemos en caché
+trims_a_probar <- setdiff(c(4L, 3L, 2L, 1L), seq_len(trim_cache))
+
+nuevos <- if (length(trims_a_probar)) {
+  if (trim_cache > 0L)
+    cat(sprintf("  Caché disponible hasta T%d — verificando si hay trimestres más nuevos...\n",
+                trim_cache))
+  obtener_par_trimestres(ultimo_anio, anio_nuevo, trimestres = trims_a_probar)
+} else {
+  cat(sprintf("  Caché al día (T%d) — sin descargas.\n", trim_cache)); NULL
+}
+
+if (!is.null(nuevos)) {
+  per        <- nuevos$trimestre
+  cache_path <- sprintf("data/paneles/cache_panel_%s_T%d.rds", nombre_nuevo, per)
+  p          <- construir_panel(nuevos$i1, nuevos$i2)
+  saveRDS(p, cache_path)
+  cat(sprintf("  Panel %s T%d calculado y guardado.\n", nombre_nuevo, per))
+  panel_nuevo        <- p
+  ultimo_panel       <- p
+  ultimo_panel_label <- sprintf("%d\u2013%d T%d", ultimo_anio, anio_nuevo, per)
+} else if (length(caches_ok)) {
+  p              <- readRDS(caches_ok[[1]])
+  panel_nuevo    <- p
+  ultimo_panel   <- p
+  ultimo_panel_label <- sprintf("%d\u2013%d T%d", ultimo_anio, anio_nuevo, trim_cache)
+  cat(sprintf("  Panel %s T%d cargado desde caché.\n", nombre_nuevo, trim_cache))
+} else {
+  cat(sprintf("  Panel %s aún no disponible en EPH.\n", nombre_nuevo))
+}
+
+# Guardar último panel + etiqueta para el widget de paneles.qmd
+if (!is.null(ultimo_panel))
+  saveRDS(list(panel=ultimo_panel, label=ultimo_panel_label),
+          "data/paneles/ultimo_panel.rds")
 
 # Combinar
 paneles_todos <- paneles_hist
