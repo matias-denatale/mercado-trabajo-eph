@@ -8,10 +8,10 @@ website:
   title: "Mercado de Trabajo — EPH"
   description: "Indicadores del mercado laboral argentino basados en la Encuesta Permanente de Hogares (INDEC)"
   site-url: "https://matias-denatale.github.io/mercado-trabajo-eph/"
-  favicon: "logos y fotos/favicon_matias_de_natale.png"
+  favicon: "favicon_matias_de_natale.png"
   navbar:
-    logo: "logos y fotos/favicon_matias_de_natale.png"
-    title: "<img src=\"logos y fotos/logo_montserrat.svg\" alt=\"Mercado de Trabajo — EPH\">"
+    logo: "favicon_matias_de_natale.png"
+    title: "<img src='logo_montserrat.svg' alt='Mercado de Trabajo — EPH'>"
     left:
       - href: index.qmd
         text: Inicio
@@ -39,7 +39,8 @@ website:
 
 format:
   html:
-    theme: [lux, styles.scss]
+    theme: lux
+    css: styles.css
     toc: true
     toc-depth: 2
     code-fold: true

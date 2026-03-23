@@ -1,0 +1,24 @@
+<svg width="600" height="160" viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&amp;display=swap');
+  </style>
+  <!-- Mosaic icon -->
+  <!-- Row 1 -->
+  <rect x="20" y="20" width="40" height="26" rx="4" fill="#0F6E56"/>
+  <rect x="64" y="20" width="18" height="26" rx="4" fill="#5DCAA5"/>
+  <rect x="86" y="20" width="26" height="26" rx="4" fill="#1D9E75"/>
+  <!-- Row 2 -->
+  <rect x="20" y="50" width="24" height="18" rx="4" fill="#9FE1CB"/>
+  <rect x="48" y="50" width="34" height="18" rx="4" fill="#1D9E75"/>
+  <rect x="86" y="50" width="26" height="18" rx="4" fill="#0F6E56"/>
+  <!-- Row 3 -->
+  <rect x="20" y="72" width="30" height="24" rx="4" fill="#5DCAA5"/>
+  <rect x="54" y="72" width="14" height="24" rx="3" fill="#0F6E56"/>
+  <rect x="72" y="72" width="40" height="24" rx="4" fill="#9FE1CB"/>
+  <!-- Name -->
+  <text x="136" y="56" font-family="'Montserrat', sans-serif" font-size="28" font-weight="500" fill="#1a1a1a" letter-spacing="-0.5">Matías De Natale</text>
+  <!-- Divider -->
+  <line x1="136" y1="66" x2="478" y2="66" stroke="#5DCAA5" stroke-width="0.8" opacity="0.5"/>
+  <!-- Tagline -->
+  <text x="138" y="86" font-family="'Montserrat', sans-serif" font-size="13" font-weight="400" fill="#0F6E56" letter-spacing="3">ANÁLISIS DE TRABAJO E INGRESOS</text>
+</svg>
