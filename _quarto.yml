@@ -39,7 +39,7 @@ website:
 
 format:
   html:
-    theme: [lux, styles.css]
+    theme: [lux, styles.scss]
     toc: true
     toc-depth: 2
     code-fold: true
