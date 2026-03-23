@@ -58,14 +58,18 @@ Probabilidades condicionales de transición entre categorías ocupacionales.
 Los valores de la diagonal muestran la tasa de permanencia; el resto indica movilidad
 hacia otras categorías. Filas suman 100%.
 
-```{r widget-data}
+```{r data-check}
 #| echo: false
 #| output: asis
-
 if (!datos_disponibles) {
   cat("::: {.callout-warning}\nDatos no disponibles. Ejecutá `source('R/calcular_paneles.R')` primero.\n:::\n")
   knitr::knit_exit()
 }
+```
+
+```{r widget-data-prep}
+#| echo: false
+#| include: false
 
 # --- Leer datos ---
 tasas_cond_bloque <- readRDS("data/paneles/tasas_cond_bloque.rds")
@@ -109,79 +113,86 @@ if (file.exists("data/paneles/ultimo_panel.rds")) {
 
 hist_js   <- toJSON(hist_data,   auto_unbox = TRUE)
 latest_js <- toJSON(latest_data, auto_unbox = TRUE)
+```
 
-# --- Inyectar datos en el widget y renderizar ---
-cat(sprintf('
+```{r widget-inject-data}
+#| echo: false
+# Inyectar datos JSON como variables JS globales — htmltools::HTML() garantiza
+# que el contenido se pase crudo a pandoc sin ningún escape.
+htmltools::HTML(sprintf(
+  '<script>var HIST=%s;var LATEST=%s;var LATEST_LABEL="%s";</script>',
+  hist_js, latest_js, last_label
+))
+```
+
+```{=html}
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-.wrap{padding:1rem 0}
-.section-label{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-tertiary, #888);margin-bottom:.5rem}
-.panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;flex-wrap:wrap;gap:8px}
-.period-nav{display:flex;align-items:center;gap:8px}
-.period-name{font-size:14px;font-weight:500;color:var(--color-text-primary, #1a1a1a);min-width:220px}
-.nav-btn{background:none;border:0.5px solid var(--color-border-secondary, #ddd);border-radius:6px;padding:4px 10px;cursor:pointer;font-size:13px;color:var(--color-text-primary, #1a1a1a)}
-.nav-btn:hover{background:var(--color-background-secondary, #f5f5f5)}
-.nav-btn:disabled{opacity:.35;cursor:default}
-.auto-btn{font-size:12px;padding:4px 10px;border-radius:6px;border:0.5px solid var(--color-border-secondary, #ddd);background:none;cursor:pointer;color:var(--color-text-secondary, #555)}
-.auto-btn.active{background:#EBF4FF;color:#1a56db;border-color:transparent}
-.matrix-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-table.mx{border-collapse:collapse;font-size:11.5px;width:100%%}
-table.mx th,table.mx td{padding:5px 6px;text-align:center;border:0.5px solid var(--color-border-tertiary, #e5e5e5);white-space:nowrap}
-table.mx th{font-weight:500;color:var(--color-text-secondary, #555);background:var(--color-background-secondary, #f9f9f9);font-size:11px}
-table.mx th.row-h{text-align:left;font-size:10.5px;min-width:148px}
-table.mx td.orig{text-align:left;font-weight:500;font-size:11px;color:var(--color-text-secondary, #555);background:var(--color-background-secondary, #f9f9f9)}
-.divider{border:none;border-top:1.5px solid var(--color-border-secondary, #ddd);margin:1.5rem 0}
-.latest-badge{display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;background:#ECFDF5;color:#065F46;font-weight:500;margin-left:8px}
-.legend{display:flex;gap:6px;flex-wrap:wrap;margin-top:.5rem;font-size:11px;color:var(--color-text-tertiary, #888);align-items:center}
-.leg-swatch{width:12px;height:12px;border-radius:2px;display:inline-block;flex-shrink:0}
-.row-label-wrap{display:flex;align-items:center;gap:4px}
-.dot{width:8px;height:8px;border-radius:50%%;flex-shrink:0}
-.t0-note{font-size:11px;color:var(--color-text-tertiary, #888);margin-top:.4rem}
+.mx-wrap * { box-sizing: border-box; }
+.mx-wrap { padding: 1rem 0; }
+.section-label { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--bs-secondary-color, #7a8a8c); margin-bottom: .5rem; }
+.panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: .75rem; flex-wrap: wrap; gap: 8px; }
+.period-nav { display: flex; align-items: center; gap: 8px; }
+.period-name { font-size: 14px; font-weight: 500; color: var(--bs-body-color, #839496); min-width: 220px; margin: 0; padding: 0; }
+.nav-btn { background: none; border: 0.5px solid var(--bs-border-color, #2d4f5a); border-radius: 6px; padding: 4px 10px; cursor: pointer; font-size: 13px; color: var(--bs-body-color, #839496); margin: 0; }
+.nav-btn:hover { background: var(--bs-secondary-bg, #073642); }
+.nav-btn:disabled { opacity: .35; cursor: default; }
+.auto-btn { font-size: 12px; padding: 4px 10px; border-radius: 6px; border: 0.5px solid var(--bs-border-color, #2d4f5a); background: none; cursor: pointer; color: var(--bs-secondary-color, #7a8a8c); margin: 0; }
+.auto-btn.active { background: rgba(38,139,210,0.15); color: #268bd2; border-color: transparent; }
+.mx-card { background: var(--bs-body-bg, #002b36); border: 0.5px solid var(--bs-border-color, #2d4f5a); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; }
+.matrix-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table.mx { border-collapse: collapse; font-size: 11.5px; width: 100%; margin: 0; padding: 0; }
+table.mx th, table.mx td { padding: 5px 6px; text-align: center; border: 0.5px solid var(--bs-border-color, #2d4f5a); white-space: nowrap; margin: 0; }
+table.mx th { font-weight: 500; color: var(--bs-secondary-color, #7a8a8c); background: var(--bs-secondary-bg, #073642); font-size: 11px; }
+table.mx th.row-h { text-align: left; font-size: 10.5px; min-width: 148px; }
+table.mx td.orig { text-align: left; font-weight: 500; font-size: 11px; color: var(--bs-secondary-color, #7a8a8c); background: var(--bs-secondary-bg, #073642); }
+.mx-divider { border: none; border-top: 1.5px solid var(--bs-border-color, #2d4f5a); margin: 1.5rem 0; }
+.latest-badge { display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: 20px; background: rgba(42,161,152,0.2); color: #2aa198; font-weight: 500; margin-left: 8px; }
+.mx-legend { display: flex; gap: 6px; flex-wrap: wrap; margin-top: .5rem; font-size: 11px; color: var(--bs-secondary-color, #7a8a8c); align-items: center; }
+.leg-swatch { width: 12px; height: 12px; border-radius: 2px; display: inline-block; flex-shrink: 0; margin: 0; padding: 0; }
+.row-label-wrap { display: flex; align-items: center; gap: 4px; margin: 0; padding: 0; }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin: 0; padding: 0; }
+.t0-note { font-size: 11px; color: var(--bs-secondary-color, #7a8a8c); margin-top: .4rem; }
 </style>
 
-<div class="wrap">
+<div class="mx-wrap">
 
-<div class="section-label">Promedios hist\u00f3ricos por grandes per\u00edodos</div>
-<div style="background:var(--color-background-primary,#fff);border:0.5px solid var(--color-border-tertiary,#e5e5e5);border-radius:8px;padding:1rem 1.25rem;margin-bottom:1rem">
-  <div class="panel-header">
-    <div class="period-nav">
-      <button class="nav-btn" id="prevBtn" onclick="changeHistPeriod(-1)">&lsaquo;</button>
-      <span class="period-name" id="periodName"></span>
-      <button class="nav-btn" id="nextBtn" onclick="changeHistPeriod(1)">&rsaquo;</button>
-    </div>
-    <button class="auto-btn" id="autoBtn" onclick="toggleAuto()">&#9654; Carrete autom\u00e1tico</button>
-  </div>
-  <div class="matrix-wrap">
-    <table class="mx" id="histTable"></table>
-  </div>
-  <div class="t0-note">Filas = posici\u00f3n en t&#8320; &middot; Columnas = posici\u00f3n en t&#8321; &middot; Valores = probabilidad de transici\u00f3n</div>
+<div class="section-label">Promedios históricos por grandes períodos</div>
+<div class="mx-card">
+<div class="panel-header">
+<div class="period-nav">
+<button class="nav-btn" id="prevBtn" onclick="changeHistPeriod(-1)">&lsaquo;</button>
+<span class="period-name" id="periodName"></span>
+<button class="nav-btn" id="nextBtn" onclick="changeHistPeriod(1)">&rsaquo;</button>
+</div>
+<button class="auto-btn" id="autoBtn" onclick="toggleAuto()">&#9654; Carrete automático</button>
+</div>
+<div class="matrix-wrap">
+<table class="mx" id="histTable"></table>
+</div>
+<div class="t0-note">Filas = posición en t₀ · Columnas = posición en t₁ · Valores = probabilidad de transición</div>
 </div>
 
-<hr class="divider">
+<hr class="mx-divider">
 
-<div class="section-label">&#218;ltimo per\u00edodo disponible <span class="latest-badge" id="latestBadge"></span></div>
-<div style="background:var(--color-background-primary,#fff);border:0.5px solid var(--color-border-tertiary,#e5e5e5);border-radius:8px;padding:1rem 1.25rem">
-  <div class="matrix-wrap">
-    <table class="mx" id="latestTable"></table>
-  </div>
-  <div class="t0-note">Filas = posici\u00f3n en t&#8320; &middot; Columnas = posici\u00f3n en t&#8321; &middot; Valores = probabilidad de transici\u00f3n</div>
+<div class="section-label">Último período disponible <span class="latest-badge" id="latestBadge"></span></div>
+<div class="mx-card">
+<div class="matrix-wrap">
+<table class="mx" id="latestTable"></table>
+</div>
+<div class="t0-note">Filas = posición en t₀ · Columnas = posición en t₁ · Valores = probabilidad de transición</div>
 </div>
 
-<div class="legend" style="margin-top:1rem">
-  <span class="leg-swatch" style="background:#1D9E75"></span> Alta permanencia (diagonal &ge; 0.50)
-  <span class="leg-swatch" style="background:#378ADD"></span> Permanencia media (0.30&ndash;0.49)
-  <span class="leg-swatch" style="background:#FAECE7"></span> Alta salida (&lt;0.30 en diagonal)
+<div class="mx-legend" style="margin-top:1rem">
+<span class="leg-swatch" style="background:#1D9E75"></span> Alta permanencia (diagonal &ge; 0.50)
+<span class="leg-swatch" style="background:#378ADD"></span> Permanencia media (0.30&ndash;0.49)
+<span class="leg-swatch" style="background:#FAECE7"></span> Alta salida (&lt;0.30 en diagonal)
 </div>
 </div>
 
 <script>
 const CATS  = ["Patrones +5","TCP calificados","Asalariados formales","Microempresarios","TCP semi o no calificados","Asalariados informales","Desocupados","Inactivos"];
 const SHORT = ["Pat+5","TCP cal.","Asal. form.","Microemp.","TCP s/c","Asal. inf.","Desoc.","Inactivos"];
-const CAT_COLORS = ["#534AB7","#1D9E75","#185FA5","#BA7517","#D85A30","#993556","#888780","#444441"];
-
-const HIST   = %s;
-const LATEST = %s;
-const LATEST_LABEL = "%s";
+const CAT_COLORS = ["#534AB7","#1D9E75","#185FA5","#BA7517","#D85A30","#993556","#888780","#9c9b98"];
 
 document.getElementById("latestBadge").textContent = LATEST_LABEL;
 
@@ -204,26 +215,26 @@ function cellText(v, isDiag) {
   const pct = (v * 100).toFixed(1);
   if (isDiag) {
     const light = v >= 0.30;
-    return "<span style=\\"color:" + (light ? "#fff" : "#2C2C2A") + ";font-weight:500\\">" + pct + "%%</span>";
+    return '<span style="color:' + (light ? '#fff' : '#2C2C2A') + ';font-weight:500">' + pct + '%</span>';
   }
-  return "<span style=\\"color:var(--color-text-primary,#1a1a1a)\\">" + pct + "%%</span>";
+  return '<span style="color:var(--bs-body-color,#839496)">' + pct + '%</span>';
 }
 
 function buildTable(matrix, tableId) {
   const t = document.getElementById(tableId);
-  let html = "<thead><tr><th class=\\"row-h\\">t&#8320; \\\\ t&#8321;</th>";
-  SHORT.forEach(s => { html += "<th>" + s + "</th>"; });
-  html += "</tr></thead><tbody>";
+  let html = '<thead><tr><th class="row-h">t\u2080 \\ t\u2081</th>';
+  SHORT.forEach(s => { html += '<th>' + s + '</th>'; });
+  html += '</tr></thead><tbody>';
   CATS.forEach((orig, ri) => {
-    html += "<tr><td class=\\"orig\\"><div class=\\"row-label-wrap\\"><span class=\\"dot\\" style=\\"background:" + CAT_COLORS[ri] + "\\"></span>" + orig + "</div></td>";
+    html += '<tr><td class="orig"><div class="row-label-wrap"><span class="dot" style="background:' + CAT_COLORS[ri] + '"></span>' + orig + '</div></td>';
     CATS.forEach((dest, ci) => {
       const v = (matrix[orig] && matrix[orig][dest] != null) ? matrix[orig][dest] : 0;
       const isDiag = ri === ci;
-      html += "<td style=\\"background:" + cellColor(v, isDiag) + "\\">" + cellText(v, isDiag) + "</td>";
+      html += '<td style="background:' + cellColor(v, isDiag) + '">' + cellText(v, isDiag) + '</td>';
     });
-    html += "</tr>";
+    html += '</tr>';
   });
-  html += "</tbody>";
+  html += '</tbody>';
   t.innerHTML = html;
 }
 
@@ -251,7 +262,7 @@ function toggleAuto() {
     btn.textContent = "\u23f8 Detener carrete";
     btn.classList.add("active");
     autoTimer = setInterval(() => {
-      currentPeriod = (currentPeriod + 1) %% histPeriods.length;
+      currentPeriod = (currentPeriod + 1) % histPeriods.length;
       updateHist();
     }, 2800);
   }
@@ -260,7 +271,6 @@ function toggleAuto() {
 updateHist();
 buildTable(LATEST, "latestTable");
 </script>
-', hist_js, latest_js, last_label))
 ```
 
 ---
