@@ -39,29 +39,12 @@ tema_limpio <- theme_minimal(base_size = 13, base_family = "Inter") +
 Último dato disponible: **`r ultimo$periodo_label`**. Los indicadores se calculan sobre el total de 31 aglomerados urbanos relevados por la EPH.
 :::
 
-::: {.indicadores-resumen}
-
-::: {.indicador-card}
-<div class="valor">`r ultimo$tasa_actividad`%</div>
-<div class="etiqueta">Tasa de actividad</div>
-:::
-
-::: {.indicador-card}
-<div class="valor">`r ultimo$tasa_empleo`%</div>
-<div class="etiqueta">Tasa de empleo</div>
-:::
-
-::: {.indicador-card}
-<div class="valor">`r ultimo$tasa_desempleo`%</div>
-<div class="etiqueta">Tasa de desempleo</div>
-:::
-
-::: {.indicador-card}
-<div class="valor">`r if(!is.null(ultimo$tasa_informalidad) && !is.na(ultimo$tasa_informalidad)) paste0(ultimo$tasa_informalidad, "%") else "—"`</div>
-<div class="etiqueta">Informalidad laboral</div>
-:::
-
-:::
+<div class="kpi-fila">
+  <div class="kpi"><div class="kpi-val">`r ultimo$tasa_actividad`%</div><div class="kpi-lbl">Actividad</div></div>
+  <div class="kpi"><div class="kpi-val">`r ultimo$tasa_empleo`%</div><div class="kpi-lbl">Empleo</div></div>
+  <div class="kpi"><div class="kpi-val">`r ultimo$tasa_desempleo`%</div><div class="kpi-lbl">Desempleo</div></div>
+  <div class="kpi"><div class="kpi-val">`r if(!is.null(ultimo$tasa_informalidad) && !is.na(ultimo$tasa_informalidad)) paste0(ultimo$tasa_informalidad, "%") else "—"`</div><div class="kpi-lbl">Informalidad laboral</div></div>
+</div>
 
 ---
 

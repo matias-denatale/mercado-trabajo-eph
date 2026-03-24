@@ -10,8 +10,8 @@ website:
   site-url: "https://matias-denatale.github.io/mercado-trabajo-eph/"
   favicon: "favicon_matias_de_natale.png"
   navbar:
-    logo: "favicon_matias_de_natale.png"
-    title: "<img src='logo_montserrat.svg' alt='Mercado de Trabajo — EPH'>"
+    logo: "logo_montserrat.svg"
+    title: false
     left:
       - href: index.qmd
         text: Inicio
@@ -39,8 +39,7 @@ website:
 
 format:
   html:
-    theme: lux
-    css: styles.css
+    theme: [lux, styles.scss]
     toc: true
     toc-depth: 2
     code-fold: true

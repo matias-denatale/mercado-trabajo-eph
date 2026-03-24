@@ -12,17 +12,16 @@ toc: false
 ::: {.profile-bio}
 ## Matías De Natale
 
-<p class="tagline">Economista · Mercado de trabajo · Análisis de datos</p>
+<p class="tagline"> Sociología · Economía · Mercado de trabajo · Análisis de datos</p>
 
-Soy economista especializado en mercado de trabajo y análisis cuantitativo aplicado a
-política pública. Mi trabajo se centra en entender la estructura del empleo en Argentina:
+Soy sociólogo de formación (UBA) y actualmente estoy maestrando en Economía Aplicada (UTDT). Recientemente también tuve la fortuna de asistir a la escuela de posgrado ELADES en la CEPAL, en Santiago de Chile. Hace varios años me vengo especializado en mercado de trabajo y análisis cuantitativo aplicado a política pública. 
+Mi trabajo se centra en entender la estructura del empleo en Argentina:
 la informalidad laboral, la movilidad ocupacional, las transiciones entre categorías de
 empleo y las condiciones de vida de los hogares.
 
 Utilizo los microdatos de la **Encuesta Permanente de Hogares (EPH-INDEC)** para construir
 indicadores trimestrales actualizados y analizar trayectorias ocupacionales aprovechando
-el diseño de panel rotante de la encuesta. Este sitio centraliza ese trabajo de forma
-abierta y reproducible.
+el diseño de panel rotante de la encuesta.
 
 Trabajo habitualmente con **R**, automatización de pipelines de datos y visualización
 para audiencias tanto académicas como de política pública.

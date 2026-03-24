@@ -1,0 +1,280 @@
+/*-- scss:rules --*/
+
+/* ═══════════════════════════════════════
+   Mercado de Trabajo — EPH
+   Lux + paleta del logo
+   ═══════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── Paleta del logo ── */
+:root {
+  --verde-oscuro:  #0F6E56;
+  --verde-medio:   #1D9E75;
+  --verde-claro:   #5DCAA5;
+  --verde-palido:  #9FE1CB;
+  --texto:         #1a1a2a;
+  --texto-muted:   #6c757d;
+  --borde:         #dee2e6;
+}
+
+/* ── Tipografía base ── */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  color: var(--texto);
+}
+
+/* ── Headings: Montserrat ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--texto);
+}
+
+h1 { font-size: 1.9rem; font-weight: 700; }
+
+h2 {
+  font-size: 1.3rem;
+  border-bottom: 1.5px solid var(--verde-claro);
+  padding-bottom: 0.45rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.1rem;
+  color: var(--verde-oscuro);
+}
+
+h3 {
+  font-size: 1.08rem;
+  color: var(--verde-medio);
+  margin-top: 1.6rem;
+}
+
+/* ── Navbar ── */
+.navbar {
+  border-bottom: 2px solid var(--verde-medio) !important;
+  box-shadow: 0 1px 6px rgba(15, 110, 86, 0.08);
+}
+
+/* Logo en el navbar: altura controlada */
+.navbar-brand img {
+  height: 32px;
+  width: auto;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: var(--verde-oscuro) !important;
+  border-bottom: 2px solid var(--verde-medio);
+}
+
+/* ── Código ── */
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.83em;
+  background: #f0faf6;
+  padding: 0.12em 0.4em;
+  border-radius: 3px;
+  color: var(--verde-oscuro);
+}
+
+pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+/* ── Links ── */
+a { color: var(--verde-medio); }
+a:hover { color: var(--verde-oscuro); }
+
+/* ── Tablas ── */
+thead th {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--verde-oscuro) !important;
+  background: transparent !important;
+  color: var(--verde-oscuro) !important;
+}
+
+tbody tr:hover {
+  background-color: rgba(29, 158, 117, 0.05) !important;
+}
+
+/* ── Callouts ── */
+.callout {
+  border-radius: 6px !important;
+  border-left-width: 3px !important;
+}
+
+.callout-note {
+  border-left-color: var(--verde-medio) !important;
+}
+
+/* ── KPIs — números sin tarjeta, solo tipografía ── */
+.kpi-fila {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0 2.5rem 0;
+  border-left: 3px solid var(--verde-claro);
+  padding-left: 1.5rem;
+}
+
+.kpi {
+  display: flex;
+  flex-direction: column;
+}
+
+.kpi-val {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--verde-oscuro);
+  letter-spacing: -0.03em;
+}
+
+.kpi-lbl {
+  font-size: 0.69rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--texto-muted);
+  margin-top: 0.4rem;
+  font-weight: 500;
+}
+
+/* ── Footer ── */
+.nav-footer {
+  border-top: 1px solid var(--borde);
+  font-size: 0.85rem;
+  color: var(--texto-muted);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 7px; height: 7px; }
+::-webkit-scrollbar-track { background: #f8f9fa; }
+::-webkit-scrollbar-thumb { background: var(--verde-palido); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--verde-claro); }
+
+/* ── Reactable ── */
+.reactable { border-radius: 6px !important; overflow: hidden; }
+
+/* ═══════════════════════════════════
+   Sobre mí — perfil
+   ═══════════════════════════════════ */
+
+.profile-section {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.profile-photo { flex-shrink: 0; }
+
+.profile-photo img {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--verde-claro);
+  box-shadow: 0 4px 16px rgba(29, 158, 117, 0.15);
+}
+
+.profile-photo .photo-placeholder {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: #f0faf6;
+  border: 2px solid var(--verde-palido);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  color: var(--verde-claro);
+}
+
+.profile-bio {
+  flex: 1;
+  min-width: 280px;
+}
+
+.profile-bio h2 {
+  border-bottom: none;
+  margin-top: 0;
+  font-size: 1.7rem;
+  letter-spacing: -0.02em;
+  color: var(--texto);
+}
+
+.profile-bio .tagline {
+  font-size: 0.93rem;
+  color: var(--verde-medio);
+  font-weight: 500;
+  margin-bottom: 1rem;
+  letter-spacing: 0.01em;
+}
+
+/* ── Contact cards ── */
+.contact-grid {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  text-decoration: none !important;
+  color: #495057 !important;
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.contact-card:hover {
+  border-color: var(--verde-medio);
+  color: var(--verde-oscuro) !important;
+  background: rgba(29, 158, 117, 0.05);
+}
+
+.contact-card svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--verde-medio);
+}
+
+/* ── Skill tags ── */
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+}
+
+.skill-tag {
+  font-size: 0.73rem;
+  padding: 2px 9px;
+  border-radius: 3px;
+  background: rgba(29, 158, 117, 0.08);
+  color: var(--verde-oscuro);
+  border: 1px solid var(--verde-palido);
+  font-weight: 500;
+}
+
+/* ── Print ── */
+@media print {
+  .navbar, .nav-footer { display: none; }
+}
