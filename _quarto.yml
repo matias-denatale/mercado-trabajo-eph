@@ -10,8 +10,8 @@ website:
   site-url: "https://matias-denatale.github.io/mercado-trabajo-eph/"
   favicon: "favicon_matias_de_natale.png"
   navbar:
-    logo: "logo_icon.svg"
-    title: "Mercado de Trabajo — EPH"
+    logo: "logos y fotos/logo_navbar.svg"
+    title: false
     left:
       - href: index.qmd
         text: Inicio
