@@ -1,0 +1,172 @@
+---
+title: "Consultor EPH"
+subtitle: "Hacé preguntas sobre el mercado laboral argentino en lenguaje natural"
+toc: false
+---
+
+El consultor analiza los microdatos de la EPH-INDEC en tiempo real y te responde con números reales.
+Las consultas pueden tardar entre 30 y 60 segundos mientras se descargan y procesan los datos.
+
+::: {.callout-note collapse="false"}
+**Ejemplos de consultas**
+
+- ¿Cuál fue la tasa de desocupación en el primer trimestre de 2024?
+- ¿Cómo evolucionó la tasa de empleo entre 2022 y 2024?
+- ¿Cuál es la tasa de informalidad laboral en el cuarto trimestre de 2023?
+:::
+
+```{=html}
+<div id="eph-chat" style="margin-top: 1.5rem;">
+
+  <div style="display: flex; gap: 0.5rem; align-items: flex-end;">
+    <textarea
+      id="chat-input"
+      rows="2"
+      placeholder="Ej: ¿Cuál fue la tasa de desocupación en el primer trimestre de 2024?"
+      style="
+        flex: 1;
+        padding: 0.65rem 0.85rem;
+        border: 1px solid #cbd5e0;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        font-family: inherit;
+        resize: vertical;
+        line-height: 1.5;
+      "
+    ></textarea>
+    <button
+      id="chat-btn"
+      onclick="enviarConsulta()"
+      style="
+        padding: 0.65rem 1.25rem;
+        background: #2166ac;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        font-family: inherit;
+        cursor: pointer;
+        white-space: nowrap;
+        height: fit-content;
+      "
+    >Consultar</button>
+  </div>
+
+  <div id="chat-loading" style="display:none; margin-top: 1rem; color: #718096; font-size: 0.9rem;">
+    ⏳ Procesando — descargando microdatos y ejecutando análisis...
+  </div>
+
+  <div id="chat-error" style="display:none; margin-top: 1rem;"></div>
+
+  <div id="chat-result" style="display:none; margin-top: 1.5rem;">
+    <div
+      id="chat-answer"
+      style="
+        background: #ebf8ff;
+        border-left: 4px solid #2166ac;
+        padding: 1rem 1.25rem;
+        border-radius: 0 6px 6px 0;
+        font-size: 0.97rem;
+        line-height: 1.7;
+        white-space: pre-wrap;
+      "
+    ></div>
+
+    <details style="margin-top: 1rem;">
+      <summary style="cursor: pointer; font-size: 0.85rem; color: #718096;">Ver código R ejecutado</summary>
+      <pre id="chat-rcode" style="
+        background: #f7fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        padding: 0.85rem;
+        font-size: 0.82rem;
+        overflow-x: auto;
+        margin-top: 0.5rem;
+        white-space: pre-wrap;
+      "></pre>
+    </details>
+
+    <details style="margin-top: 0.5rem;">
+      <summary style="cursor: pointer; font-size: 0.85rem; color: #718096;">Ver output del sandbox</summary>
+      <pre id="chat-routput" style="
+        background: #f7fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        padding: 0.85rem;
+        font-size: 0.82rem;
+        overflow-x: auto;
+        margin-top: 0.5rem;
+        white-space: pre-wrap;
+      "></pre>
+    </details>
+  </div>
+
+</div>
+
+<script>
+// Cambiar a la URL del backend deployado cuando esté en producción
+const API_URL = "https://eph-chat-f9gvq.ondigitalocean.app";
+
+async function enviarConsulta() {
+  const input = document.getElementById("chat-input");
+  const question = input.value.trim();
+  if (!question) return;
+
+  const btn      = document.getElementById("chat-btn");
+  const loading  = document.getElementById("chat-loading");
+  const error    = document.getElementById("chat-error");
+  const result   = document.getElementById("chat-result");
+  const answer   = document.getElementById("chat-answer");
+  const rcode    = document.getElementById("chat-rcode");
+  const routput  = document.getElementById("chat-routput");
+
+  btn.disabled = true;
+  loading.style.display = "block";
+  error.style.display   = "none";
+  result.style.display  = "none";
+
+  try {
+    const resp = await fetch(`${API_URL}/chat`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question }),
+    });
+
+    if (!resp.ok) {
+      const data = await resp.json().catch(() => ({}));
+      throw new Error(data.detail || `Error ${resp.status}`);
+    }
+
+    const data = await resp.json();
+    answer.textContent  = data.answer;
+    rcode.textContent   = data.r_code;
+    routput.textContent = data.r_output;
+    result.style.display = "block";
+
+  } catch (err) {
+    error.innerHTML = `
+      <div style="
+        background: #fff5f5;
+        border-left: 4px solid #d73027;
+        padding: 0.85rem 1rem;
+        border-radius: 0 6px 6px 0;
+        font-size: 0.9rem;
+        color: #742a2a;
+      ">
+        <strong>Error:</strong> ${err.message}
+      </div>`;
+    error.style.display = "block";
+  } finally {
+    btn.disabled = false;
+    loading.style.display = "none";
+  }
+}
+
+document.getElementById("chat-input").addEventListener("keydown", function(e) {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    enviarConsulta();
+  }
+});
+</script>
+```

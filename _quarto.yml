@@ -19,6 +19,8 @@ website:
         text: Paneles
       - href: hogares.qmd
         text: Hogares
+      - href: chat.qmd
+        text: Consultor IA
       - href: metodologia.qmd
         text: Metodología
       - href: sobre-mi.qmd
