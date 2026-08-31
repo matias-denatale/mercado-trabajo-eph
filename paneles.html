@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Transiciones ocupacionales – Mercado de Trabajo — EPH</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./favicon_matias_de_natale.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-3cfa09d2010059c8592a0b9eb880ecc3.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d5e1199e3d32eb0c99f33aaeb0dbe05e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+<script src="site_libs/react-18.2.0/react.min.js"></script>
+<script src="site_libs/react-18.2.0/react-dom.min.js"></script>
+<script src="site_libs/reactwidget-2.0.0/react-tools.js"></script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="site_libs/reactable-0.4.5/reactable.css" rel="stylesheet">
+<script src="site_libs/reactable-binding-0.4.5/reactable.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./logos y fotos/logo_navbar.svg" alt="" class="navbar-logo light-content">
+    <img src="./logos y fotos/logo_navbar.svg" alt="" class="navbar-logo dark-content">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./paneles.html" aria-current="page"> 
+<span class="menu-text">Paneles</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./hogares.html"> 
+<span class="menu-text">Hogares</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chat.html"> 
+<span class="menu-text">Consultor IA</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./metodologia.html"> 
+<span class="menu-text">Metodología</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./sobre-mi.html"> 
+<span class="menu-text">Sobre mí</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/matías-de-natale-336745181"> <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:matias_denatale@hotmail.com"> <i class="bi bi-envelope" role="img" aria-label="Email">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/matias-denatale/mercado-trabajo-eph"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul class="collapse">
+  <li><a href="#marco-conceptual" id="toc-marco-conceptual" class="nav-link active" data-scroll-target="#marco-conceptual">Marco conceptual</a></li>
+  <li><a href="#categorías-ocupacionales" id="toc-categorías-ocupacionales" class="nav-link" data-scroll-target="#categorías-ocupacionales">Categorías ocupacionales</a></li>
+  <li><a href="#matrices-de-transición" id="toc-matrices-de-transición" class="nav-link" data-scroll-target="#matrices-de-transición">Matrices de transición</a></li>
+  <li><a href="#balance-interanual" id="toc-balance-interanual" class="nav-link" data-scroll-target="#balance-interanual">Balance interanual</a></li>
+  <li><a href="#nota-metodológica" id="toc-nota-metodológica" class="nav-link" data-scroll-target="#nota-metodológica">Nota metodológica</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Transiciones ocupacionales</h1>
+<p class="subtitle lead">Matrices de transición y flujos interanuales — EPH en panel</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">31 de agosto de 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<hr>
+<section id="marco-conceptual" class="level2">
+<h2 class="anchored" data-anchor-id="marco-conceptual">Marco conceptual</h2>
+<p>Las matrices de transición permiten analizar la <strong>movilidad ocupacional</strong> entre períodos: qué proporción de quienes estaban en cada categoría en <span class="math inline">\(t_0\)</span> se encuentran en cada categoría en <span class="math inline">\(t_1\)</span>. Se trabaja con población de <strong>18 a 64 años</strong> y ocho categorías que combinan posición en el empleo, formalidad y tamaño del establecimiento.</p>
+<p>El análisis interanual agrega dos métricas de flujo:</p>
+<ul>
+<li><strong>Tasa de entrada (TE):</strong> proporción del stock total que ingresa a una categoría.</li>
+<li><strong>Tasa de salida (TS):</strong> proporción del stock total que egresa de una categoría.</li>
+<li><strong>Balance:</strong> TE − TS. Positivo indica ganancia de participación; negativo, pérdida.</li>
+</ul>
+<hr>
+</section>
+<section id="categorías-ocupacionales" class="level2">
+<h2 class="anchored" data-anchor-id="categorías-ocupacionales">Categorías ocupacionales</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Código</th>
+<th>Categoría</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Patrones +5 empleados</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>TCP calificados</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Asalariados formales</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Microempresarios</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>TCP semi o no calificados</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Asalariados informales</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Desocupados</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Inactivos</td>
+</tr>
+</tbody>
+</table>
+<p>La variable <code>g_ocup</code> combina <code>CAT_OCUP</code>, <code>PP07H</code>, <code>PP04D_COD</code> y <code>PP04C</code>. Los desocupados (ESTADO==2) e inactivos (ESTADO==3) se asignan por estado de actividad con prioridad sobre la categoría ocupacional.</p>
+<hr>
+</section>
+<section id="matrices-de-transición" class="level2">
+<h2 class="anchored" data-anchor-id="matrices-de-transición">Matrices de transición</h2>
+<p>Probabilidades condicionales de transición entre categorías ocupacionales. Los valores de la diagonal muestran la tasa de permanencia; el resto indica movilidad hacia otras categorías. Filas suman 100%.</p>
+<div class="cell">
+<div class="cell-output-display">
+<script>var HIST={"2003–2007":{"Patrones +5":{"Patrones +5":0.5127,"TCP calificados":0.064,"Asalariados formales":0.0913,"Microempresarios":0.1347,"TCP semi o no calificados":0.0567,"Asalariados informales":0.0934,"Desocupados":0.0106,"Inactivos":0.0365},"TCP calificados":{"Patrones +5":0.0133,"TCP calificados":0.5318,"Asalariados formales":0.0643,"Microempresarios":0.0711,"TCP semi o no calificados":0.1015,"Asalariados informales":0.1046,"Desocupados":0.0387,"Inactivos":0.0748},"Asalariados formales":{"Patrones +5":0.0031,"TCP calificados":0.0058,"Asalariados formales":0.8816,"Microempresarios":0.0042,"TCP semi o no calificados":0.0117,"Asalariados informales":0.0517,"Desocupados":0.0188,"Inactivos":0.0231},"Microempresarios":{"Patrones +5":0.079,"TCP calificados":0.088,"Asalariados formales":0.0475,"Microempresarios":0.3721,"TCP semi o no calificados":0.2611,"Asalariados informales":0.0911,"Desocupados":0.0161,"Inactivos":0.0451},"TCP semi o no calificados":{"Patrones +5":0.0049,"TCP calificados":0.031,"Asalariados formales":0.0399,"Microempresarios":0.0456,"TCP semi o no calificados":0.5377,"Asalariados informales":0.1838,"Desocupados":0.0546,"Inactivos":0.1025},"Asalariados informales":{"Patrones +5":0.0022,"TCP calificados":0.0159,"Asalariados formales":0.1295,"Microempresarios":0.0081,"TCP semi o no calificados":0.0813,"Asalariados informales":0.5679,"Desocupados":0.0712,"Inactivos":0.1239},"Desocupados":{"Patrones +5":0.0006,"TCP calificados":0.0168,"Asalariados formales":0.1111,"Microempresarios":0.0035,"TCP semi o no calificados":0.0949,"Asalariados informales":0.2554,"Desocupados":0.2696,"Inactivos":0.2481},"Inactivos":{"Patrones +5":0.0009,"TCP calificados":0.0087,"Asalariados formales":0.0309,"Microempresarios":0.003,"TCP semi o no calificados":0.0359,"Asalariados informales":0.1193,"Desocupados":0.0809,"Inactivos":0.7206}},"2008–2011":{"Patrones +5":{"Patrones +5":0.4607,"TCP calificados":0.0467,"Asalariados formales":0.1192,"Microempresarios":0.1755,"TCP semi o no calificados":0.0747,"Asalariados informales":0.0879,"Desocupados":0.0044,"Inactivos":0.031},"TCP calificados":{"Patrones +5":0.021,"TCP calificados":0.5118,"Asalariados formales":0.0783,"Microempresarios":0.0663,"TCP semi o no calificados":0.1057,"Asalariados informales":0.0988,"Desocupados":0.0351,"Inactivos":0.083},"Asalariados formales":{"Patrones +5":0.0026,"TCP calificados":0.0075,"Asalariados formales":0.869,"Microempresarios":0.0034,"TCP semi o no calificados":0.0131,"Asalariados informales":0.0552,"Desocupados":0.0197,"Inactivos":0.0295},"Microempresarios":{"Patrones +5":0.0531,"TCP calificados":0.0899,"Asalariados formales":0.0591,"Microempresarios":0.3855,"TCP semi o no calificados":0.2593,"Asalariados informales":0.0858,"Desocupados":0.0119,"Inactivos":0.0554},"TCP semi o no calificados":{"Patrones +5":0.0053,"TCP calificados":0.0297,"Asalariados formales":0.0467,"Microempresarios":0.0559,"TCP semi o no calificados":0.5368,"Asalariados informales":0.1513,"Desocupados":0.0447,"Inactivos":0.1295},"Asalariados informales":{"Patrones +5":0.0038,"TCP calificados":0.0156,"Asalariados formales":0.1563,"Microempresarios":0.0103,"TCP semi o no calificados":0.0843,"Asalariados informales":0.5146,"Desocupados":0.0636,"Inactivos":0.1513},"Desocupados":{"Patrones +5":0.0005,"TCP calificados":0.0214,"Asalariados formales":0.1469,"Microempresarios":0.0067,"TCP semi o no calificados":0.0832,"Asalariados informales":0.2421,"Desocupados":0.2185,"Inactivos":0.2807},"Inactivos":{"Patrones +5":0.0009,"TCP calificados":0.0096,"Asalariados formales":0.0406,"Microempresarios":0.0033,"TCP semi o no calificados":0.0377,"Asalariados informales":0.1092,"Desocupados":0.0615,"Inactivos":0.7373}},"2011–2015":{"Patrones +5":{"Patrones +5":0.4,"TCP calificados":0.0751,"Asalariados formales":0.1304,"Microempresarios":0.15,"TCP semi o no calificados":0.1031,"Asalariados informales":0.1043,"Desocupados":0.0103,"Inactivos":0.0269},"TCP calificados":{"Patrones +5":0.0198,"TCP calificados":0.5277,"Asalariados formales":0.0926,"Microempresarios":0.0624,"TCP semi o no calificados":0.0965,"Asalariados informales":0.0953,"Desocupados":0.0286,"Inactivos":0.0771},"Asalariados formales":{"Patrones +5":0.0017,"TCP calificados":0.0071,"Asalariados formales":0.8661,"Microempresarios":0.0035,"TCP semi o no calificados":0.0144,"Asalariados informales":0.0555,"Desocupados":0.0196,"Inactivos":0.032},"Microempresarios":{"Patrones +5":0.0413,"TCP calificados":0.0814,"Asalariados formales":0.0667,"Microempresarios":0.3535,"TCP semi o no calificados":0.2883,"Asalariados informales":0.0861,"Desocupados":0.0177,"Inactivos":0.0649},"TCP semi o no calificados":{"Patrones +5":0.0042,"TCP calificados":0.0279,"Asalariados formales":0.0446,"Microempresarios":0.0485,"TCP semi o no calificados":0.5606,"Asalariados informales":0.1448,"Desocupados":0.0389,"Inactivos":0.1305},"Asalariados informales":{"Patrones +5":0.0032,"TCP calificados":0.0177,"Asalariados formales":0.1488,"Microempresarios":0.0089,"TCP semi o no calificados":0.0847,"Asalariados informales":0.5286,"Desocupados":0.0608,"Inactivos":0.1472},"Desocupados":{"Patrones +5":0.0009,"TCP calificados":0.017,"Asalariados formales":0.125,"Microempresarios":0.0047,"TCP semi o no calificados":0.0971,"Asalariados informales":0.2447,"Desocupados":0.2296,"Inactivos":0.281},"Inactivos":{"Patrones +5":0.0007,"TCP calificados":0.0096,"Asalariados formales":0.0386,"Microempresarios":0.0033,"TCP semi o no calificados":0.0392,"Asalariados informales":0.1002,"Desocupados":0.0616,"Inactivos":0.7469}},"2016–2019":{"Patrones +5":{"Patrones +5":0.4302,"TCP calificados":0.0926,"Asalariados formales":0.1372,"Microempresarios":0.1386,"TCP semi o no calificados":0.0647,"Asalariados informales":0.0859,"Desocupados":0.0158,"Inactivos":0.035},"TCP calificados":{"Patrones +5":0.0125,"TCP calificados":0.5495,"Asalariados formales":0.0766,"Microempresarios":0.0498,"TCP semi o no calificados":0.1064,"Asalariados informales":0.0953,"Desocupados":0.0386,"Inactivos":0.0713},"Asalariados formales":{"Patrones +5":0.0024,"TCP calificados":0.0078,"Asalariados formales":0.8616,"Microempresarios":0.0031,"TCP semi o no calificados":0.0156,"Asalariados informales":0.0564,"Desocupados":0.0197,"Inactivos":0.0334},"Microempresarios":{"Patrones +5":0.0466,"TCP calificados":0.0848,"Asalariados formales":0.0546,"Microempresarios":0.3532,"TCP semi o no calificados":0.3185,"Asalariados informales":0.0779,"Desocupados":0.0259,"Inactivos":0.0385},"TCP semi o no calificados":{"Patrones +5":0.003,"TCP calificados":0.0295,"Asalariados formales":0.0429,"Microempresarios":0.0449,"TCP semi o no calificados":0.554,"Asalariados informales":0.1417,"Desocupados":0.0575,"Inactivos":0.1264},"Asalariados informales":{"Patrones +5":0.003,"TCP calificados":0.0203,"Asalariados formales":0.1304,"Microempresarios":0.0091,"TCP semi o no calificados":0.1008,"Asalariados informales":0.5346,"Desocupados":0.0758,"Inactivos":0.126},"Desocupados":{"Patrones +5":0.0005,"TCP calificados":0.0187,"Asalariados formales":0.0989,"Microempresarios":0.0043,"TCP semi o no calificados":0.1055,"Asalariados informales":0.2263,"Desocupados":0.2703,"Inactivos":0.2755},"Inactivos":{"Patrones +5":0.0004,"TCP calificados":0.0102,"Asalariados formales":0.0335,"Microempresarios":0.0031,"TCP semi o no calificados":0.0484,"Asalariados informales":0.0997,"Desocupados":0.0778,"Inactivos":0.7268}},"2022–2024":{"Patrones +5":{"Patrones +5":0.4375,"TCP calificados":0.0701,"Asalariados formales":0.0967,"Microempresarios":0.1364,"TCP semi o no calificados":0.1116,"Asalariados informales":0.08,"Desocupados":0.0005,"Inactivos":0.0673},"TCP calificados":{"Patrones +5":0.0135,"TCP calificados":0.5333,"Asalariados formales":0.0753,"Microempresarios":0.0429,"TCP semi o no calificados":0.1308,"Asalariados informales":0.1143,"Desocupados":0.0293,"Inactivos":0.0607},"Asalariados formales":{"Patrones +5":0.0023,"TCP calificados":0.007,"Asalariados formales":0.8614,"Microempresarios":0.0018,"TCP semi o no calificados":0.0156,"Asalariados informales":0.0629,"Desocupados":0.0175,"Inactivos":0.0314},"Microempresarios":{"Patrones +5":0.0373,"TCP calificados":0.0796,"Asalariados formales":0.0542,"Microempresarios":0.3151,"TCP semi o no calificados":0.3119,"Asalariados informales":0.1388,"Desocupados":0.0218,"Inactivos":0.0414},"TCP semi o no calificados":{"Patrones +5":0.0038,"TCP calificados":0.0301,"Asalariados formales":0.0468,"Microempresarios":0.0423,"TCP semi o no calificados":0.5625,"Asalariados informales":0.1563,"Desocupados":0.04,"Inactivos":0.1183},"Asalariados informales":{"Patrones +5":0.0016,"TCP calificados":0.0238,"Asalariados formales":0.1437,"Microempresarios":0.0092,"TCP semi o no calificados":0.0902,"Asalariados informales":0.5559,"Desocupados":0.0564,"Inactivos":0.1192},"Desocupados":{"Patrones +5":0.0001,"TCP calificados":0.0194,"Asalariados formales":0.1286,"Microempresarios":0.0077,"TCP semi o no calificados":0.1143,"Asalariados informales":0.2476,"Desocupados":0.2251,"Inactivos":0.2571},"Inactivos":{"Patrones +5":0.0002,"TCP calificados":0.0117,"Asalariados formales":0.0432,"Microempresarios":0.003,"TCP semi o no calificados":0.0593,"Asalariados informales":0.1139,"Desocupados":0.0685,"Inactivos":0.7001}}};var LATEST={"Patrones +5":{"Patrones +5":0.4447,"TCP calificados":0.3288,"Asalariados formales":0.1518,"Microempresarios":0.0142,"TCP semi o no calificados":0,"Asalariados informales":0,"Desocupados":0.0086,"Inactivos":0.0519},"TCP calificados":{"Patrones +5":0.046,"TCP calificados":0.6048,"Asalariados formales":0.197,"Microempresarios":0.0056,"TCP semi o no calificados":0,"Asalariados informales":0,"Desocupados":0.0426,"Inactivos":0.104},"Asalariados formales":{"Patrones +5":0.0072,"TCP calificados":0.0652,"Asalariados formales":0.817,"Microempresarios":0.0009,"TCP semi o no calificados":0,"Asalariados informales":0,"Desocupados":0.0368,"Inactivos":0.0729},"Microempresarios":{"Patrones +5":0.0393,"TCP calificados":0.3618,"Asalariados formales":0.1475,"Microempresarios":0.0598,"TCP semi o no calificados":0,"Asalariados informales":0,"Desocupados":0,"Inactivos":0.3916},"TCP semi o no calificados":{"Patrones +5":"NaN","TCP calificados":"NaN","Asalariados formales":"NaN","Microempresarios":"NaN","TCP semi o no calificados":"NaN","Asalariados informales":"NaN","Desocupados":"NaN","Inactivos":"NaN"},"Asalariados informales":{"Patrones +5":"NaN","TCP calificados":"NaN","Asalariados formales":"NaN","Microempresarios":"NaN","TCP semi o no calificados":"NaN","Asalariados informales":"NaN","Desocupados":"NaN","Inactivos":"NaN"},"Desocupados":{"Patrones +5":0.0087,"TCP calificados":0.1337,"Asalariados formales":0.374,"Microempresarios":0.0037,"TCP semi o no calificados":0,"Asalariados informales":0,"Desocupados":0.267,"Inactivos":0.2129},"Inactivos":{"Patrones +5":0.0056,"TCP calificados":0.0677,"Asalariados formales":0.161,"Microempresarios":0.0007,"TCP semi o no calificados":0,"Asalariados informales":0,"Desocupados":0.0713,"Inactivos":0.6938}};var LATEST_LABEL="2024–2025";</script>
+</div>
+</div>
+<style>
+.mx-wrap * { box-sizing: border-box; }
+.mx-wrap { padding: 1rem 0; }
+.section-label { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--bs-secondary-color, #7a8a8c); margin-bottom: .5rem; }
+.panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: .75rem; flex-wrap: wrap; gap: 8px; }
+.period-nav { display: flex; align-items: center; gap: 8px; }
+.period-name { font-size: 14px; font-weight: 500; color: var(--bs-body-color, #839496); min-width: 220px; margin: 0; padding: 0; }
+.nav-btn { background: none; border: 0.5px solid var(--bs-border-color, #2d4f5a); border-radius: 6px; padding: 4px 10px; cursor: pointer; font-size: 13px; color: var(--bs-body-color, #839496); margin: 0; }
+.nav-btn:hover { background: var(--bs-secondary-bg, #073642); }
+.nav-btn:disabled { opacity: .35; cursor: default; }
+.auto-btn { font-size: 12px; padding: 4px 10px; border-radius: 6px; border: 0.5px solid var(--bs-border-color, #2d4f5a); background: none; cursor: pointer; color: var(--bs-secondary-color, #7a8a8c); margin: 0; }
+.auto-btn.active { background: rgba(38,139,210,0.15); color: #268bd2; border-color: transparent; }
+.mx-card { background: var(--bs-body-bg, #002b36); border: 0.5px solid var(--bs-border-color, #2d4f5a); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; }
+.matrix-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table.mx { border-collapse: collapse; font-size: 11.5px; width: 100%; margin: 0; padding: 0; }
+table.mx th, table.mx td { padding: 5px 6px; text-align: center; border: 0.5px solid var(--bs-border-color, #2d4f5a); white-space: nowrap; margin: 0; }
+table.mx th { font-weight: 500; color: var(--bs-secondary-color, #7a8a8c); background: var(--bs-secondary-bg, #073642); font-size: 11px; }
+table.mx th.row-h { text-align: left; font-size: 10.5px; min-width: 148px; }
+table.mx td.orig { text-align: left; font-weight: 500; font-size: 11px; color: var(--bs-secondary-color, #7a8a8c); background: var(--bs-secondary-bg, #073642); }
+.mx-divider { border: none; border-top: 1.5px solid var(--bs-border-color, #2d4f5a); margin: 1.5rem 0; }
+.latest-badge { display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: 20px; background: rgba(42,161,152,0.2); color: #2aa198; font-weight: 500; margin-left: 8px; }
+.mx-legend { display: flex; gap: 6px; flex-wrap: wrap; margin-top: .5rem; font-size: 11px; color: var(--bs-secondary-color, #7a8a8c); align-items: center; }
+.leg-swatch { width: 12px; height: 12px; border-radius: 2px; display: inline-block; flex-shrink: 0; margin: 0; padding: 0; }
+.row-label-wrap { display: flex; align-items: center; gap: 4px; margin: 0; padding: 0; }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin: 0; padding: 0; }
+.t0-note { font-size: 11px; color: var(--bs-secondary-color, #7a8a8c); margin-top: .4rem; }
+</style>
+
+<div class="mx-wrap">
+
+<div class="section-label">Promedios históricos por grandes períodos</div>
+<div class="mx-card">
+<div class="panel-header">
+<div class="period-nav">
+<button class="nav-btn" id="prevBtn" onclick="changeHistPeriod(-1)">‹</button>
+<span class="period-name" id="periodName"></span>
+<button class="nav-btn" id="nextBtn" onclick="changeHistPeriod(1)">›</button>
+</div>
+<button class="auto-btn" id="autoBtn" onclick="toggleAuto()">▶ Carrete automático</button>
+</div>
+<div class="matrix-wrap">
+<table class="mx" id="histTable"></table>
+</div>
+<div class="t0-note">Filas = posición en t₀ · Columnas = posición en t₁ · Valores = probabilidad de transición</div>
+</div>
+
+<hr class="mx-divider">
+
+<div class="section-label">Último período disponible <span class="latest-badge" id="latestBadge"></span></div>
+<div class="mx-card">
+<div class="matrix-wrap">
+<table class="mx" id="latestTable"></table>
+</div>
+<div class="t0-note">Filas = posición en t₀ · Columnas = posición en t₁ · Valores = probabilidad de transición</div>
+</div>
+
+<div class="mx-legend" style="margin-top:1rem">
+<span class="leg-swatch" style="background:#1D9E75"></span> Alta permanencia (diagonal ≥ 0.50)
+<span class="leg-swatch" style="background:#378ADD"></span> Permanencia media (0.30–0.49)
+<span class="leg-swatch" style="background:#FAECE7"></span> Alta salida (&lt;0.30 en diagonal)
+</div>
+</div>
+
+<script>
+const CATS  = ["Patrones +5","TCP calificados","Asalariados formales","Microempresarios","TCP semi o no calificados","Asalariados informales","Desocupados","Inactivos"];
+const SHORT = ["Pat+5","TCP cal.","Asal. form.","Microemp.","TCP s/c","Asal. inf.","Desoc.","Inactivos"];
+const CAT_COLORS = ["#534AB7","#1D9E75","#185FA5","#BA7517","#D85A30","#993556","#888780","#9c9b98"];
+
+document.getElementById("latestBadge").textContent = LATEST_LABEL;
+
+const histPeriods = Object.keys(HIST);
+let currentPeriod = 0;
+let autoTimer = null;
+
+function cellColor(v, isDiag) {
+  if (isDiag) {
+    if (v >= 0.50) return "#1D9E75";
+    if (v >= 0.30) return "#378ADD";
+    return "#FAECE7";
+  }
+  if (v === 0) return "transparent";
+  const opacity = Math.min(v / 0.25, 1);
+  return "rgba(211,83,78," + (opacity * 0.35).toFixed(2) + ")";
+}
+
+function cellText(v, isDiag) {
+  const pct = (v * 100).toFixed(1);
+  if (isDiag) {
+    const light = v >= 0.30;
+    return '<span style="color:' + (light ? '#fff' : '#2C2C2A') + ';font-weight:500">' + pct + '%</span>';
+  }
+  return '<span style="color:var(--bs-body-color,#839496)">' + pct + '%</span>';
+}
+
+function buildTable(matrix, tableId) {
+  const t = document.getElementById(tableId);
+  let html = '<thead><tr><th class="row-h">t\u2080 \\ t\u2081</th>';
+  SHORT.forEach(s => { html += '<th>' + s + '</th>'; });
+  html += '</tr></thead><tbody>';
+  CATS.forEach((orig, ri) => {
+    html += '<tr><td class="orig"><div class="row-label-wrap"><span class="dot" style="background:' + CAT_COLORS[ri] + '"></span>' + orig + '</div></td>';
+    CATS.forEach((dest, ci) => {
+      const v = (matrix[orig] && matrix[orig][dest] != null) ? matrix[orig][dest] : 0;
+      const isDiag = ri === ci;
+      html += '<td style="background:' + cellColor(v, isDiag) + '">' + cellText(v, isDiag) + '</td>';
+    });
+    html += '</tr>';
+  });
+  html += '</tbody>';
+  t.innerHTML = html;
+}
+
+function updateHist() {
+  const p = histPeriods[currentPeriod];
+  document.getElementById("periodName").textContent = p;
+  document.getElementById("prevBtn").disabled = currentPeriod === 0;
+  document.getElementById("nextBtn").disabled = currentPeriod === histPeriods.length - 1;
+  buildTable(HIST[p], "histTable");
+}
+
+function changeHistPeriod(dir) {
+  currentPeriod = Math.max(0, Math.min(histPeriods.length - 1, currentPeriod + dir));
+  updateHist();
+}
+
+function toggleAuto() {
+  const btn = document.getElementById("autoBtn");
+  if (autoTimer) {
+    clearInterval(autoTimer);
+    autoTimer = null;
+    btn.textContent = "\u25b6 Carrete autom\u00e1tico";
+    btn.classList.remove("active");
+  } else {
+    btn.textContent = "\u23f8 Detener carrete";
+    btn.classList.add("active");
+    autoTimer = setInterval(() => {
+      currentPeriod = (currentPeriod + 1) % histPeriods.length;
+      updateHist();
+    }, 2800);
+  }
+}
+
+updateHist();
+buildTable(LATEST, "latestTable");
+</script>
+<hr>
+</section>
+<section id="balance-interanual" class="level2">
+<h2 class="anchored" data-anchor-id="balance-interanual">Balance interanual</h2>
+<p>Variación de la participación en el stock total (TE − TS) por año y categoría. Valores positivos indican que la categoría ganó peso relativo en ese período.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="reactable html-widget html-fill-item" id="htmlwidget-f9c936cc7e7ed775b2fd" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-f9c936cc7e7ed775b2fd">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"categoria":["Patrones +5","TCP calificados","Asalariados formales","Microempresarios","TCP semi o no calificados","Asalariados informales","Desocupados","Inactivos"],"2003-2004":[-0.000117981325428584,0.00208027652728814,0.019082825054784,0.00255778882862815,-0.0006007786264145,0.00613442492232685,-0.0227917371396203,-0.00634481824156385],"2004-2005":[0.000482205773915422,0.000556301342145495,0.0216931948043369,-0.00151881300361146,0.00274935478762961,-0.00398401299210499,-0.0204566367134967,0.000478406001185649],"2005-2006":[-0.000750714023234886,-0.00174802274222458,0.0254434288206256,0.00210770392462122,0.00618955562643501,-0.0023629275171948,-0.00979351025943474,-0.0190855138295928],"2006-2007":[0.00147002090926918,0.00415603626512604,0.0218668903311384,0.00112369004227134,-0.00510585286651608,-0.0115039673934609,-0.0114143632963704,-0.000592453991457464],"2007-2008":[0.000524389470606134,5.88484051397935e-05,0.0235653648395834,0.000359281569806951,0.00599220789766451,-0.0163290964436729,-0.00777046593403986,-0.00640052980508793],"2008-2009":[-0.00218409544510402,0.0038379693558425,0.0083432721652586,-0.00104865667151667,0.00229737317800953,-0.00460154254473544,0.000931576874993616,-0.00757589691274813],"2009-2010":[-0.000167052019393495,-0.00105821342626532,0.0146090075892373,0.000829439469114037,-0.000358108308054536,-0.00319885409066625,-0.0103681679827611,-0.000288051231210618],"2010-2011":[0.00061901462567363,-0.000597169217181413,0.0156793865643556,-0.00140927055142484,0.000685885976221462,-0.00256661681355688,-0.00507568513266643,-0.00733554545142112],"2011-2012":[-0.000938611963469155,0.000648574575025557,0.00475336892485834,-0.00417578796159747,0.00651718152936118,0.000948541459926094,-0.000639994940990193,-0.00711327162311437],"2012-2013":[-0.000652016509431491,-0.00101987741121016,0.00774477703994747,-0.00171645913147806,0.00517568809884647,-0.0055195666771343,0.000864970228506602,-0.00487751563804661],"2013-2014":[-0.00115273972368453,0.00186430851009246,0.00860775037883066,-0.00263573766790834,0.00352346697588823,0.00109741163754032,0.000471699726694648,-0.0117761598374534],"2014-2015":[-0.000676706158917437,0.00285090325378943,0.00374825048180288,0.000422218749822106,2.09609015641155e-05,-0.00219807045854817,-0.000688841417717717,-0.00347871535179517],"2016-2017":[-0.000264922844139297,0.000710331669979664,0.00557318303921939,0.00185160060955595,0.00541668016080933,0.00350999427264823,-0.00506484044963359,-0.0117320264584397],"2017-2018":[-0.00144437702942704,0.00111830862484001,0.00280732456340443,0.00083295496797782,0.00394941813500567,0.00484505497925486,0.00496687070106525,-0.017075554942121],"2018-2019":[-0.00156343028365915,0.00312645395902617,-0.0061382229792365,-0.00114276190480063,0.00416675057421115,0.00606730193291524,0.00488813788575117,-0.00940422918420741],"2019-2020":[-0.0015718165729935,-0.00302173363344168,-0.00960141267088893,-0.00537567111349199,-0.00102811120168057,-0.0304386275045501,0.00463686159560185,0.0464005111014449],"2020-2021":[-0.00115058119985751,0.00556439235948451,0.01020295148987,0.00533667192515289,0.00728595408708986,0.0262903404921353,-0.0120201076459848,-0.0415096215078903],"2021-2022":[0.000609076044070289,-0.00105223021433243,0.0138961908776754,0.0013327017664573,-0.00919461522453525,0.0236096148882525,-0.0168611655739298,-0.012339572563658],"2022-2023":[-0.00144769080513283,0.00171287801986333,0.0128744128275905,-0.000148052331988096,-0.00396649551443289,0.00917399296033769,0.00042012983393875,-0.0186191749901764],"2023-2024":[0.00038363531522125,0.00148463783070781,-9.46310508286308e-05,-0.00169061348395859,0.00664179287626593,-0.00110699782818718,0.00776425343541122,-0.0133820770946318],"2024-2025":[0.0018392165053726,0.00315813968950501,1.22311269007414e-05,0.00025465833444668,0,0,-0.000512609664597409,-0.00475163599162765]},"columns":[{"id":"categoria","name":"Categoría","type":"character","minWidth":180,"sticky":"left"},{"id":"2003-2004","name":"2003-2004","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2004-2005","name":"2004-2005","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2005-2006","name":"2005-2006","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2006-2007","name":"2006-2007","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2007-2008","name":"2007-2008","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2008-2009","name":"2008-2009","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2009-2010","name":"2009-2010","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2010-2011","name":"2010-2011","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2011-2012","name":"2011-2012","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2012-2013","name":"2012-2013","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2013-2014","name":"2013-2014","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2014-2015","name":"2014-2015","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2016-2017","name":"2016-2017","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2017-2018","name":"2017-2018","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2018-2019","name":"2018-2019","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2019-2020","name":"2019-2020","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2020-2021","name":"2020-2021","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2021-2022","name":"2021-2022","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2022-2023","name":"2022-2023","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2023-2024","name":"2023-2024","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90},{"id":"2024-2025","name":"2024-2025","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"minWidth":90}],"defaultPageSize":8,"highlight":true,"striped":true,"dataKey":"18cc023495f5cf8c2426b840fa9fd478"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<hr>
+</section>
+<section id="nota-metodológica" class="level2">
+<h2 class="anchored" data-anchor-id="nota-metodológica">Nota metodológica</h2>
+<p>Los paneles se construyen apareando observaciones entre trimestres consecutivos mediante <code>CODUSU</code> + <code>NRO_HOGAR</code> + <code>COMPONENTE</code>, con horizonte temporal anual (t₀ y t₁ separados por cuatro trimestres). La ponderación utilizada es <code>PONDERA_t1</code>.</p>
+<p>Los períodos plurianuales acumulan todos los paneles disponibles dentro del bloque, lo que amplía el tamaño efectivo de la muestra y estabiliza las estimaciones en celdas de baja frecuencia (especialmente para patrones y TCP calificados).</p>
+<p>La variable <code>g_ocup</code> se construye desde microdatos crudos EPH combinando <code>CAT_OCUP</code> (categoría de ocupación), <code>PP07H</code> (registración patronal para asalariados), <code>PP04C</code> (tamaño del establecimiento para patrones) y el dígito de calificación del código CNO (<code>PP04D_COD</code>) para cuenta propia. Los desocupados e inactivos se asignan por <code>ESTADO</code>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/matias-denatale\.github\.io\/mercado-trabajo-eph\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Elaboración propia en base a EPH-INDEC.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Actualizado trimestralmente vía GitHub Actions.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

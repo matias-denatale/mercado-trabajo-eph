@@ -1,0 +1,219 @@
+[
+  {
+    "objectID": "sobre-mi.html",
+    "href": "sobre-mi.html",
+    "title": "Sobre mí",
+    "section": "",
+    "text": "Sociología · Economía · Mercado de trabajo · Análisis de datos\n\nSoy sociólogo de formación (UBA) y actualmente estoy maestrando en Economía Aplicada (UTDT). Recientemente también tuve la fortuna de asistir a la escuela de posgrado ELADES en la CEPAL, en Santiago de Chile. Hace varios años me vengo especializado en mercado de trabajo y análisis cuantitativo aplicado a política pública. Mi trabajo se centra en entender la estructura del empleo en Argentina: la informalidad laboral, la movilidad ocupacional, las transiciones entre categorías de empleo y las condiciones de vida de los hogares.\nUtilizo los microdatos de la Encuesta Permanente de Hogares (EPH-INDEC) para construir indicadores trimestrales actualizados y analizar trayectorias ocupacionales aprovechando el diseño de panel rotante de la encuesta.\nTrabajo habitualmente con R, automatización de pipelines de datos y visualización para audiencias tanto académicas como de política pública.\n\nR EPH · INDEC Mercado laboral Informalidad Movilidad ocupacional Pobreza Quarto GitHub Actions"
+  },
+  {
+    "objectID": "sobre-mi.html#matías-de-natale",
+    "href": "sobre-mi.html#matías-de-natale",
+    "title": "Sobre mí",
+    "section": "",
+    "text": "Sociología · Economía · Mercado de trabajo · Análisis de datos\n\nSoy sociólogo de formación (UBA) y actualmente estoy maestrando en Economía Aplicada (UTDT). Recientemente también tuve la fortuna de asistir a la escuela de posgrado ELADES en la CEPAL, en Santiago de Chile. Hace varios años me vengo especializado en mercado de trabajo y análisis cuantitativo aplicado a política pública. Mi trabajo se centra en entender la estructura del empleo en Argentina: la informalidad laboral, la movilidad ocupacional, las transiciones entre categorías de empleo y las condiciones de vida de los hogares.\nUtilizo los microdatos de la Encuesta Permanente de Hogares (EPH-INDEC) para construir indicadores trimestrales actualizados y analizar trayectorias ocupacionales aprovechando el diseño de panel rotante de la encuesta.\nTrabajo habitualmente con R, automatización de pipelines de datos y visualización para audiencias tanto académicas como de política pública.\n\nR EPH · INDEC Mercado laboral Informalidad Movilidad ocupacional Pobreza Quarto GitHub Actions"
+  },
+  {
+    "objectID": "sobre-mi.html#contacto",
+    "href": "sobre-mi.html#contacto",
+    "title": "Sobre mí",
+    "section": "Contacto",
+    "text": "Contacto\n\n  matias_denatale@hotmail.com \n  LinkedIn \n  Código fuente"
+  },
+  {
+    "objectID": "sobre-mi.html#este-sitio",
+    "href": "sobre-mi.html#este-sitio",
+    "title": "Sobre mí",
+    "section": "Este sitio",
+    "text": "Este sitio\nLos indicadores de este sitio se actualizan automáticamente cada vez que el INDEC publica nuevos datos de la EPH, mediante un pipeline construido en R que corre en GitHub Actions. Podés explorar el código fuente en el repositorio.\nEl objetivo es poner a disposición, de forma libre y actualizada, las principales estadísticas del mercado laboral argentino con metodología transparente y reproducible.\n\n¿Tenés preguntas sobre los datos, la metodología, o querés colaborar? Escribime por cualquiera de los canales de arriba."
+  },
+  {
+    "objectID": "metodologia.html",
+    "href": "metodologia.html",
+    "title": "Metodología",
+    "section": "",
+    "text": "Los indicadores se calculan a partir de los microdatos de la Encuesta Permanente de Hogares (EPH) del INDEC, descargados automáticamente mediante el paquete eph de R (función get_microdata()).\nLa EPH releva trimestralmente 31 aglomerados urbanos, los cuales concentran aproximadamente el 62% de la población total del país."
+  },
+  {
+    "objectID": "metodologia.html#fuente-de-datos",
+    "href": "metodologia.html#fuente-de-datos",
+    "title": "Metodología",
+    "section": "",
+    "text": "Los indicadores se calculan a partir de los microdatos de la Encuesta Permanente de Hogares (EPH) del INDEC, descargados automáticamente mediante el paquete eph de R (función get_microdata()).\nLa EPH releva trimestralmente 31 aglomerados urbanos, los cuales concentran aproximadamente el 62% de la población total del país."
+  },
+  {
+    "objectID": "metodologia.html#definiciones",
+    "href": "metodologia.html#definiciones",
+    "title": "Metodología",
+    "section": "Definiciones",
+    "text": "Definiciones\n\nTasa de empleo\n\\[\\text{Tasa de empleo} = \\frac{\\text{Ocupados}}{\\text{PET}} \\times 100\\]\nDonde la Población en Edad de Trabajar (PET) comprende a todas las personas de 10 años y más (ESTADO ≠ 4 en el diseño de registro).\n\n\nTasa de desempleo\n\\[\\text{Tasa de desempleo} = \\frac{\\text{Desocupados}}{\\text{PEA}} \\times 100\\]\nDonde la Población Económicamente Activa (PEA) es la suma de ocupados (ESTADO = 1) y desocupados (ESTADO = 2).\n\n\nTasa de informalidad laboral\n\\[\\text{Tasa de informalidad} = \\frac{\\text{Ocupados informales}}{\\text{Total ocupados con información válida}} \\times 100\\]\nSe utiliza la variable EMPLEO del diseño de registro post-4T2023 (valores: 1 = Formal, 2 = Informal). El ponderador empleado es PONDERA. La variable EMPLEO fue incorporada en el cuarto trimestre de 2023, junto con SECTOR, como parte de la revisión metodológica del diseño de registro de la EPH.\n\n\n\n\n\n\nAdvertencia\n\n\n\nRuptura de serie: la tasa de informalidad calculada aquí no es comparable con indicadores elaborados mediante la variable PP07H (descuento jubilatorio), que sólo captura informalidad asalariada. La variable EMPLEO cubre también a los trabajadores independientes. Por esta razón la serie de informalidad inicia en el 4T2023."
+  },
+  {
+    "objectID": "metodologia.html#ponderadores",
+    "href": "metodologia.html#ponderadores",
+    "title": "Metodología",
+    "section": "Ponderadores",
+    "text": "Ponderadores\nSe utiliza PONDERA para el cálculo de tasas de actividad, empleo y desempleo, siguiendo las recomendaciones del Anexo I del diseño de registros de la EPH."
+  },
+  {
+    "objectID": "metodologia.html#cobertura-temporal",
+    "href": "metodologia.html#cobertura-temporal",
+    "title": "Metodología",
+    "section": "Cobertura temporal",
+    "text": "Cobertura temporal\n\n\n\nIndicador\nPeríodo disponible\n\n\n\n\nTasa de empleo\n2T2016 — 3T2025\n\n\nTasa de desempleo\n2T2016 — 3T2025\n\n\nTasa de informalidad\n4T2023 — 3T2025"
+  },
+  {
+    "objectID": "metodologia.html#notas-adicionales",
+    "href": "metodologia.html#notas-adicionales",
+    "title": "Metodología",
+    "section": "Notas adicionales",
+    "text": "Notas adicionales\n\nEl aglomerado Viedma-Carmen de Patagones presentó cobertura insuficiente en el 3T2025 (ver nota metodológica del informe INDEC correspondiente).\nLos microdatos son las bases preliminares publicadas por INDEC. Los valores pueden diferir marginalmente de las bases definitivas."
+  },
+  {
+    "objectID": "metodologia.html#reproducibilidad",
+    "href": "metodologia.html#reproducibilidad",
+    "title": "Metodología",
+    "section": "Reproducibilidad",
+    "text": "Reproducibilidad\nEl sitio se actualiza automáticamente mediante GitHub Actions cada vez que se sube un nuevo conjunto de datos. El renderizado se realiza con Quarto y el entorno de paquetes está gestionado con renv.\nTodo el código fuente está disponible en el repositorio de GitHub."
+  },
+  {
+    "objectID": "hogares.html",
+    "href": "hogares.html",
+    "title": "Hogares y pobreza",
+    "section": "",
+    "text": "Nota\n\n\n\nIngresos expresados en precios de febrero 2026 (IPC Nacional). Las tasas de pobreza e indigencia se calculan con las líneas de cada período (canasta a precios corrientes)."
+  },
+  {
+    "objectID": "hogares.html#tasas-de-pobreza-e-indigencia",
+    "href": "hogares.html#tasas-de-pobreza-e-indigencia",
+    "title": "Hogares y pobreza",
+    "section": "Tasas de pobreza e indigencia",
+    "text": "Tasas de pobreza e indigencia\n\nPor tipo de hogar — serie trimestral\n\n\n\n\n\n\n\n\nFigura 1\n\n\n\n\n\n\nTasa de indigencia por tipo de hogar\n\n\n\n\n\n\n\n\nFigura 2\n\n\n\n\n\n\nÚltimo período: 2025T3\n\n\n\n\n\n\n\n\nFigura 3"
+  },
+  {
+    "objectID": "hogares.html#ingresos-de-los-hogares",
+    "href": "hogares.html#ingresos-de-los-hogares",
+    "title": "Hogares y pobreza",
+    "section": "Ingresos de los hogares",
+    "text": "Ingresos de los hogares\n\nIngreso per cápita familiar (IPCF) — precios de febrero 2026\n\n\n\n\n\n\n\n\nFigura 4\n\n\n\n\n\n\nIngreso total familiar (ITF) — precios de febrero 2026\n\n\n\n\n\n\n\n\nFigura 5"
+  },
+  {
+    "objectID": "hogares.html#política-social",
+    "href": "hogares.html#política-social",
+    "title": "Hogares y pobreza",
+    "section": "Política social",
+    "text": "Política social\n\nHogares con al menos una fuente de política social (%)\n\n\n\n\n\n\n\n\nFigura 6"
+  },
+  {
+    "objectID": "hogares.html#composición-de-ingresos",
+    "href": "hogares.html#composición-de-ingresos",
+    "title": "Hogares y pobreza",
+    "section": "Composición de ingresos",
+    "text": "Composición de ingresos\nEl ingreso de los hogares proviene de dos fuentes: laboral (salarios, ganancias de la ocupación) y no laboral (jubilaciones, pensiones, transferencias, rentas).\n\n% del ingreso del hogar que es laboral\n\n\n\n\n\n\n\n\nFigura 7\n\n\n\n\nLos hogares sin ocupados tienen ingreso laboral prácticamente nulo (cercano a 0%). Sus ingresos provienen de jubilaciones, pensiones y transferencias sociales.\n\n\nCuadro 5 — Hogares sin ocupados: composición del ingreso no laboral por fuente (defl. a ene 2026)\n\n\n\n\n\n\n\nperiodo\nCategoría\nMonto prom.\n\n\n\n\n2023T4\nJubilación contributiva\n522.835,6\n\n\n2023T4\nJubilación moratoria\n104.075,1\n\n\n2023T4\nSeg. desempleo / indemnización\n17.820,0\n\n\n2023T4\nTransferencias sociales y planes\n0,0\n\n\n2023T4\nRentas y ganancias\n25.593,0\n\n\n2023T4\nOtros (becas, alimentos, etc.)\n99.138,5\n\n\n2023T4\nTotal no laboral\n868.286,0\n\n\n2024T1\nJubilación contributiva\n408.463,1\n\n\n2024T1\nJubilación moratoria\n84.037,8\n\n\n2024T1\nSeg. desempleo / indemnización\n9.007,1\n\n\n2024T1\nTransferencias sociales y planes\n0,0\n\n\n2024T1\nRentas y ganancias\n24.819,6\n\n\n2024T1\nOtros (becas, alimentos, etc.)\n41.116,1\n\n\n2024T1\nTotal no laboral\n712.065,3\n\n\n2024T2\nJubilación contributiva\n421.606,1\n\n\n2024T2\nJubilación moratoria\n88.885,6\n\n\n2024T2\nSeg. desempleo / indemnización\n5.677,0\n\n\n2024T2\nTransferencias sociales y planes\n0,0\n\n\n2024T2\nRentas y ganancias\n31.447,6\n\n\n2024T2\nOtros (becas, alimentos, etc.)\n53.022,4\n\n\n2024T2\nTotal no laboral\n690.906,8\n\n\n2024T3\nJubilación contributiva\n514.192,4\n\n\n2024T3\nJubilación moratoria\n116.739,9\n\n\n2024T3\nSeg. desempleo / indemnización\n6.241,6\n\n\n2024T3\nTransferencias sociales y planes\n0,0\n\n\n2024T3\nRentas y ganancias\n29.070,8\n\n\n2024T3\nOtros (becas, alimentos, etc.)\n84.385,6\n\n\n2024T3\nTotal no laboral\n942.864,9\n\n\n2024T4\nJubilación contributiva\n591.050,1\n\n\n2024T4\nJubilación moratoria\n143.066,4\n\n\n2024T4\nSeg. desempleo / indemnización\n21.058,6\n\n\n2024T4\nTransferencias sociales y planes\n0,0\n\n\n2024T4\nRentas y ganancias\n26.544,3\n\n\n2024T4\nOtros (becas, alimentos, etc.)\n74.328,4\n\n\n2024T4\nTotal no laboral\n966.589,9\n\n\n2025T1\nJubilación contributiva\n599.828,8\n\n\n2025T1\nJubilación moratoria\n126.578,2\n\n\n2025T1\nSeg. desempleo / indemnización\n11.561,5\n\n\n2025T1\nTransferencias sociales y planes\n0,0\n\n\n2025T1\nRentas y ganancias\n41.548,6\n\n\n2025T1\nOtros (becas, alimentos, etc.)\n60.377,7\n\n\n2025T1\nTotal no laboral\n1.039.217,4\n\n\n2025T2\nJubilación contributiva\n559.139,4\n\n\n2025T2\nJubilación moratoria\n119.682,3\n\n\n2025T2\nSeg. desempleo / indemnización\n37.187,3\n\n\n2025T2\nTransferencias sociales y planes\n0,0\n\n\n2025T2\nRentas y ganancias\n44.526,5\n\n\n2025T2\nOtros (becas, alimentos, etc.)\n80.324,4\n\n\n2025T2\nTotal no laboral\n876.295,2\n\n\n2025T3\nJubilación contributiva\n601.844,6\n\n\n2025T3\nJubilación moratoria\n125.598,2\n\n\n2025T3\nSeg. desempleo / indemnización\n41.339,4\n\n\n2025T3\nTransferencias sociales y planes\n0,0\n\n\n2025T3\nRentas y ganancias\n38.427,9\n\n\n2025T3\nOtros (becas, alimentos, etc.)\n90.244,0\n\n\n2025T3\nTotal no laboral\n1.056.086,9\n\n\n\n\n\nFigura 8"
+  },
+  {
+    "objectID": "hogares.html#horas-semanales-de-trabajo",
+    "href": "hogares.html#horas-semanales-de-trabajo",
+    "title": "Hogares y pobreza",
+    "section": "Horas semanales de trabajo",
+    "text": "Horas semanales de trabajo\n\nCuadro 2b — Horas semanales promedio de los ocupados, por tipo de hogar\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCategoría\n2023T4\n2024T1\n2024T2\n2024T3\n2024T4\n2025T1\n2025T2\n2025T3\n\n\n\n\nHogares de trabajadores formales\n45.9\n43.4\n41.9\n42.8\n45.0\n42.6\n42.6\n46.2\n\n\nHogares de trabajadores informales\n39.6\n40.9\n37.4\n39.2\n42.3\n44.3\n39.5\n44.0\n\n\nHogares mixtos\n40.7\n37.4\n41.4\n37.2\n38.8\n39.4\n37.3\n39.0\n\n\nHogares sin ocupados\n54.3\n58.9\n52.4\n57.4\n73.2\n60.8\n58.7\n58.3"
+  },
+  {
+    "objectID": "hogares.html#distribución-de-hogares-por-tipo",
+    "href": "hogares.html#distribución-de-hogares-por-tipo",
+    "title": "Hogares y pobreza",
+    "section": "Distribución de hogares por tipo",
+    "text": "Distribución de hogares por tipo\n\n\n\n\n\n\n\n\nFigura 9\n\n\n\n\n\nCuadro 7 — Peso de cada tipo de hogar en el total (%)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCategoría\n2023T4\n2024T1\n2024T2\n2024T3\n2024T4\n2025T1\n2025T2\n2025T3\n\n\n\n\nHogares de trabajadores formales\n41.0\n41.7\n41.9\n41.8\n41.9\n41.6\n39.9\n41.3\n\n\nHogares de trabajadores informales\n24.4\n24.5\n23.8\n23.6\n23.7\n24.8\n24.0\n24.9\n\n\nHogares mixtos\n15.3\n13.1\n13.7\n14.5\n14.9\n13.6\n14.4\n14.2\n\n\nHogares sin ocupados\n19.2\n20.8\n20.6\n20.1\n19.5\n20.0\n21.7\n19.6"
+  },
+  {
+    "objectID": "hogares.html#nota-metodológica",
+    "href": "hogares.html#nota-metodológica",
+    "title": "Hogares y pobreza",
+    "section": "Nota metodológica",
+    "text": "Nota metodológica\nClasificación de hogares — variable EMPLEO, disponible desde 4T2023:\n\nFormales: al menos un miembro con ingreso laboral formal (EMPLEO = 1), ninguno informal\nInformales: al menos un miembro con ingreso laboral informal (EMPLEO = 2), ninguno formal\nMixtos: miembros con ambos tipos de empleo\nSin ocupados: ningún miembro con ingreso laboral positivo\n\nLíneas de pobreza e indigencia: canasta CBA/CBT del INDEC para adulto equivalente (GBA), descargada automáticamente. Valores regionales estimados por ratios de Paridades de Poder de Compra del Consumidor (Metodología N° 22).\nDeflactación: ingresos expresados en precios de febrero 2026 usando el IPC de Cobertura Nacional. Las tasas de pobreza e indigencia se calculan siempre con las líneas a precios corrientes de cada período.\nPonderador: PONDIH. Fuente: EPH-INDEC. Elaboración propia."
+  },
+  {
+    "objectID": "chat.html",
+    "href": "chat.html",
+    "title": "Consultor EPH",
+    "section": "",
+    "text": "El consultor analiza los microdatos de la EPH-INDEC en tiempo real y te responde con números reales. Las consultas pueden tardar entre 30 y 60 segundos mientras se descargan y procesan los datos.\n\n\n\n\n\n\nNota\n\n\n\n\n\nEjemplos de consultas\n\n¿Cuál fue la tasa de desocupación en el primer trimestre de 2024?\n¿Cómo evolucionó la tasa de empleo entre 2022 y 2024?\n¿Cuál es la tasa de informalidad laboral en el cuarto trimestre de 2023?\n\n\n\n\n\n\n  \n    \n    Consultar\n  \n\n  \n    ⏳ Procesando — descargando microdatos y ejecutando análisis...\n  \n\n  \n\n  \n    \n\n    \n      Ver código R ejecutado\n      \n    \n\n    \n      Ver output del sandbox"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Mercado de Trabajo Argentino",
+    "section": "",
+    "text": "Nota\n\n\n\nÚltimo dato disponible: 3T2025. Los indicadores se calculan sobre el total de 31 aglomerados urbanos relevados por la EPH.\n\n\n\n\n\n56%\n\n\nActividad\n\n\n\n\n52.3%\n\n\nEmpleo\n\n\n\n\n6.6%\n\n\nDesempleo\n\n\n\n\n43.3%\n\n\nInformalidad laboral"
+  },
+  {
+    "objectID": "index.html#panorama-actual",
+    "href": "index.html#panorama-actual",
+    "title": "Mercado de Trabajo Argentino",
+    "section": "",
+    "text": "Nota\n\n\n\nÚltimo dato disponible: 3T2025. Los indicadores se calculan sobre el total de 31 aglomerados urbanos relevados por la EPH.\n\n\n\n\n\n56%\n\n\nActividad\n\n\n\n\n52.3%\n\n\nEmpleo\n\n\n\n\n6.6%\n\n\nDesempleo\n\n\n\n\n43.3%\n\n\nInformalidad laboral"
+  },
+  {
+    "objectID": "index.html#tasa-de-empleo",
+    "href": "index.html#tasa-de-empleo",
+    "title": "Mercado de Trabajo Argentino",
+    "section": "Tasa de empleo",
+    "text": "Tasa de empleo\nProporción de ocupados sobre la Población en Edad de Trabajar (PET, 10 años y más)."
+  },
+  {
+    "objectID": "index.html#tasa-de-desempleo",
+    "href": "index.html#tasa-de-desempleo",
+    "title": "Mercado de Trabajo Argentino",
+    "section": "Tasa de desempleo",
+    "text": "Tasa de desempleo\nProporción de desocupados sobre la Población Económicamente Activa (PEA)."
+  },
+  {
+    "objectID": "index.html#tasa-de-informalidad-laboral",
+    "href": "index.html#tasa-de-informalidad-laboral",
+    "title": "Mercado de Trabajo Argentino",
+    "section": "Tasa de informalidad laboral",
+    "text": "Tasa de informalidad laboral\nProporción de ocupados con empleo informal sobre el total de ocupados con información válida. Variable EMPLEO del diseño de registro. Serie disponible desde el 4° trimestre de 2023, cuando INDEC incorporó la medición directa de informalidad laboral."
+  },
+  {
+    "objectID": "index.html#presión-sobre-el-mercado-de-trabajo",
+    "href": "index.html#presión-sobre-el-mercado-de-trabajo",
+    "title": "Mercado de Trabajo Argentino",
+    "section": "Presión sobre el mercado de trabajo",
+    "text": "Presión sobre el mercado de trabajo\nComposición de la presión sobre el mercado de trabajo (Total = Desocupados + Ocupados demandantes + Ocupados no demandantes disponibles). Expresado como % de la Población Económicamente Activa.\n\n\n\n\n\n\n\nElaboración propia en base a EPH-INDEC. Actualizado trimestralmente vía GitHub Actions."
+  },
+  {
+    "objectID": "paneles.html#marco-conceptual",
+    "href": "paneles.html#marco-conceptual",
+    "title": "Transiciones ocupacionales",
+    "section": "Marco conceptual",
+    "text": "Marco conceptual\nLas matrices de transición permiten analizar la movilidad ocupacional entre períodos: qué proporción de quienes estaban en cada categoría en \\(t_0\\) se encuentran en cada categoría en \\(t_1\\). Se trabaja con población de 18 a 64 años y ocho categorías que combinan posición en el empleo, formalidad y tamaño del establecimiento.\nEl análisis interanual agrega dos métricas de flujo:\n\nTasa de entrada (TE): proporción del stock total que ingresa a una categoría.\nTasa de salida (TS): proporción del stock total que egresa de una categoría.\nBalance: TE − TS. Positivo indica ganancia de participación; negativo, pérdida."
+  },
+  {
+    "objectID": "paneles.html#categorías-ocupacionales",
+    "href": "paneles.html#categorías-ocupacionales",
+    "title": "Transiciones ocupacionales",
+    "section": "Categorías ocupacionales",
+    "text": "Categorías ocupacionales\n\n\n\nCódigo\nCategoría\n\n\n\n\n1\nPatrones +5 empleados\n\n\n2\nTCP calificados\n\n\n3\nAsalariados formales\n\n\n4\nMicroempresarios\n\n\n5\nTCP semi o no calificados\n\n\n6\nAsalariados informales\n\n\n7\nDesocupados\n\n\n8\nInactivos\n\n\n\nLa variable g_ocup combina CAT_OCUP, PP07H, PP04D_COD y PP04C. Los desocupados (ESTADO==2) e inactivos (ESTADO==3) se asignan por estado de actividad con prioridad sobre la categoría ocupacional."
+  },
+  {
+    "objectID": "paneles.html#matrices-de-transición",
+    "href": "paneles.html#matrices-de-transición",
+    "title": "Transiciones ocupacionales",
+    "section": "Matrices de transición",
+    "text": "Matrices de transición\nProbabilidades condicionales de transición entre categorías ocupacionales. Los valores de la diagonal muestran la tasa de permanencia; el resto indica movilidad hacia otras categorías. Filas suman 100%.\n\n\n\n\n\n\n\n\n\nPromedios históricos por grandes períodos\n\n\n\n‹\n\n›\n\n▶ Carrete automático\n\n\n\n\nFilas = posición en t₀ · Columnas = posición en t₁ · Valores = probabilidad de transición\n\n\n\n\nÚltimo período disponible \n\n\n\n\nFilas = posición en t₀ · Columnas = posición en t₁ · Valores = probabilidad de transición\n\n\n\n Alta permanencia (diagonal ≥ 0.50)\n Permanencia media (0.30–0.49)\n Alta salida (&lt;0.30 en diagonal)"
+  },
+  {
+    "objectID": "paneles.html#balance-interanual",
+    "href": "paneles.html#balance-interanual",
+    "title": "Transiciones ocupacionales",
+    "section": "Balance interanual",
+    "text": "Balance interanual\nVariación de la participación en el stock total (TE − TS) por año y categoría. Valores positivos indican que la categoría ganó peso relativo en ese período."
+  },
+  {
+    "objectID": "paneles.html#nota-metodológica",
+    "href": "paneles.html#nota-metodológica",
+    "title": "Transiciones ocupacionales",
+    "section": "Nota metodológica",
+    "text": "Nota metodológica\nLos paneles se construyen apareando observaciones entre trimestres consecutivos mediante CODUSU + NRO_HOGAR + COMPONENTE, con horizonte temporal anual (t₀ y t₁ separados por cuatro trimestres). La ponderación utilizada es PONDERA_t1.\nLos períodos plurianuales acumulan todos los paneles disponibles dentro del bloque, lo que amplía el tamaño efectivo de la muestra y estabiliza las estimaciones en celdas de baja frecuencia (especialmente para patrones y TCP calificados).\nLa variable g_ocup se construye desde microdatos crudos EPH combinando CAT_OCUP (categoría de ocupación), PP07H (registración patronal para asalariados), PP04C (tamaño del establecimiento para patrones) y el dígito de calificación del código CNO (PP04D_COD) para cuenta propia. Los desocupados e inactivos se asignan por ESTADO."
+  }
+]

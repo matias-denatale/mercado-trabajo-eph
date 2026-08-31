@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Hogares y pobreza – Mercado de Trabajo — EPH</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./favicon_matias_de_natale.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-3cfa09d2010059c8592a0b9eb880ecc3.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d5e1199e3d32eb0c99f33aaeb0dbe05e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.12.0/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="site_libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./logos y fotos/logo_navbar.svg" alt="" class="navbar-logo light-content">
+    <img src="./logos y fotos/logo_navbar.svg" alt="" class="navbar-logo dark-content">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./paneles.html"> 
+<span class="menu-text">Paneles</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./hogares.html" aria-current="page"> 
+<span class="menu-text">Hogares</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chat.html"> 
+<span class="menu-text">Consultor IA</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./metodologia.html"> 
+<span class="menu-text">Metodología</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./sobre-mi.html"> 
+<span class="menu-text">Sobre mí</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/matías-de-natale-336745181"> <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:matias_denatale@hotmail.com"> <i class="bi bi-envelope" role="img" aria-label="Email">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/matias-denatale/mercado-trabajo-eph"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul class="collapse">
+  <li><a href="#tasas-de-pobreza-e-indigencia" id="toc-tasas-de-pobreza-e-indigencia" class="nav-link active" data-scroll-target="#tasas-de-pobreza-e-indigencia">Tasas de pobreza e indigencia</a></li>
+  <li><a href="#ingresos-de-los-hogares" id="toc-ingresos-de-los-hogares" class="nav-link" data-scroll-target="#ingresos-de-los-hogares">Ingresos de los hogares</a></li>
+  <li><a href="#política-social" id="toc-política-social" class="nav-link" data-scroll-target="#política-social">Política social</a></li>
+  <li><a href="#composición-de-ingresos" id="toc-composición-de-ingresos" class="nav-link" data-scroll-target="#composición-de-ingresos">Composición de ingresos</a></li>
+  <li><a href="#horas-semanales-de-trabajo" id="toc-horas-semanales-de-trabajo" class="nav-link" data-scroll-target="#horas-semanales-de-trabajo">Horas semanales de trabajo</a></li>
+  <li><a href="#distribución-de-hogares-por-tipo" id="toc-distribución-de-hogares-por-tipo" class="nav-link" data-scroll-target="#distribución-de-hogares-por-tipo">Distribución de hogares por tipo</a></li>
+  <li><a href="#nota-metodológica" id="toc-nota-metodológica" class="nav-link" data-scroll-target="#nota-metodológica">Nota metodológica</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Hogares y pobreza</h1>
+<p class="subtitle lead">Pobreza, grupos de hogar e ingresos — EPH-INDEC</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">31 de agosto de 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ingresos expresados en <strong>precios de febrero 2026</strong> (IPC Nacional). Las tasas de pobreza e indigencia se calculan con las líneas de cada período (canasta a precios corrientes).</p>
+</div>
+</div>
+<hr>
+<section id="tasas-de-pobreza-e-indigencia" class="level2">
+<h2 class="anchored" data-anchor-id="tasas-de-pobreza-e-indigencia">Tasas de pobreza e indigencia</h2>
+<section id="por-tipo-de-hogar-serie-trimestral" class="level3">
+<h3 class="anchored" data-anchor-id="por-tipo-de-hogar-serie-trimestral">Por tipo de hogar — serie trimestral</h3>
+<div class="cell">
+<div id="fig-pobreza" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pobreza-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-5bde9f18a178b2e4c93f" style="width:100%;height:361px;"></div>
+<script type="application/json" data-for="htmlwidget-5bde9f18a178b2e4c93f">{"x":{"visdat":{"58781692bd9":["function () ","plotlyVisDat"]},"cur_data":"58781692bd9","attrs":{"58781692bd9":{"x":{},"y":{},"mode":"lines+markers","hovertemplate":"<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","color":{},"colors":["#2166ac","#d6604d","#74add1","#878787"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"","tickangle":-45,"type":"category","categoryorder":"array","categoryarray":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Tasa de pobreza (%)","ticksuffix":"%","range":[0,80]},"legend":{"orientation":"h","y":-0.29999999999999999},"hovermode":"x unified","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[22.440000000000001,28.57,25.390000000000001,15.779999999999999,16.800000000000001,11.619999999999999,13.15,10.09],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>"],"type":"scatter","name":"Hogares de trabajadores formales","marker":{"color":"rgba(33,102,172,1)","line":{"color":"rgba(33,102,172,1)"}},"textfont":{"color":"rgba(33,102,172,1)"},"error_y":{"color":"rgba(33,102,172,1)"},"error_x":{"color":"rgba(33,102,172,1)"},"line":{"color":"rgba(33,102,172,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[60.609999999999999,72.870000000000005,69.489999999999995,57.939999999999998,53.210000000000001,49.439999999999998,47,41.390000000000001],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>"],"type":"scatter","name":"Hogares de trabajadores informales","marker":{"color":"rgba(214,96,77,1)","line":{"color":"rgba(214,96,77,1)"}},"textfont":{"color":"rgba(214,96,77,1)"},"error_y":{"color":"rgba(214,96,77,1)"},"error_x":{"color":"rgba(214,96,77,1)"},"line":{"color":"rgba(214,96,77,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[34.619999999999997,45.829999999999998,45.07,27.920000000000002,25.5,14.949999999999999,18.620000000000001,13.91],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>"],"type":"scatter","name":"Hogares mixtos","marker":{"color":"rgba(116,173,209,1)","line":{"color":"rgba(116,173,209,1)"}},"textfont":{"color":"rgba(116,173,209,1)"},"error_y":{"color":"rgba(116,173,209,1)"},"error_x":{"color":"rgba(116,173,209,1)"},"line":{"color":"rgba(116,173,209,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[27.77,39.740000000000002,38.649999999999999,25,25.210000000000001,23.969999999999999,27,20.41],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>"],"type":"scatter","name":"Hogares sin ocupados","marker":{"color":"rgba(135,135,135,1)","line":{"color":"rgba(135,135,135,1)"}},"textfont":{"color":"rgba(135,135,135,1)"},"error_y":{"color":"rgba(135,135,135,1)"},"error_x":{"color":"rgba(135,135,135,1)"},"line":{"color":"rgba(135,135,135,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-pobreza-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="tasa-de-indigencia-por-tipo-de-hogar" class="level3">
+<h3 class="anchored" data-anchor-id="tasa-de-indigencia-por-tipo-de-hogar">Tasa de indigencia por tipo de hogar</h3>
+<div class="cell">
+<div id="fig-indigencia" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-indigencia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-3971039612e7780a3a16" style="width:100%;height:361px;"></div>
+<script type="application/json" data-for="htmlwidget-3971039612e7780a3a16">{"x":{"visdat":{"58782228f41":["function () ","plotlyVisDat"]},"cur_data":"58782228f41","attrs":{"58782228f41":{"x":{},"y":{},"mode":"lines+markers","hovertemplate":"<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","color":{},"colors":["#2166ac","#d6604d","#74add1","#878787"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"","tickangle":-45,"type":"category","categoryorder":"array","categoryarray":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Tasa de indigencia (%)","ticksuffix":"%","range":[0,40]},"legend":{"orientation":"h","y":-0.29999999999999999},"hovermode":"x unified","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[3.5099999999999998,5.3399999999999999,5.1699999999999999,2.04,1.8100000000000001,0.92000000000000004,1.4099999999999999,1.02],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>"],"type":"scatter","name":"Hogares de trabajadores formales","marker":{"color":"rgba(33,102,172,1)","line":{"color":"rgba(33,102,172,1)"}},"textfont":{"color":"rgba(33,102,172,1)"},"error_y":{"color":"rgba(33,102,172,1)"},"error_x":{"color":"rgba(33,102,172,1)"},"line":{"color":"rgba(33,102,172,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[23.719999999999999,33.240000000000002,27.66,14.98,12.98,11.18,9.9800000000000004,10.029999999999999],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>"],"type":"scatter","name":"Hogares de trabajadores informales","marker":{"color":"rgba(214,96,77,1)","line":{"color":"rgba(214,96,77,1)"}},"textfont":{"color":"rgba(214,96,77,1)"},"error_y":{"color":"rgba(214,96,77,1)"},"error_x":{"color":"rgba(214,96,77,1)"},"line":{"color":"rgba(214,96,77,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[4.4500000000000002,8.3499999999999996,4.4400000000000004,3.5899999999999999,1.6599999999999999,0.98999999999999999,1.21,1.1899999999999999],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>"],"type":"scatter","name":"Hogares mixtos","marker":{"color":"rgba(116,173,209,1)","line":{"color":"rgba(116,173,209,1)"}},"textfont":{"color":"rgba(116,173,209,1)"},"error_y":{"color":"rgba(116,173,209,1)"},"error_x":{"color":"rgba(116,173,209,1)"},"line":{"color":"rgba(116,173,209,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[11.15,17.940000000000001,13.699999999999999,10.41,8.9100000000000001,10.539999999999999,12.460000000000001,8.5800000000000001],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>"],"type":"scatter","name":"Hogares sin ocupados","marker":{"color":"rgba(135,135,135,1)","line":{"color":"rgba(135,135,135,1)"}},"textfont":{"color":"rgba(135,135,135,1)"},"error_y":{"color":"rgba(135,135,135,1)"},"error_x":{"color":"rgba(135,135,135,1)"},"line":{"color":"rgba(135,135,135,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-indigencia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="último-período-2025t3" class="level3">
+<h3 class="anchored" data-anchor-id="último-período-2025t3">Último período: 2025T3</h3>
+<div class="cell">
+<div id="fig-ultimo" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ultimo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-0913db42f3292f710fb7" style="width:100%;height:361px;"></div>
+<script type="application/json" data-for="htmlwidget-0913db42f3292f710fb7">{"x":{"visdat":{"58783e6536ee":["function () ","plotlyVisDat"],"587818bb680a":["function () ","data"],"5878572eff":["function () ","data"]},"cur_data":"5878572eff","attrs":{"587818bb680a":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"bar","name":"Pobreza","marker":{"color":["#2166ac","#d6604d","#74add1","#878787"]},"showlegend":false,"text":{},"textposition":"outside","hovertemplate":{},"inherit":true},"5878572eff":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"bar","name":"Indigencia","marker":{"color":"white","line":{"color":["#2166ac","#d6604d","#74add1","#878787"],"width":1.5},"pattern":{"shape":"x","fgcolor":["#2166ac","#d6604d","#74add1","#878787"],"bgcolor":"white","size":5,"solidity":0.40000000000000002}},"showlegend":false,"text":{},"textposition":"outside","hovertemplate":{},"inherit":true},"5878572eff.1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":"Leyenda","y":0,"type":"bar","name":"Pobreza","xaxis":"x2","showlegend":true,"hoverinfo":"none","marker":{"color":"grey"},"inherit":true},"5878572eff.2":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":"Leyenda","y":0,"type":"bar","name":"Indigencia","xaxis":"x2","showlegend":true,"hoverinfo":"none","marker":{"color":"white","line":{"color":"grey","width":1.5},"pattern":{"shape":"x","fgcolor":"grey","bgcolor":"white","size":5}},"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"group","bargap":0.14999999999999999,"xaxis":{"domain":[0,1],"automargin":true,"title":"","type":"category","categoryorder":"array","categoryarray":["Hogares de<br>trabajadores<br>formales","Hogares de<br>trabajadores<br>informales","Hogares mixtos","Hogares sin ocupados"]},"xaxis2":{"overlaying":"x","showticklabels":false,"showgrid":false,"zeroline":false,"type":"category","categoryorder":"array","categoryarray":["Leyenda"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"(%)","ticksuffix":"%","range":[0,100]},"legend":{"orientation":"h","y":-0.34999999999999998,"font":{"size":11}},"showlegend":true,"hovermode":"closest"},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["Hogares de<br>trabajadores<br>formales","Hogares de<br>trabajadores<br>informales","Hogares mixtos","Hogares sin ocupados"],"y":[10.09,41.390000000000001,13.91,20.41],"type":"bar","name":"Pobreza","marker":{"color":["#2166ac","#d6604d","#74add1","#878787"],"line":{"color":"rgba(31,119,180,1)"}},"showlegend":false,"text":["10.1%","41.4%","13.9%","20.4%"],"textposition":["outside","outside","outside","outside"],"hovertemplate":["<b>Hogares de trabajadores formales<\/b><br>Pobreza: %{y:.1f}%<extra><\/extra>","<b>Hogares de trabajadores informales<\/b><br>Pobreza: %{y:.1f}%<extra><\/extra>","<b>Hogares mixtos<\/b><br>Pobreza: %{y:.1f}%<extra><\/extra>","<b>Hogares sin ocupados<\/b><br>Pobreza: %{y:.1f}%<extra><\/extra>"],"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Hogares de<br>trabajadores<br>formales","Hogares de<br>trabajadores<br>informales","Hogares mixtos","Hogares sin ocupados"],"y":[1.02,10.029999999999999,1.1899999999999999,8.5800000000000001],"type":"bar","name":"Indigencia","marker":{"color":"white","line":{"color":["#2166ac","#d6604d","#74add1","#878787"],"width":1.5},"pattern":{"shape":"x","fgcolor":["#2166ac","#d6604d","#74add1","#878787"],"bgcolor":"white","size":5,"solidity":0.40000000000000002}},"showlegend":false,"text":["1%","10%","1.2%","8.6%"],"textposition":["outside","outside","outside","outside"],"hovertemplate":["<b>Hogares de trabajadores formales<\/b><br>Indigencia: %{y:.1f}%<extra><\/extra>","<b>Hogares de trabajadores informales<\/b><br>Indigencia: %{y:.1f}%<extra><\/extra>","<b>Hogares mixtos<\/b><br>Indigencia: %{y:.1f}%<extra><\/extra>","<b>Hogares sin ocupados<\/b><br>Indigencia: %{y:.1f}%<extra><\/extra>"],"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Leyenda"],"y":[0],"type":"bar","name":"Pobreza","xaxis":"x2","showlegend":true,"hoverinfo":"none","marker":{"color":"grey","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"yaxis":"y","frame":null},{"x":["Leyenda"],"y":[0],"type":"bar","name":"Indigencia","xaxis":"x2","showlegend":true,"hoverinfo":"none","marker":{"color":"white","line":{"color":"grey","width":1.5},"pattern":{"shape":"x","fgcolor":"grey","bgcolor":"white","size":5}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ultimo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3
+</figcaption>
+</figure>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="ingresos-de-los-hogares" class="level2">
+<h2 class="anchored" data-anchor-id="ingresos-de-los-hogares">Ingresos de los hogares</h2>
+<section id="ingreso-per-cápita-familiar-ipcf-precios-de-febrero-2026" class="level3">
+<h3 class="anchored" data-anchor-id="ingreso-per-cápita-familiar-ipcf-precios-de-febrero-2026">Ingreso per cápita familiar (IPCF) — precios de febrero 2026</h3>
+<div class="cell">
+<div id="fig-ipcf" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ipcf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-6ae7b6a2d96ecb59d308" style="width:100%;height:361px;"></div>
+<script type="application/json" data-for="htmlwidget-6ae7b6a2d96ecb59d308">{"x":{"visdat":{"58784c9a2001":["function () ","plotlyVisDat"]},"cur_data":"58784c9a2001","attrs":{"58784c9a2001":{"x":{},"y":{},"mode":"lines+markers","hovertemplate":"<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","color":{},"colors":["#2166ac","#d6604d","#74add1","#878787"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"","tickangle":-45,"type":"category","categoryorder":"array","categoryarray":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"IPCF promedio ($)","tickprefix":"$","tickformat":",.0f"},"legend":{"orientation":"h","y":-0.29999999999999999},"hovermode":"x unified","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[909789,888368,852065,1043864,1032818,1163647,1050338,1215638],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>"],"type":"scatter","name":"Hogares de trabajadores formales","marker":{"color":"rgba(33,102,172,1)","line":{"color":"rgba(33,102,172,1)"}},"textfont":{"color":"rgba(33,102,172,1)"},"error_y":{"color":"rgba(33,102,172,1)"},"error_x":{"color":"rgba(33,102,172,1)"},"line":{"color":"rgba(33,102,172,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[424482,349341,364593,460570,474095,500038,511806,530201],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>"],"type":"scatter","name":"Hogares de trabajadores informales","marker":{"color":"rgba(214,96,77,1)","line":{"color":"rgba(214,96,77,1)"}},"textfont":{"color":"rgba(214,96,77,1)"},"error_y":{"color":"rgba(214,96,77,1)"},"error_x":{"color":"rgba(214,96,77,1)"},"line":{"color":"rgba(214,96,77,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[646798,575268,548218,703778,671007,835904,747631,781339],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>"],"type":"scatter","name":"Hogares mixtos","marker":{"color":"rgba(116,173,209,1)","line":{"color":"rgba(116,173,209,1)"}},"textfont":{"color":"rgba(116,173,209,1)"},"error_y":{"color":"rgba(116,173,209,1)"},"error_x":{"color":"rgba(116,173,209,1)"},"line":{"color":"rgba(116,173,209,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[589686,496142,481113,659886,637077,701907,610024,755597],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>"],"type":"scatter","name":"Hogares sin ocupados","marker":{"color":"rgba(135,135,135,1)","line":{"color":"rgba(135,135,135,1)"}},"textfont":{"color":"rgba(135,135,135,1)"},"error_y":{"color":"rgba(135,135,135,1)"},"error_x":{"color":"rgba(135,135,135,1)"},"line":{"color":"rgba(135,135,135,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ipcf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="ingreso-total-familiar-itf-precios-de-febrero-2026" class="level3">
+<h3 class="anchored" data-anchor-id="ingreso-total-familiar-itf-precios-de-febrero-2026">Ingreso total familiar (ITF) — precios de febrero 2026</h3>
+<div class="cell">
+<div id="fig-itf" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-itf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-379cd1ae030f492afdeb" style="width:100%;height:361px;"></div>
+<script type="application/json" data-for="htmlwidget-379cd1ae030f492afdeb">{"x":{"visdat":{"5878160361b2":["function () ","plotlyVisDat"]},"cur_data":"5878160361b2","attrs":{"5878160361b2":{"x":{},"y":{},"mode":"lines+markers","hovertemplate":"<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","color":{},"colors":["#2166ac","#d6604d","#74add1","#878787"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"","tickangle":-45,"type":"category","categoryorder":"array","categoryarray":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"ITF promedio ($)","tickprefix":"$","tickformat":",.0f"},"legend":{"orientation":"h","y":-0.29999999999999999},"hovermode":"x unified","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[2167164,2113355,2009017,2557290,2459661,2804151,2609202,2928359],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>"],"type":"scatter","name":"Hogares de trabajadores formales","marker":{"color":"rgba(33,102,172,1)","line":{"color":"rgba(33,102,172,1)"}},"textfont":{"color":"rgba(33,102,172,1)"},"error_y":{"color":"rgba(33,102,172,1)"},"error_x":{"color":"rgba(33,102,172,1)"},"line":{"color":"rgba(33,102,172,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[1075326,895031,923851,1154561,1186300,1308812,1331353,1368561],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>"],"type":"scatter","name":"Hogares de trabajadores informales","marker":{"color":"rgba(214,96,77,1)","line":{"color":"rgba(214,96,77,1)"}},"textfont":{"color":"rgba(214,96,77,1)"},"error_y":{"color":"rgba(214,96,77,1)"},"error_x":{"color":"rgba(214,96,77,1)"},"line":{"color":"rgba(214,96,77,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[2253741,2010078,1976514,2362726,2297366,2841044,2636036,2718912],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>"],"type":"scatter","name":"Hogares mixtos","marker":{"color":"rgba(116,173,209,1)","line":{"color":"rgba(116,173,209,1)"}},"textfont":{"color":"rgba(116,173,209,1)"},"error_y":{"color":"rgba(116,173,209,1)"},"error_x":{"color":"rgba(116,173,209,1)"},"line":{"color":"rgba(116,173,209,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[908220,767615,739973,1008502,984741,1091093,961490,1165722],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: $%{y:,.0f}<extra><\/extra>"],"type":"scatter","name":"Hogares sin ocupados","marker":{"color":"rgba(135,135,135,1)","line":{"color":"rgba(135,135,135,1)"}},"textfont":{"color":"rgba(135,135,135,1)"},"error_y":{"color":"rgba(135,135,135,1)"},"error_x":{"color":"rgba(135,135,135,1)"},"line":{"color":"rgba(135,135,135,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-itf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5
+</figcaption>
+</figure>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="política-social" class="level2">
+<h2 class="anchored" data-anchor-id="política-social">Política social</h2>
+<section id="hogares-con-al-menos-una-fuente-de-política-social" class="level3">
+<h3 class="anchored" data-anchor-id="hogares-con-al-menos-una-fuente-de-política-social">Hogares con al menos una fuente de política social (%)</h3>
+<div class="cell">
+<div id="fig-social" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-social-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-db954733a9c4ac1c005c" style="width:100%;height:361px;"></div>
+<script type="application/json" data-for="htmlwidget-db954733a9c4ac1c005c">{"x":{"visdat":{"58781b5d730b":["function () ","plotlyVisDat"]},"cur_data":"58781b5d730b","attrs":{"58781b5d730b":{"x":{},"y":{},"mode":"lines+markers","hovertemplate":"<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","color":{},"colors":["#2166ac","#d6604d","#74add1","#878787"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"","tickangle":-45,"type":"category","categoryorder":"array","categoryarray":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Hogares con política social (%)","ticksuffix":"%","range":[0,100]},"legend":{"orientation":"h","y":-0.29999999999999999},"hovermode":"x unified","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[18.949999999999999,19.210000000000001,18.449999999999999,18.120000000000001,17.850000000000001,20.59,19.09,17.93],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>"],"type":"scatter","name":"Hogares de trabajadores formales","marker":{"color":"rgba(33,102,172,1)","line":{"color":"rgba(33,102,172,1)"}},"textfont":{"color":"rgba(33,102,172,1)"},"error_y":{"color":"rgba(33,102,172,1)"},"error_x":{"color":"rgba(33,102,172,1)"},"line":{"color":"rgba(33,102,172,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[31.469999999999999,31.18,33.700000000000003,33.310000000000002,31.149999999999999,33.859999999999999,32.280000000000001,31.809999999999999],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>"],"type":"scatter","name":"Hogares de trabajadores informales","marker":{"color":"rgba(214,96,77,1)","line":{"color":"rgba(214,96,77,1)"}},"textfont":{"color":"rgba(214,96,77,1)"},"error_y":{"color":"rgba(214,96,77,1)"},"error_x":{"color":"rgba(214,96,77,1)"},"line":{"color":"rgba(214,96,77,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[21.609999999999999,21.23,18.390000000000001,20.75,22.16,18.82,17.440000000000001,23.68],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>"],"type":"scatter","name":"Hogares mixtos","marker":{"color":"rgba(116,173,209,1)","line":{"color":"rgba(116,173,209,1)"}},"textfont":{"color":"rgba(116,173,209,1)"},"error_y":{"color":"rgba(116,173,209,1)"},"error_x":{"color":"rgba(116,173,209,1)"},"line":{"color":"rgba(116,173,209,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[85.150000000000006,83.109999999999999,83.010000000000005,82.760000000000005,84.239999999999995,84.019999999999996,80.689999999999998,84.010000000000005],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>"],"type":"scatter","name":"Hogares sin ocupados","marker":{"color":"rgba(135,135,135,1)","line":{"color":"rgba(135,135,135,1)"}},"textfont":{"color":"rgba(135,135,135,1)"},"error_y":{"color":"rgba(135,135,135,1)"},"error_x":{"color":"rgba(135,135,135,1)"},"line":{"color":"rgba(135,135,135,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-social-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;6
+</figcaption>
+</figure>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="composición-de-ingresos" class="level2">
+<h2 class="anchored" data-anchor-id="composición-de-ingresos">Composición de ingresos</h2>
+<p>El ingreso de los hogares proviene de dos fuentes: <strong>laboral</strong> (salarios, ganancias de la ocupación) y <strong>no laboral</strong> (jubilaciones, pensiones, transferencias, rentas).</p>
+<section id="del-ingreso-del-hogar-que-es-laboral" class="level3">
+<h3 class="anchored" data-anchor-id="del-ingreso-del-hogar-que-es-laboral">% del ingreso del hogar que es laboral</h3>
+<div class="cell">
+<div id="fig-comp-laboral" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-comp-laboral-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-ec4295e05f0d2fb99762" style="width:100%;height:361px;"></div>
+<script type="application/json" data-for="htmlwidget-ec4295e05f0d2fb99762">{"x":{"visdat":{"587838c7257e":["function () ","plotlyVisDat"]},"cur_data":"587838c7257e","attrs":{"587838c7257e":{"x":{},"y":{},"mode":"lines+markers","hovertemplate":"<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","color":{},"colors":["#2166ac","#d6604d","#74add1","#878787"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"","tickangle":-45,"type":"category","categoryorder":"array","categoryarray":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Ingreso laboral (% del ingreso total del hogar)","ticksuffix":"%","range":[0,100]},"legend":{"orientation":"h","y":-0.29999999999999999},"hovermode":"x unified","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[89.5,86.200000000000003,91,90.299999999999997,91.200000000000003,89.5,91.299999999999997,90.299999999999997],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>"],"type":"scatter","name":"Hogares de trabajadores formales","marker":{"color":"rgba(33,102,172,1)","line":{"color":"rgba(33,102,172,1)"}},"textfont":{"color":"rgba(33,102,172,1)"},"error_y":{"color":"rgba(33,102,172,1)"},"error_x":{"color":"rgba(33,102,172,1)"},"line":{"color":"rgba(33,102,172,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[71.400000000000006,67.299999999999997,67.900000000000006,67.599999999999994,70.200000000000003,69.5,72.799999999999997,70.400000000000006],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>"],"type":"scatter","name":"Hogares de trabajadores informales","marker":{"color":"rgba(214,96,77,1)","line":{"color":"rgba(214,96,77,1)"}},"textfont":{"color":"rgba(214,96,77,1)"},"error_y":{"color":"rgba(214,96,77,1)"},"error_x":{"color":"rgba(214,96,77,1)"},"line":{"color":"rgba(214,96,77,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[90.599999999999994,90.099999999999994,91.599999999999994,89.400000000000006,89.700000000000003,91,91.5,90.099999999999994],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>"],"type":"scatter","name":"Hogares mixtos","marker":{"color":"rgba(116,173,209,1)","line":{"color":"rgba(116,173,209,1)"}},"textfont":{"color":"rgba(116,173,209,1)"},"error_y":{"color":"rgba(116,173,209,1)"},"error_x":{"color":"rgba(116,173,209,1)"},"line":{"color":"rgba(116,173,209,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[1.1000000000000001,2,1.5,0.59999999999999998,1.2,1.1000000000000001,1.8,1.6000000000000001],"mode":"lines+markers","hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}% laboral<extra><\/extra>"],"type":"scatter","name":"Hogares sin ocupados","marker":{"color":"rgba(135,135,135,1)","line":{"color":"rgba(135,135,135,1)"}},"textfont":{"color":"rgba(135,135,135,1)"},"error_y":{"color":"rgba(135,135,135,1)"},"error_x":{"color":"rgba(135,135,135,1)"},"line":{"color":"rgba(135,135,135,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-comp-laboral-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7
+</figcaption>
+</figure>
+</div>
+</div>
+<p><em>Los hogares sin ocupados tienen ingreso laboral prácticamente nulo (cercano a 0%). Sus ingresos provienen de jubilaciones, pensiones y transferencias sociales.</em></p>
+</section>
+<section id="cuadro-5-hogares-sin-ocupados-composición-del-ingreso-no-laboral-por-fuente-defl.-a-ene-2026" class="level3">
+<h3 class="anchored" data-anchor-id="cuadro-5-hogares-sin-ocupados-composición-del-ingreso-no-laboral-por-fuente-defl.-a-ene-2026">Cuadro 5 — Hogares sin ocupados: composición del ingreso no laboral por fuente (defl. a ene 2026)</h3>
+<div class="cell">
+<div id="fig-comp-nolab" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-comp-nolab-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">periodo</th>
+<th style="text-align: right;">Categoría</th>
+<th style="text-align: right;">Monto prom.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2023T4</td>
+<td style="text-align: right;">Jubilación contributiva</td>
+<td style="text-align: right;">522.835,6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023T4</td>
+<td style="text-align: right;">Jubilación moratoria</td>
+<td style="text-align: right;">104.075,1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023T4</td>
+<td style="text-align: right;">Seg. desempleo / indemnización</td>
+<td style="text-align: right;">17.820,0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023T4</td>
+<td style="text-align: right;">Transferencias sociales y planes</td>
+<td style="text-align: right;">0,0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023T4</td>
+<td style="text-align: right;">Rentas y ganancias</td>
+<td style="text-align: right;">25.593,0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023T4</td>
+<td style="text-align: right;">Otros (becas, alimentos, etc.)</td>
+<td style="text-align: right;">99.138,5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023T4</td>
+<td style="text-align: right;">Total no laboral</td>
+<td style="text-align: right;">868.286,0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024T1</td>
+<td style="text-align: right;">Jubilación contributiva</td>
+<td style="text-align: right;">408.463,1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024T1</td>
+<td style="text-align: right;">Jubilación moratoria</td>
+<td style="text-align: right;">84.037,8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024T1</td>
+<td style="text-align: right;">Seg. desempleo / indemnización</td>
+<td style="text-align: right;">9.007,1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024T1</td>
+<td style="text-align: right;">Transferencias sociales y planes</td>
+<td style="text-align: right;">0,0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024T1</td>
+<td style="text-align: right;">Rentas y ganancias</td>
+<td style="text-align: right;">24.819,6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024T1</td>
+<td style="text-align: right;">Otros (becas, alimentos, etc.)</td>
+<td style="text-align: right;">41.116,1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024T1</td>
+<td style="text-align: right;">Total no laboral</td>
+<td style="text-align: right;">712.065,3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024T2</td>
+<td style="text-align: right;">Jubilación contributiva</td>
+<td style="text-align: right;">421.606,1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024T2</td>
+<td style="text-align: right;">Jubilación moratoria</td>
+<td style="text-align: right;">88.885,6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024T2</td>
+<td style="text-align: right;">Seg. desempleo / indemnización</td>
+<td style="text-align: right;">5.677,0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024T2</td>
+<td style="text-align: right;">Transferencias sociales y planes</td>
+<td style="text-align: right;">0,0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024T2</td>
+<td style="text-align: right;">Rentas y ganancias</td>
+<td style="text-align: right;">31.447,6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024T2</td>
+<td style="text-align: right;">Otros (becas, alimentos, etc.)</td>
+<td style="text-align: right;">53.022,4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024T2</td>
+<td style="text-align: right;">Total no laboral</td>
+<td style="text-align: right;">690.906,8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024T3</td>
+<td style="text-align: right;">Jubilación contributiva</td>
+<td style="text-align: right;">514.192,4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024T3</td>
+<td style="text-align: right;">Jubilación moratoria</td>
+<td style="text-align: right;">116.739,9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024T3</td>
+<td style="text-align: right;">Seg. desempleo / indemnización</td>
+<td style="text-align: right;">6.241,6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024T3</td>
+<td style="text-align: right;">Transferencias sociales y planes</td>
+<td style="text-align: right;">0,0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024T3</td>
+<td style="text-align: right;">Rentas y ganancias</td>
+<td style="text-align: right;">29.070,8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024T3</td>
+<td style="text-align: right;">Otros (becas, alimentos, etc.)</td>
+<td style="text-align: right;">84.385,6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024T3</td>
+<td style="text-align: right;">Total no laboral</td>
+<td style="text-align: right;">942.864,9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024T4</td>
+<td style="text-align: right;">Jubilación contributiva</td>
+<td style="text-align: right;">591.050,1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024T4</td>
+<td style="text-align: right;">Jubilación moratoria</td>
+<td style="text-align: right;">143.066,4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024T4</td>
+<td style="text-align: right;">Seg. desempleo / indemnización</td>
+<td style="text-align: right;">21.058,6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024T4</td>
+<td style="text-align: right;">Transferencias sociales y planes</td>
+<td style="text-align: right;">0,0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024T4</td>
+<td style="text-align: right;">Rentas y ganancias</td>
+<td style="text-align: right;">26.544,3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2024T4</td>
+<td style="text-align: right;">Otros (becas, alimentos, etc.)</td>
+<td style="text-align: right;">74.328,4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2024T4</td>
+<td style="text-align: right;">Total no laboral</td>
+<td style="text-align: right;">966.589,9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2025T1</td>
+<td style="text-align: right;">Jubilación contributiva</td>
+<td style="text-align: right;">599.828,8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2025T1</td>
+<td style="text-align: right;">Jubilación moratoria</td>
+<td style="text-align: right;">126.578,2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2025T1</td>
+<td style="text-align: right;">Seg. desempleo / indemnización</td>
+<td style="text-align: right;">11.561,5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2025T1</td>
+<td style="text-align: right;">Transferencias sociales y planes</td>
+<td style="text-align: right;">0,0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2025T1</td>
+<td style="text-align: right;">Rentas y ganancias</td>
+<td style="text-align: right;">41.548,6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2025T1</td>
+<td style="text-align: right;">Otros (becas, alimentos, etc.)</td>
+<td style="text-align: right;">60.377,7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2025T1</td>
+<td style="text-align: right;">Total no laboral</td>
+<td style="text-align: right;">1.039.217,4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2025T2</td>
+<td style="text-align: right;">Jubilación contributiva</td>
+<td style="text-align: right;">559.139,4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2025T2</td>
+<td style="text-align: right;">Jubilación moratoria</td>
+<td style="text-align: right;">119.682,3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2025T2</td>
+<td style="text-align: right;">Seg. desempleo / indemnización</td>
+<td style="text-align: right;">37.187,3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2025T2</td>
+<td style="text-align: right;">Transferencias sociales y planes</td>
+<td style="text-align: right;">0,0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2025T2</td>
+<td style="text-align: right;">Rentas y ganancias</td>
+<td style="text-align: right;">44.526,5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2025T2</td>
+<td style="text-align: right;">Otros (becas, alimentos, etc.)</td>
+<td style="text-align: right;">80.324,4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2025T2</td>
+<td style="text-align: right;">Total no laboral</td>
+<td style="text-align: right;">876.295,2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2025T3</td>
+<td style="text-align: right;">Jubilación contributiva</td>
+<td style="text-align: right;">601.844,6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2025T3</td>
+<td style="text-align: right;">Jubilación moratoria</td>
+<td style="text-align: right;">125.598,2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2025T3</td>
+<td style="text-align: right;">Seg. desempleo / indemnización</td>
+<td style="text-align: right;">41.339,4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2025T3</td>
+<td style="text-align: right;">Transferencias sociales y planes</td>
+<td style="text-align: right;">0,0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2025T3</td>
+<td style="text-align: right;">Rentas y ganancias</td>
+<td style="text-align: right;">38.427,9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2025T3</td>
+<td style="text-align: right;">Otros (becas, alimentos, etc.)</td>
+<td style="text-align: right;">90.244,0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2025T3</td>
+<td style="text-align: right;">Total no laboral</td>
+<td style="text-align: right;">1.056.086,9</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-comp-nolab-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;8
+</figcaption>
+</figure>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="horas-semanales-de-trabajo" class="level2">
+<h2 class="anchored" data-anchor-id="horas-semanales-de-trabajo">Horas semanales de trabajo</h2>
+<section id="cuadro-2b-horas-semanales-promedio-de-los-ocupados-por-tipo-de-hogar" class="level3">
+<h3 class="anchored" data-anchor-id="cuadro-2b-horas-semanales-promedio-de-los-ocupados-por-tipo-de-hogar">Cuadro 2b — Horas semanales promedio de los ocupados, por tipo de hogar</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 38%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Categoría</th>
+<th style="text-align: right;">2023T4</th>
+<th style="text-align: right;">2024T1</th>
+<th style="text-align: right;">2024T2</th>
+<th style="text-align: right;">2024T3</th>
+<th style="text-align: right;">2024T4</th>
+<th style="text-align: right;">2025T1</th>
+<th style="text-align: right;">2025T2</th>
+<th style="text-align: right;">2025T3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Hogares de trabajadores formales</td>
+<td style="text-align: right;">45.9</td>
+<td style="text-align: right;">43.4</td>
+<td style="text-align: right;">41.9</td>
+<td style="text-align: right;">42.8</td>
+<td style="text-align: right;">45.0</td>
+<td style="text-align: right;">42.6</td>
+<td style="text-align: right;">42.6</td>
+<td style="text-align: right;">46.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hogares de trabajadores informales</td>
+<td style="text-align: right;">39.6</td>
+<td style="text-align: right;">40.9</td>
+<td style="text-align: right;">37.4</td>
+<td style="text-align: right;">39.2</td>
+<td style="text-align: right;">42.3</td>
+<td style="text-align: right;">44.3</td>
+<td style="text-align: right;">39.5</td>
+<td style="text-align: right;">44.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hogares mixtos</td>
+<td style="text-align: right;">40.7</td>
+<td style="text-align: right;">37.4</td>
+<td style="text-align: right;">41.4</td>
+<td style="text-align: right;">37.2</td>
+<td style="text-align: right;">38.8</td>
+<td style="text-align: right;">39.4</td>
+<td style="text-align: right;">37.3</td>
+<td style="text-align: right;">39.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hogares sin ocupados</td>
+<td style="text-align: right;">54.3</td>
+<td style="text-align: right;">58.9</td>
+<td style="text-align: right;">52.4</td>
+<td style="text-align: right;">57.4</td>
+<td style="text-align: right;">73.2</td>
+<td style="text-align: right;">60.8</td>
+<td style="text-align: right;">58.7</td>
+<td style="text-align: right;">58.3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="distribución-de-hogares-por-tipo" class="level2">
+<h2 class="anchored" data-anchor-id="distribución-de-hogares-por-tipo">Distribución de hogares por tipo</h2>
+<div class="cell">
+<div id="fig-peso" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-peso-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-820dedd4d8d18d4fb437" style="width:100%;height:361px;"></div>
+<script type="application/json" data-for="htmlwidget-820dedd4d8d18d4fb437">{"x":{"visdat":{"5878e5c723b":["function () ","plotlyVisDat"]},"cur_data":"5878e5c723b","attrs":{"5878e5c723b":{"x":{},"y":{},"hovertemplate":"<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","color":{},"colors":["#2166ac","#d6604d","#74add1","#878787"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"stack","xaxis":{"domain":[0,1],"automargin":true,"title":"","tickangle":-45,"type":"category","categoryorder":"array","categoryarray":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"% del total de hogares","ticksuffix":"%","range":[0,100]},"legend":{"orientation":"h","y":-0.29999999999999999},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[41.016524754749206,41.6599702741483,41.903529653892271,41.832019461167171,41.862813150754086,41.611283900639364,39.911982447051507,41.304034155328381],"hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>"],"type":"bar","name":"Hogares de trabajadores formales","marker":{"color":"rgba(33,102,172,1)","line":{"color":"rgba(33,102,172,1)"}},"textfont":{"color":"rgba(33,102,172,1)"},"error_y":{"color":"rgba(33,102,172,1)"},"error_x":{"color":"rgba(33,102,172,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[24.441920237381744,24.484598626835741,23.795824288301478,23.568499571333014,23.741811742489418,24.804504909024942,23.969792306305195,24.930744429200953],"hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>"],"type":"bar","name":"Hogares de trabajadores informales","marker":{"color":"rgba(214,96,77,1)","line":{"color":"rgba(214,96,77,1)"}},"textfont":{"color":"rgba(214,96,77,1)"},"error_y":{"color":"rgba(214,96,77,1)"},"error_x":{"color":"rgba(214,96,77,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[15.304705836049761,13.074331440279815,13.680811152303345,14.451465240289044,14.880395489947155,13.579160720904554,14.423569364187539,14.191472859578111],"hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>"],"type":"bar","name":"Hogares mixtos","marker":{"color":"rgba(116,173,209,1)","line":{"color":"rgba(116,173,209,1)"}},"textfont":{"color":"rgba(116,173,209,1)"},"error_y":{"color":"rgba(116,173,209,1)"},"error_x":{"color":"rgba(116,173,209,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2023T4","2024T1","2024T2","2024T3","2024T4","2025T1","2025T2","2025T3"],"y":[19.236849171819287,20.781099658736146,20.619834905502902,20.148015727210776,19.514979616809342,20.005050469431144,21.694655882455763,19.573748555892553],"hovertemplate":["<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>","<b>%{fullData.name}<\/b><br>%{x}: %{y:.1f}%<extra><\/extra>"],"type":"bar","name":"Hogares sin ocupados","marker":{"color":"rgba(135,135,135,1)","line":{"color":"rgba(135,135,135,1)"}},"textfont":{"color":"rgba(135,135,135,1)"},"error_y":{"color":"rgba(135,135,135,1)"},"error_x":{"color":"rgba(135,135,135,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-peso-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;9
+</figcaption>
+</figure>
+</div>
+</div>
+<section id="cuadro-7-peso-de-cada-tipo-de-hogar-en-el-total" class="level3">
+<h3 class="anchored" data-anchor-id="cuadro-7-peso-de-cada-tipo-de-hogar-en-el-total">Cuadro 7 — Peso de cada tipo de hogar en el total (%)</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 38%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Categoría</th>
+<th style="text-align: right;">2023T4</th>
+<th style="text-align: right;">2024T1</th>
+<th style="text-align: right;">2024T2</th>
+<th style="text-align: right;">2024T3</th>
+<th style="text-align: right;">2024T4</th>
+<th style="text-align: right;">2025T1</th>
+<th style="text-align: right;">2025T2</th>
+<th style="text-align: right;">2025T3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Hogares de trabajadores formales</td>
+<td style="text-align: right;">41.0</td>
+<td style="text-align: right;">41.7</td>
+<td style="text-align: right;">41.9</td>
+<td style="text-align: right;">41.8</td>
+<td style="text-align: right;">41.9</td>
+<td style="text-align: right;">41.6</td>
+<td style="text-align: right;">39.9</td>
+<td style="text-align: right;">41.3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hogares de trabajadores informales</td>
+<td style="text-align: right;">24.4</td>
+<td style="text-align: right;">24.5</td>
+<td style="text-align: right;">23.8</td>
+<td style="text-align: right;">23.6</td>
+<td style="text-align: right;">23.7</td>
+<td style="text-align: right;">24.8</td>
+<td style="text-align: right;">24.0</td>
+<td style="text-align: right;">24.9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hogares mixtos</td>
+<td style="text-align: right;">15.3</td>
+<td style="text-align: right;">13.1</td>
+<td style="text-align: right;">13.7</td>
+<td style="text-align: right;">14.5</td>
+<td style="text-align: right;">14.9</td>
+<td style="text-align: right;">13.6</td>
+<td style="text-align: right;">14.4</td>
+<td style="text-align: right;">14.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hogares sin ocupados</td>
+<td style="text-align: right;">19.2</td>
+<td style="text-align: right;">20.8</td>
+<td style="text-align: right;">20.6</td>
+<td style="text-align: right;">20.1</td>
+<td style="text-align: right;">19.5</td>
+<td style="text-align: right;">20.0</td>
+<td style="text-align: right;">21.7</td>
+<td style="text-align: right;">19.6</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="nota-metodológica" class="level2">
+<h2 class="anchored" data-anchor-id="nota-metodológica">Nota metodológica</h2>
+<p><strong>Clasificación de hogares</strong> — variable <code>EMPLEO</code>, disponible desde 4T2023:</p>
+<ul>
+<li><strong>Formales</strong>: al menos un miembro con ingreso laboral formal (<code>EMPLEO = 1</code>), ninguno informal</li>
+<li><strong>Informales</strong>: al menos un miembro con ingreso laboral informal (<code>EMPLEO = 2</code>), ninguno formal</li>
+<li><strong>Mixtos</strong>: miembros con ambos tipos de empleo</li>
+<li><strong>Sin ocupados</strong>: ningún miembro con ingreso laboral positivo</li>
+</ul>
+<p><strong>Líneas de pobreza e indigencia</strong>: canasta CBA/CBT del INDEC para adulto equivalente (GBA), descargada automáticamente. Valores regionales estimados por ratios de Paridades de Poder de Compra del Consumidor (Metodología N° 22).</p>
+<p><strong>Deflactación</strong>: ingresos expresados en precios de febrero 2026 usando el IPC de Cobertura Nacional. Las tasas de pobreza e indigencia se calculan siempre con las líneas a precios corrientes de cada período.</p>
+<p><strong>Ponderador:</strong> <code>PONDIH</code>. <strong>Fuente:</strong> EPH-INDEC. Elaboración propia.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/matias-denatale\.github\.io\/mercado-trabajo-eph\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Elaboración propia en base a EPH-INDEC.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Actualizado trimestralmente vía GitHub Actions.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
