@@ -1,0 +1,20 @@
+<svg width="260" height="44" viewBox="0 0 260 44" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&amp;display=swap');
+  </style>
+  <!-- Mosaic icon — Row 1 -->
+  <rect x="2"  y="2"  width="20" height="13" rx="3" fill="#0F6E56"/>
+  <rect x="25" y="2"  width="9"  height="13" rx="3" fill="#5DCAA5"/>
+  <rect x="37" y="2"  width="14" height="13" rx="3" fill="#1D9E75"/>
+  <!-- Row 2 -->
+  <rect x="2"  y="17" width="12" height="9"  rx="2" fill="#9FE1CB"/>
+  <rect x="17" y="17" width="18" height="9"  rx="2" fill="#1D9E75"/>
+  <rect x="37" y="17" width="14" height="9"  rx="2" fill="#0F6E56"/>
+  <!-- Row 3 -->
+  <rect x="2"  y="28" width="16" height="13" rx="3" fill="#5DCAA5"/>
+  <rect x="21" y="28" width="7"  height="13" rx="2" fill="#0F6E56"/>
+  <rect x="31" y="28" width="20" height="13" rx="3" fill="#9FE1CB"/>
+  <!-- Name -->
+  <text x="62" y="27" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif"
+        font-size="16" font-weight="500" fill="#1a1a2a" letter-spacing="-0.3">Matías De Natale</text>
+</svg>
